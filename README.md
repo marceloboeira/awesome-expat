@@ -13,6 +13,10 @@
 * [AngelList](https://angel.co/jobs) - "The world's best startups are hiring on AngelList".
 * [HN Hiring](http://hnhiring.me) - Montly updated software related jobs.
 
+### Education
+
+* [OSSU Computer Science](https://ossu.firebaseapp.com/) - Path to a free self-taught education in Computer Science!
+
 ### Finances
 
 * [Equity Compensation Guide](https://github.com/jlevy/og-equity-compensation) - Stock options, RSUs, taxes — a guide for humans.
