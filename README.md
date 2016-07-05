@@ -25,6 +25,7 @@
 ### Technical
 * [OSSU Computer Science](https://ossu.firebaseapp.com/) - Path to a free self-taught education in Computer Science!
 * [OSSU Data Science](https://github.com/open-source-society/data-science) - Path to a free self-taught education in Data Science!
+* [The Programmer Competency Matrix](http://competency-checklist.appspot.com/) - The idea behind the project is to help people track theirs software skills studies.
 
 ### Languages
 
