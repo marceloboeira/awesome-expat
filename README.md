@@ -22,8 +22,13 @@
 
 ### Education
 
+#### Technical
 * [OSSU Computer Science](https://ossu.firebaseapp.com/) - Path to a free self-taught education in Computer Science!
 * [OSSU Data Science](https://github.com/open-source-society/data-science) - Path to a free self-taught education in Data Science!
+
+#### Languages
+
+* [Memrise](https://www.memrise.com) - Memrise uses images and science to make learning easy and fun.
 
 ### Finances
 
