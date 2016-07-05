@@ -16,6 +16,7 @@
 ### Interviewing
 
 * [Interview](https://github.com/andreis/interview) - Everything you need to kick ass on your coding interview.
+* [Awesome Interview Questions](https://github.com/MaximAbramchuck/awesome-interview-questions) - A curated awesome list of lists of interview questions.
 
 ### Education
 
