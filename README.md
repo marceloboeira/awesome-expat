@@ -9,6 +9,7 @@
 
 * [WhoIsHiring](https://whoishiring.io) - Map with the collection of jobs for Software Engineers, Developers, Designers.
 * [StackOverflow Jobs](http://stackoverflow.com/jobs) - Software related jobs around the world.
+* [GitHub Jobs](https://jobs.github.com/) - Software related jobs around the world.
 
 ### Finances
 
