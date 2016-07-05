@@ -29,6 +29,7 @@
 #### Languages
 
 * [Memrise](https://www.memrise.com) - Memrise uses images and science to make learning easy and fun.
+* [Duolingo](https://www.duolingo.com) - Duolingo is the world's most popular way to learn a language.
 
 ### Finances
 
