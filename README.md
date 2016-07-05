@@ -11,6 +11,7 @@
 * [StackOverflow Jobs](http://stackoverflow.com/jobs) - Software related jobs around the world.
 * [GitHub Jobs](https://jobs.github.com/) - Software related jobs around the world.
 * [AngelList](https://angel.co/jobs) - "The world's best startups are hiring on AngelList".
+* [HN Hiring](http://hnhiring.me) - Montly updated software related jobs.
 
 ### Finances
 
