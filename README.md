@@ -11,5 +11,6 @@
 
 ## Finances
 
+* [Equity Compensation Guide](https://github.com/jlevy/og-equity-compensation) - Stock options, RSUs, taxes — a guide for humans.
 * [Xoom](https://www.xoom.com/) - The easiest way to send money, reload phones, and pay bills around the world.
 * [TransferWise](https://transferwise.com/) - Transfer money abroad easily and quickly with our low cost money transfers.
