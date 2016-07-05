@@ -1,5 +1,5 @@
 # Awesome Expat
-> A curated list of resources for expats developers
+> A curated list of resources for expat developers
 
 ## Destination
 
