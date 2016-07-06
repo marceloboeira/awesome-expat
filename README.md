@@ -4,6 +4,7 @@
 ## Destination
 
 * [Teleport](https://teleport.org) - Explore and compare the best cities based on your personal preferences.
+* [Numbeo](http://www.numbeo.com) - Check the cost of living of different cities, compare then and more (info about other living aspects, like crime, traffic, quality of life, etc)
 
 ## Jobs
 
@@ -12,6 +13,11 @@
 * [GitHub Jobs](https://jobs.github.com/) - Software related jobs around the world.
 * [AngelList](https://angel.co/jobs) - "The world's best startups are hiring on AngelList".
 * [HN Hiring](http://hnhiring.me) - Montly updated software related jobs.
+
+
+## Compensation
+
+* [Glassdoor](https://www.glassdoor.com/index.htm) - Compare compensation between companies and positions
 
 ## Interviewing
 
