@@ -21,6 +21,11 @@
 
 * [Glassdoor](https://www.glassdoor.com/index.htm) - Compare compensation between companies and positions
 
+## Flights
+
+* [Sky Scanner](https://www.skyscanner.net/) - Compare cheap flights, hotels & car hire from different providers
+* [Google Flights](https://www.google.com/flights/) - Find cheap flights in seconds, explore destinations on a map, and sign up for fare alerts
+
 ## Interviewing
 
 * [Awesome Interview Questions](https://github.com/MaximAbramchuck/awesome-interview-questions) - A curated awesome list of lists of interview questions.
