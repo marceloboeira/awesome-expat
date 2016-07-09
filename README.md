@@ -21,6 +21,11 @@
 
 * [Glassdoor](https://www.glassdoor.com/index.htm) - Compare compensation between companies and positions
 
+## Temporary accommodation
+
+* [Couch Surfing](https://www.couchsurfing.com/) - Stay with locals and meet travelers
+* [Airbnb](https://www.airbnb.com/) - Rent unique accommodations from local hosts in 191+ countries
+
 ## Flights
 
 * [Sky Scanner](https://www.skyscanner.net/) - Compare cheap flights, hotels & car hire from different providers
