@@ -31,12 +31,11 @@
 * [Sky Scanner](https://www.skyscanner.net/) - Compare cheap flights, hotels & car hire from different providers
 * [Google Flights](https://www.google.com/flights/) - Find cheap flights in seconds, explore destinations on a map, and sign up for fare alerts
 
-## Knowing about...
+## Knowing about
 
 ### Berlin
   * [Settling in Berlin](www.settle-in-berlin.com) - Informations about registration, bank account, finding a flat and etc.
-  * [John Worth  Euroblog](https://jonworth.eu/how-to-find-a-flat-in-berlin/) - How to find a flat in Berlin
-
+  * [John Worth Euroblog](https://jonworth.eu/how-to-find-a-flat-in-berlin/) - How to find a flat in Berlin
 
 ## Interviewing
 
