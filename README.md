@@ -15,7 +15,8 @@
 * [Landing.jobs](https://landing.jobs) - Europe&#39;s best tech jobs marketplace
 * [StackOverflow Jobs](http://stackoverflow.com/jobs) - Software related jobs around the world.
 * [WhoIsHiring](https://whoishiring.io) - Map with the collection of jobs for Software Engineers, Developers, Designers.
-
+* [Berlin Startup Jobs](http://berlinstartupjobs.com/) - Startup Jobs in Berlin.
+* [London Startup Jobs](http://londonstartupjobs.co.uk/) - Startup Jobs in London.
 
 ## Compensation
 
