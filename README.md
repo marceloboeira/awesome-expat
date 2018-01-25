@@ -36,7 +36,7 @@
 ## Knowing about
 
 ### Berlin
-  * [Settling in Berlin](www.settle-in-berlin.com) - Informations about registration, bank account, finding a flat and etc.
+  * [Settling in Berlin](https://www.settle-in-berlin.com) - Informations about registration, bank account, finding a flat and etc.
   * [John Worth Euroblog](https://jonworth.eu/how-to-find-a-flat-in-berlin/) - How to find a flat in Berlin
 
 ## Interviewing
