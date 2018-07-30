@@ -18,6 +18,7 @@
 * [Startup List](http://startups-list.com) - Startup all around the world.
 * [Berlin Startup Jobs](http://berlinstartupjobs.com/) - Startup Jobs in Berlin.
 * [London Startup Jobs](http://londonstartupjobs.co.uk/) - Startup Jobs in London.
+* [List of job boards for Berlin](http://allaboutberlin.com/guides/find-a-job-in-berlin)
 
 ## Compensation
 
@@ -37,6 +38,7 @@
 
 ### Berlin
   * [Settling in Berlin](https://www.settle-in-berlin.com) - Informations about registration, bank account, finding a flat and etc.
+  * [All About Berlin](http://allaboutberlin.com/) - Guides on settling in Berlin, finding an apartment, a job, a bank etc.
   * [John Worth Euroblog](https://jonworth.eu/how-to-find-a-flat-in-berlin/) - How to find a flat in Berlin
 
 ## Interviewing
@@ -57,6 +59,7 @@
 
 * [Duolingo](https://www.duolingo.com) - Duolingo is the world's most popular way to learn a language.
 * [Memrise](https://www.memrise.com) - Memrise uses images and science to make learning easy and fun.
+* [Babbel](http://babbel.com) - Another language learning app that's closer to a language course.
 
 ## Finances
 
