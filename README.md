@@ -39,6 +39,7 @@
 ### Berlin
   * [Settling in Berlin](https://www.settle-in-berlin.com) - Informations about registration, bank account, finding a flat and etc.
   * [All About Berlin](http://allaboutberlin.com/) - Guides on settling in Berlin, finding an apartment, a job, a bank etc.
+  * [BerlinCheap.com](https://berlincheap.com/guide/) - Low-Budget solutions for Berlin: Free furniture, cheap apts & public transport.
   * [John Worth Euroblog](https://jonworth.eu/how-to-find-a-flat-in-berlin/) - How to find a flat in Berlin
 
 ## Interviewing
