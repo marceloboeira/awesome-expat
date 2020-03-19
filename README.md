@@ -26,8 +26,10 @@
 
 ## Temporary accommodation
 
+* [SpotAHome](https://www.spotahome.com/)
 * [Couch Surfing](https://www.couchsurfing.com/) - Stay with locals and meet travelers
 * [Airbnb](https://www.airbnb.com/) - Rent unique accommodations from local hosts in 191+ countries
+* [How to find a flat in Berlin](https://allaboutberlin.com/guides/find-a-flat-in-berlin)
 
 ## Flights
 
@@ -36,9 +38,16 @@
 
 ## Knowing about
 
+### Germany
+
+* [How to become a freelancer in Germany](https://allaboutberlin.com/guides/become-a-freelancer-in-germany)
+* [An intro to German health insurance](https://allaboutberlin.com/guides/german-health-insurance)
+* [German banks that don't require an Anmeldung](https://allaboutberlin.com/guides/german-banks-no-address)
+
 ### Berlin
-  * [Settling in Berlin](https://www.settle-in-berlin.com) - Informations about registration, bank account, finding a flat and etc.
+  * [Settle in Berlin](https://www.settle-in-berlin.com) - Informations about registration, bank account, finding a flat and etc.
   * [All About Berlin](http://allaboutberlin.com/) - Guides on settling in Berlin, finding an apartment, a job, a bank etc.
+      * [Moving to Berlin: the definitive guide](https://allaboutberlin.com/guides/moving-to-berlin)
   * [BerlinCheap.com](https://berlincheap.com/guide/) - Low-Budget solutions for Berlin: Free furniture, cheap apts & public transport.
   * [John Worth Euroblog](https://jonworth.eu/how-to-find-a-flat-in-berlin/) - How to find a flat in Berlin
 
