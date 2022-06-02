@@ -43,6 +43,7 @@
 * [How to become a freelancer in Germany](https://allaboutberlin.com/guides/become-a-freelancer-in-germany)
 * [An intro to German health insurance](https://allaboutberlin.com/guides/german-health-insurance)
 * [German banks that don't require an Anmeldung](https://allaboutberlin.com/guides/german-banks-no-address)
+* [Understanding & picking the right health insurance in Germany](https://www.settle-in-berlin.com/health-insurance-germany/)
 
 ### Berlin
   * [Settle in Berlin](https://www.settle-in-berlin.com) - Informations about registration, bank account, finding a flat and etc.
