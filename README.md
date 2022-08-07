@@ -77,7 +77,7 @@
 * [Equity Compensation Guide](https://github.com/jlevy/og-equity-compensation) - Stock options, RSUs, taxes — a guide for humans.
 * [TransferWise](https://transferwise.com/) - Transfer money abroad easily and quickly with our low cost money transfers.
 * [Xoom](https://www.xoom.com/) - The easiest way to send money, reload phones, and pay bills around the world.
-
+* [German Salary Calculator](https://lohntastik.de/gns/gross-net-salary-calculator) - The calculator will assist you in determining how much of your gross salary will remain after taxes and social contributions have been deducted.
 ## Misc
 
 * [SeeYourFolks](http://seeyourfolks.com) - We’re so busy growing up we sometimes forget that they are also growing old.
