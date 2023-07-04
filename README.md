@@ -4,21 +4,22 @@
 ## Destination
 
 * [Expatisan](https://www.expatistan.com/cost-of-living) - The original source for International Cost-of-Living Comparisons
-* [Numbeo](http://www.numbeo.com) - Check the cost of living of different cities, compare then and more (info about other living aspects, like crime, traffic, quality of life, etc)
+* [Numbeo](http://www.numbeo.com) - Check the cost of living of different cities, compare them, and more (info about other living aspects, like crime, traffic, quality of life, etc)
 * [Teleport](https://teleport.org) - Explore and compare the best cities based on your personal preferences.
 
 ## Jobs
 
 * [AngelList](https://angel.co/jobs) - "The world's best startups are hiring on AngelList".
-* [GitHub Jobs](https://jobs.github.com/) - Software related jobs around the world.
+* [GitHub Jobs](https://jobs.github.com/) - Software-related jobs around the world.
 * [HN Hiring](http://hnhiring.me) - Montly updated software related jobs.
 * [Landing.jobs](https://landing.jobs) - Europe&#39;s best tech jobs marketplace
-* [StackOverflow Jobs](http://stackoverflow.com/jobs) - Software related jobs around the world.
-* [WhoIsHiring](https://whoishiring.io) - Map with the collection of jobs for Software Engineers, Developers, Designers.
+* [StackOverflow Jobs](http://stackoverflow.com/jobs) - Software-related jobs around the world.
+* [WhoIsHiring](https://whoishiring.io) - Map with the collection of jobs for Software Engineers, Developers, and Designers.
 * [Startup List](http://startups-list.com) - Startup all around the world.
 * [Berlin Startup Jobs](http://berlinstartupjobs.com/) - Startup Jobs in Berlin.
 * [London Startup Jobs](http://londonstartupjobs.co.uk/) - Startup Jobs in London.
 * [List of job boards for Berlin](http://allaboutberlin.com/guides/find-a-job-in-berlin)
+* [Jobs in Malta](https://jobsinmalta.com) - Jobs in Malta.
 
 ## Compensation
 
@@ -35,6 +36,7 @@
 
 * [Sky Scanner](https://www.skyscanner.net/) - Compare cheap flights, hotels & car hire from different providers
 * [Google Flights](https://www.google.com/flights/) - Find cheap flights in seconds, explore destinations on a map, and sign up for fare alerts
+* [Kiwi](https://kiwi.com) - Cheap flights, trains, hotels, and car hire with 24/7 customer support & the Kiwi.com Guarantee.
 
 ## Knowing about
 
@@ -46,10 +48,10 @@
 * [Understanding & picking the right health insurance in Germany](https://www.settle-in-berlin.com/health-insurance-germany/)
 
 ### Berlin
-  * [Settle in Berlin](https://www.settle-in-berlin.com) - Informations about registration, bank account, finding a flat and etc.
-  * [All About Berlin](http://allaboutberlin.com/) - Guides on settling in Berlin, finding an apartment, a job, a bank etc.
+  * [Settle in Berlin](https://www.settle-in-berlin.com) - Information about registration, bank account, finding a flat and etc.
+  * [All About Berlin](http://allaboutberlin.com/) - Guides on settling in Berlin, finding an apartment, a job, a bank, etc.
       * [Moving to Berlin: the definitive guide](https://allaboutberlin.com/guides/moving-to-berlin)
-  * [BerlinCheap.com](https://berlincheap.com/guide/) - Low-Budget solutions for Berlin: Free furniture, cheap apts & public transport.
+  * [BerlinCheap.com](https://berlincheap.com/guide/) - Low-Budget solutions for Berlin: Free furniture, cheap apartments & public transport.
   * [John Worth Euroblog](https://jonworth.eu/how-to-find-a-flat-in-berlin/) - How to find a flat in Berlin
 
 ## Interviewing
@@ -64,7 +66,7 @@
 ### Technical
 * [OSSU Computer Science](https://ossu.firebaseapp.com/) - Path to a free self-taught education in Computer Science!
 * [OSSU Data Science](https://github.com/open-source-society/data-science) - Path to a free self-taught education in Data Science!
-* [The Programmer Competency Matrix](http://competency-checklist.appspot.com/) - The idea behind the project is to help people track theirs software skills studies.
+* [The Programmer Competency Matrix](http://competency-checklist.appspot.com/) - The idea behind the project is to help people track their software skills studies.
 
 ### Languages
 
@@ -75,9 +77,9 @@
 ## Finances
 
 * [Equity Compensation Guide](https://github.com/jlevy/og-equity-compensation) - Stock options, RSUs, taxes — a guide for humans.
-* [TransferWise](https://transferwise.com/) - Transfer money abroad easily and quickly with our low cost money transfers.
-* [Xoom](https://www.xoom.com/) - The easiest way to send money, reload phones, and pay bills around the world.
+* [Wise](https://wise.com/) - Transfer money abroad easily and quickly with our low-cost money transfers.
+* [Xoom](https://www.xoom.com/) - The easiest way to send money, reload phones, and pay bills worldwide.
 * [German Salary Calculator](https://lohntastik.de/gns/gross-net-salary-calculator) - The calculator will assist you in determining how much of your gross salary will remain after taxes and social contributions have been deducted.
 ## Misc
 
-* [SeeYourFolks](http://seeyourfolks.com) - We’re so busy growing up we sometimes forget that they are also growing old.
+* [SeeYourFolks](http://seeyourfolks.com) - We’re so busy growing up that we sometimes forget that they are also growing old.
