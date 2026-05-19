@@ -6,6 +6,7 @@
 * [Expatisan](https://www.expatistan.com/cost-of-living) - The original source for International Cost-of-Living Comparisons
 * [Numbeo](http://www.numbeo.com) - Check the cost of living of different cities, compare them, and more (info about other living aspects, like crime, traffic, quality of life, etc)
 * [Teleport](https://teleport.org) - Explore and compare the best cities based on your personal preferences.
+* [ReloMap](https://relomap.app) - Free cost of living comparison for 208 cities with verified data, tax calculator, visa guides, and 3,000+ in-depth city guides.
 
 ## Jobs
 
