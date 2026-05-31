@@ -21,6 +21,7 @@
 * [London Startup Jobs](http://londonstartupjobs.co.uk/) - Startup Jobs in London.
 * [List of job boards for Berlin](http://allaboutberlin.com/guides/find-a-job-in-berlin)
 * [Jobs in Malta](https://jobsinmalta.com) - Jobs in Malta.
+* [Seoulstart Jobs](https://seoulstart.com/jobs) - Jobs in Korea hiring foreign residents, filterable by English / Korean / bilingual posting language.
 
 ## Compensation
 
@@ -54,6 +55,10 @@
       * [Moving to Berlin: the definitive guide](https://allaboutberlin.com/guides/moving-to-berlin)
   * [BerlinCheap.com](https://berlincheap.com/guide/) - Low-Budget solutions for Berlin: Free furniture, cheap apartments & public transport.
   * [John Worth Euroblog](https://jonworth.eu/how-to-find-a-flat-in-berlin/) - How to find a flat in Berlin
+
+### Korea
+
+* [Awesome Living in Korea](https://github.com/seoulstart/awesome-living-in-korea) - Curated list of resources for foreign residents in Korea: visa categories, ARC registration, housing (jeonse/wolse), NHIS health insurance, banking, taxes, work, and Korean government portals. Available in English, Korean, Vietnamese, Filipino, Russian, and Chinese.
 
 ## Interviewing
 
