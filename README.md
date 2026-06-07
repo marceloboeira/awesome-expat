@@ -93,3 +93,4 @@
 ## Misc
 
 * [SeeYourFolks](http://seeyourfolks.com) - We’re so busy growing up that we sometimes forget that they are also growing old.
+* [IDPhotoSnap](https://idphotosnap.com) - Free browser-only passport, visa, residence permit, and biometric ID photo tool for 100+ countries (248 document formats). Validated against 15+ official issuing-authority sources. No upload, no signup, no watermark. Useful for expat document renewals at consulates (passport-of-origin), host-country residence permits (BRP, TIE, PR Card, Aufenthaltstitel, Verblijfsvergunning, etc.), and visa applications when relocating again.
