@@ -56,6 +56,10 @@
   * [BerlinCheap.com](https://berlincheap.com/guide/) - Low-Budget solutions for Berlin: Free furniture, cheap apartments & public transport.
   * [John Worth Euroblog](https://jonworth.eu/how-to-find-a-flat-in-berlin/) - How to find a flat in Berlin
 
+### Italy
+
+* [TaxCompass](https://taxcompass.it) - AI tax co-pilot for foreigners opening a business in Italy: sourced, English-native answers on the forfettario regime, partita IVA, INPS and ATECO codes, with a licensed commercialista who signs off before you file. Free to use.
+
 ### Korea
 
 * [Awesome Living in Korea](https://github.com/seoulstart/awesome-living-in-korea) - Curated list of resources for foreign residents in Korea: visa categories, ARC registration, housing (jeonse/wolse), NHIS health insurance, banking, taxes, work, and Korean government portals. Available in English, Korean, Vietnamese, Filipino, Russian, and Chinese.
