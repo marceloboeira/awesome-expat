@@ -7,6 +7,7 @@
 * [Numbeo](http://www.numbeo.com) - Check the cost of living of different cities, compare them, and more (info about other living aspects, like crime, traffic, quality of life, etc)
 * [Teleport](https://teleport.org) - Explore and compare the best cities based on your personal preferences.
 * [ReloMap](https://relomap.app) - Free cost of living comparison for 208 cities with verified data, tax calculator, visa guides, and 3,000+ in-depth city guides.
+* [Visa Income Calculator](https://expatcove.com/visa-income-calculator/) - Free tool showing which countries' 2026 residence and digital-nomad visas you qualify for by income, plus an Affordability Index ranking each visa's income requirement against local cost of living.
 
 ## Jobs
 
@@ -90,6 +91,7 @@
 * [Wise](https://wise.com/) - Transfer money abroad easily and quickly with our low-cost money transfers.
 * [Xoom](https://www.xoom.com/) - The easiest way to send money, reload phones, and pay bills worldwide.
 * [German Salary Calculator](https://lohntastik.de/gns/gross-net-salary-calculator) - The calculator will assist you in determining how much of your gross salary will remain after taxes and social contributions have been deducted.
+* [FEIE vs Foreign Tax Credit Calculator](https://expatcove.com/feie-vs-foreign-tax-credit-calculator/) - Free, no-signup calculator for US citizens abroad: runs both tax elections (Foreign Earned Income Exclusion / Form 2555 and the Foreign Tax Credit / Form 1116) on official 2025/2026 IRS brackets and shows which one keeps more.
 ## Misc
 
 * [SeeYourFolks](http://seeyourfolks.com) - We’re so busy growing up that we sometimes forget that they are also growing old.
