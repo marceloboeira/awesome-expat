@@ -65,6 +65,10 @@
 
 * [Awesome Living in Korea](https://github.com/seoulstart/awesome-living-in-korea) - Curated list of resources for foreign residents in Korea: visa categories, ARC registration, housing (jeonse/wolse), NHIS health insurance, banking, taxes, work, and Korean government portals. Available in English, Korean, Vietnamese, Filipino, Russian, and Chinese.
 
+### Nordics (Denmark, Sweden, Norway, Finland)
+
+* [NordicExpat](https://nordicexpat.com) - Comprehensive relocation guides for non-EU expats moving to Denmark, Sweden, Norway, and Finland. Covers banking (Wise, Revolut), housing, taxes, healthcare, visas, and everyday life. Includes free tools: Copenhagen zone calculator, Nordic tax calculators, and country-specific benefit guides. 160+ in-depth articles authored by an expat in the region.
+
 ## Interviewing
 
 * [Awesome Interview Questions](https://github.com/MaximAbramchuck/awesome-interview-questions) - A curated awesome list of lists of interview questions.
