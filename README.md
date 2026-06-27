@@ -8,6 +8,7 @@
 * [Teleport](https://teleport.org) - Explore and compare the best cities based on your personal preferences.
 * [ReloMap](https://relomap.app) - Free cost of living comparison for 208 cities with verified data, tax calculator, visa guides, and 3,000+ in-depth city guides.
 * [Visa Income Calculator](https://expatcove.com/visa-income-calculator/) - Free tool showing which countries' 2026 residence and digital-nomad visas you qualify for by income, plus an Affordability Index ranking each visa's income requirement against local cost of living.
+* [Transita](https://transita.app) - AI visa-pathway matcher: answer a short quiz and get ranked residence/work visa options across 10 countries (US, Canada, UK, Australia, Germany, Spain, Netherlands, Portugal, New Zealand, Ireland) with eligibility scores, processing times, costs, official sources, side-by-side comparisons, and points calculators.
 
 ## Jobs
 
