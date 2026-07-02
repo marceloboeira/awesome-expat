@@ -97,6 +97,7 @@
 * [Xoom](https://www.xoom.com/) - The easiest way to send money, reload phones, and pay bills worldwide.
 * [German Salary Calculator](https://lohntastik.de/gns/gross-net-salary-calculator) - The calculator will assist you in determining how much of your gross salary will remain after taxes and social contributions have been deducted.
 * [FEIE vs Foreign Tax Credit Calculator](https://expatcove.com/feie-vs-foreign-tax-credit-calculator/) - Free, no-signup calculator for US citizens abroad: runs both tax elections (Foreign Earned Income Exclusion / Form 2555 and the Foreign Tax Credit / Form 1116) on official 2025/2026 IRS brackets and shows which one keeps more.
+* [US Expat Tax Guide: Maintaining Florida Domicile](https://yourtaxbase.com/expat-tax-guide) - Free 2026 guide for US citizens abroad on legally eliminating state income tax by keeping domicile in a no-tax state, alongside federal exclusions and filing requirements.
 ## Misc
 
 * [SeeYourFolks](http://seeyourfolks.com) - We’re so busy growing up that we sometimes forget that they are also growing old.
