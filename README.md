@@ -101,6 +101,7 @@
 * [US Expat Tax Guide: Maintaining Florida Domicile](https://yourtaxbase.com/expat-tax-guide) - Free 2026 guide for US citizens abroad on legally eliminating state income tax by keeping domicile in a no-tax state, alongside federal exclusions and filing requirements.
 * [Awesome Digital Nomads](https://github.com/cloudfloo/awesome-digital-nomads) - Curated, link-checked list of tools and resources for digital nomads: finance and FIRE, visas, insurance, eSIMs, accommodation, and communities.
 * [Banking Access Index](https://www.globalsolo.global/data/banking-access-index) - Free CC-BY dataset of which 18 US banking providers accept non-US-resident business owners, across 8 countries — 239 claims verified against published policies, with CSV/JSON downloads.
+* [IndepAI Coast FIRE Calculator](https://indepai.app/tools/coast-fire-calculator) - Free calculator that shows the age you can stop saving and coast to retirement, built for expats juggling multiple currencies and relocation plans. No signup needed.
 ## Misc
 
 * [SeeYourFolks](http://seeyourfolks.com) - We’re so busy growing up that we sometimes forget that they are also growing old.
