@@ -72,6 +72,18 @@
 
 * [NordicExpat](https://nordicexpat.com) - Comprehensive relocation guides for non-EU expats moving to Denmark, Sweden, Norway, and Finland. Covers banking (Wise, Revolut), housing, taxes, healthcare, visas, and everyday life. Includes free tools: Copenhagen zone calculator, Nordic tax calculators, and country-specific benefit guides. 160+ in-depth articles authored by an expat in the region.
 
+### France
+
+* [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in France handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
+
+### Spain
+
+* [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in Spain handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
+
+### United Kingdom
+
+* [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in the UK handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
+
 ## Interviewing
 
 * [Awesome Interview Questions](https://github.com/MaximAbramchuck/awesome-interview-questions) - A curated awesome list of lists of interview questions.
