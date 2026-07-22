@@ -50,6 +50,7 @@
 * [An intro to German health insurance](https://allaboutberlin.com/guides/german-health-insurance)
 * [German banks that don't require an Anmeldung](https://allaboutberlin.com/guides/german-banks-no-address)
 * [Understanding & picking the right health insurance in Germany](https://www.settle-in-berlin.com/health-insurance-germany/)
+* [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in Germany handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
 
 ### Berlin
   * [Settle in Berlin](https://www.settle-in-berlin.com) - Information about registration, bank account, finding a flat and etc.
@@ -61,6 +62,7 @@
 ### Italy
 
 * [TaxCompass](https://taxcompass.it) - AI tax co-pilot for foreigners opening a business in Italy: sourced, English-native answers on the forfettario regime, partita IVA, INPS and ATECO codes, with a licensed commercialista who signs off before you file. Free to use.
+* [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in Italy handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
 
 ### Korea
 
