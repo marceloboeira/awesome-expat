@@ -83,6 +83,7 @@
 ### United Kingdom
 
 * [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in the UK handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
+* [UK SIM Keep-Number Reminder](https://getgiffgaff.com/tools/keep-number-reminder/) - Free browser-only tool that turns the last qualifying giffgaff activity date into an early fifth-month calendar reminder, exports an ICS file, and stores no phone number or account details.
 
 ## Interviewing
 
