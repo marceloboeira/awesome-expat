@@ -79,6 +79,7 @@
 ### Spain
 
 * [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in Spain handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
+* [ES Extranjería](https://esextranjeria.es/en/) - Free English guides to Spanish visas and residence permits (digital nomad, non-lucrative, student visa, Beckham law, citizenship by residency, cost of moving), written against the official texts in the BOE, plus a Spanish-language immigration deadline calculator.
 
 ### United Kingdom
 
