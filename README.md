@@ -7,6 +7,7 @@
 * [Numbeo](http://www.numbeo.com) - Check the cost of living of different cities, compare them, and more (info about other living aspects, like crime, traffic, quality of life, etc)
 * [Teleport](https://teleport.org) - Explore and compare the best cities based on your personal preferences.
 * [ReloMap](https://relomap.app) - Free cost of living comparison for 208 cities with verified data, tax calculator, visa guides, and 3,000+ in-depth city guides.
+* [Cheaper Abroad](https://cheaper-abroad.com) - Dated prices from named clinics and shops in Da Nang, Bangkok and Budapest (dental, scans, glasses, repairs) compared with home-country prices for the Netherlands, Germany, the UK, the US and Australia. Free, no signup.
 * [Visa Income Calculator](https://expatcove.com/visa-income-calculator/) - Free tool showing which countries' 2026 residence and digital-nomad visas you qualify for by income, plus an Affordability Index ranking each visa's income requirement against local cost of living.
 * [Transita](https://transita.app) - AI visa-pathway matcher: answer a short quiz and get ranked residence/work visa options across 10 countries (US, Canada, UK, Australia, Germany, Spain, Netherlands, Portugal, New Zealand, Ireland) with eligibility scores, processing times, costs, official sources, side-by-side comparisons, and points calculators.
 
