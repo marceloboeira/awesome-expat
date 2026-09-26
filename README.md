@@ -11,6 +11,7 @@
 * [Visa Income Calculator](https://expatcove.com/visa-income-calculator/) - Free tool showing which countries' 2026 residence and digital-nomad visas you qualify for by income, plus an Affordability Index ranking each visa's income requirement against local cost of living.
 * [Transita](https://transita.app) - AI visa-pathway matcher: answer a short quiz and get ranked residence/work visa options across 10 countries (US, Canada, UK, Australia, Germany, Spain, Netherlands, Portugal, New Zealand, Ireland) with eligibility scores, processing times, costs, official sources, side-by-side comparisons, and points calculators.
 * [Coworking Price Index](https://coworkingview.com/en/tools/price-index) - Median monthly prices for flex desks, fixed desks and private offices by city in Germany, Spain, the UK, the Netherlands and the UAE, built from the rates coworking operators publish. Free CC BY 4.0 data with JSON and CSV downloads, no signup; small-sample cities are flagged.
+* [Take Root Abroad](https://takerootabroad.com) - Move-abroad planner for US citizens: a free country-fit quiz and a comparison of 20+ countries by visa route for remote workers and retirees, all-in cost and the US tax picture, then per-country plans with timelines. Free compare, 14-day free trial, then paid.
 
 ## Jobs
 
