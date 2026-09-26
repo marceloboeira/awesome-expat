@@ -10,6 +10,7 @@
 * [Cheaper Abroad](https://cheaper-abroad.com) - Dated prices from named clinics and shops in Da Nang, Bangkok and Budapest (dental, scans, glasses, repairs) compared with home-country prices for the Netherlands, Germany, the UK, the US and Australia. Free, no signup.
 * [Visa Income Calculator](https://expatcove.com/visa-income-calculator/) - Free tool showing which countries' 2026 residence and digital-nomad visas you qualify for by income, plus an Affordability Index ranking each visa's income requirement against local cost of living.
 * [Transita](https://transita.app) - AI visa-pathway matcher: answer a short quiz and get ranked residence/work visa options across 10 countries (US, Canada, UK, Australia, Germany, Spain, Netherlands, Portugal, New Zealand, Ireland) with eligibility scores, processing times, costs, official sources, side-by-side comparisons, and points calculators.
+* [Coworking Price Index](https://coworkingview.com/en/tools/price-index) - Median monthly prices for flex desks, fixed desks and private offices by city in Germany, Spain, the UK, the Netherlands and the UAE, built from the rates coworking operators publish. Free CC BY 4.0 data with JSON and CSV downloads, no signup; small-sample cities are flagged.
 
 ## Jobs
 
