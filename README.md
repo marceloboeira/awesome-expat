@@ -39,6 +39,7 @@
 * [Airbnb](https://www.airbnb.com/) - Rent unique accommodations from local hosts in 191+ countries
 * [How to find a flat in Berlin](https://allaboutberlin.com/guides/find-a-flat-in-berlin)
 * [StayingAPI](https://stayingapi.com/) - API for accommodation data across Airbnb, Booking.com, Vrbo & Google Hotels (listings, pricing, availability)
+* [yumpara](https://yumpara.com) - Rooms and studios to rent directly from the host, with no agency and no commission: you message whoever has the room and you agree on everything together. Organised by city and neighbourhood in Barcelona, Berlin, Bucharest, Dublin, Edinburgh, Lisbon, Milan, Tallinn and Toulouse, for stays from one month upwards. Free, on the web and in the mobile apps.
 
 ## Flights
 
