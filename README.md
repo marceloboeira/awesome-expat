@@ -129,6 +129,8 @@
 * [Banking Access Index](https://www.globalsolo.global/data/banking-access-index) - Free CC-BY dataset of which 18 US banking providers accept non-US-resident business owners, across 8 countries — 239 claims verified against published policies, with CSV/JSON downloads.
 * [IndepAI Coast FIRE Calculator](https://indepai.app/tools/coast-fire-calculator) - Free calculator that shows the age you can stop saving and coast to retirement, built for expats juggling multiple currencies and relocation plans. No signup needed.
 * [Paperpack](https://paperpack-7v7.pages.dev/) - Free, no-signup calculator for working holidaymakers in Australia: works out income tax on official ATO rates, runs the treaty-country comparison where it applies, and estimates the departing superannuation payment (DASP). Runs entirely in the browser, in 8 languages. [Source](https://github.com/ChangkeunJ/paperpack).
+* [Tax Residency Days](https://taxresidencydays.com) - Free, no-signup calculator that checks one travel ledger against 15 countries' tax-residency day-count tests (US Substantial Presence Test, UK Statutory Residence Test, the 183-day family) plus the Schengen 90/180 stay limit, with the exact arithmetic shown per country. Runs entirely in the browser.
+
 ## Misc
 
 * [SeeYourFolks](http://seeyourfolks.com) - We’re so busy growing up that we sometimes forget that they are also growing old.
