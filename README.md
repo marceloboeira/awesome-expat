@@ -69,6 +69,10 @@
 * [TaxCompass](https://taxcompass.it) - AI tax co-pilot for foreigners opening a business in Italy: sourced, English-native answers on the forfettario regime, partita IVA, INPS and ATECO codes, with a licensed commercialista who signs off before you file. Free to use.
 * [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in Italy handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
 
+### Japan
+
+* [Engawa](https://engawahomes.com) - English-language search for buying property in Japan as a foreigner: akiya, kominka, apartments and land on a map with hazard and transit data, plus a closing-cost calculator and furnished long-stay placements.
+
 ### Korea
 
 * [Awesome Living in Korea](https://github.com/seoulstart/awesome-living-in-korea) - Curated list of resources for foreign residents in Korea: visa categories, ARC registration, housing (jeonse/wolse), NHIS health insurance, banking, taxes, work, and Korean government portals. Available in English, Korean, Vietnamese, Filipino, Russian, and Chinese.
