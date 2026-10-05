@@ -17,10 +17,8 @@
 ## Jobs
 
 * [AngelList](https://angel.co/jobs) - "The world's best startups are hiring on AngelList".
-* [GitHub Jobs](https://jobs.github.com/) - Software-related jobs around the world.
 * [HN Hiring](http://hnhiring.me) - Montly updated software related jobs.
 * [Landing.jobs](https://landing.jobs) - Europe&#39;s best tech jobs marketplace
-* [StackOverflow Jobs](http://stackoverflow.com/jobs) - Software-related jobs around the world.
 * [WhoIsHiring](https://whoishiring.io) - Map with the collection of jobs for Software Engineers, Developers, and Designers.
 * [Startup List](http://startups-list.com) - Startup all around the world.
 * [Berlin Startup Jobs](http://berlinstartupjobs.com/) - Startup Jobs in Berlin.
@@ -28,6 +26,8 @@
 * [List of job boards for Berlin](http://allaboutberlin.com/guides/find-a-job-in-berlin)
 * [Jobs in Malta](https://jobsinmalta.com) - Jobs in Malta.
 * [Seoulstart Jobs](https://seoulstart.com/jobs) - Jobs in Korea hiring foreign residents, filterable by English / Korean / bilingual posting language.
+* [JobCrawls](https://www.jobcrawls.com/en) - Jobs in Finland from employers' own career pages, searchable in English with a "no Finnish required" filter.
+* [Work in Finland](https://www.workinfinland.com/en/) - Jobs in Finland for international applicants, every listing in English, run by Business Finland.
 
 ## Compensation
 
