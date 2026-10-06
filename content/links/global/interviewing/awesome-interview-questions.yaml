@@ -1,0 +1,13 @@
+---
+title: Awesome Interview Questions
+url: https://github.com/DopplerHQ/awesome-interview-questions
+country: global
+category: interviewing
+roles:
+  - software-engineer
+  - data-scientist
+  - devops-sre
+description: A curated list of lists of interview questions, across algorithms, system design and behavioural rounds.
+added_at: 2026-09-29
+last_checked: 2026-09-29
+featured: false

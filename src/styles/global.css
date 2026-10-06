@@ -1,0 +1,134 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens.
+ *
+ * Black on white, one accent, heavy type. The site is a reference directory,
+ * not a magazine: the reader arrives with a question ("what does health
+ * insurance cost in Berlin?") and wants a link, fast. Everything here
+ * optimises for scanning a dense list, so the palette stays out of the way and
+ * contrast carries the hierarchy.
+ */
+@theme {
+  --color-ink: oklch(0.16 0.01 260);
+  --color-ink-soft: oklch(0.42 0.012 260);
+  --color-ink-faint: oklch(0.62 0.01 260);
+  --color-paper: oklch(0.995 0.002 260);
+  --color-paper-sunk: oklch(0.965 0.004 260);
+  --color-rule: oklch(0.88 0.006 260);
+
+  /* One accent, reserved for interactive affordances only. */
+  --color-accent: oklch(0.52 0.19 258);
+  --color-accent-soft: oklch(0.95 0.03 258);
+  --color-good: oklch(0.55 0.15 152);
+  --color-warn: oklch(0.62 0.15 62);
+  --color-bad: oklch(0.55 0.19 22);
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, monospace;
+
+  --text-step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.9rem);
+  --text-step-0: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
+  --text-step-1: clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem);
+  --text-step-2: clamp(1.45rem, 1.25rem + 1vw, 2rem);
+  --text-step-3: clamp(1.9rem, 1.5rem + 2vw, 3rem);
+  --text-step-4: clamp(2.4rem, 1.7rem + 3.4vw, 4.5rem);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Anchored headings must clear the sticky header. */
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-step-0);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-accent-soft);
+  }
+
+  /* A hairline rule rather than a border, so dense lists read as one table. */
+  hr {
+    border: 0;
+    border-top: 1px solid var(--color-rule);
+  }
+}
+
+@layer components {
+  .skip-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 100;
+  }
+  .skip-link:focus {
+    left: 1rem;
+    top: 1rem;
+    padding: 0.5rem 0.875rem;
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border-radius: 4px;
+  }
+
+  /* Clamp a description to a fixed number of lines. A 400-character
+     description must not make one list row three times taller than its
+     neighbours. */
+  .clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Visually hidden but available to screen readers. Used on external-link
+     icons so the "opens in a new tab" meaning is not colour-only. */
+  .sr-only-focusable:not(:focus):not(:focus-within) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}

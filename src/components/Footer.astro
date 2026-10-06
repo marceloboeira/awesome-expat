@@ -1,0 +1,63 @@
+---
+import { categories, countries, roles, global, contribute, about, stats } from '../lib/routes.ts';
+const year = new Date().getFullYear();
+---
+
+<footer class="mt-20 border-t border-rule bg-paper-sunk">
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div>
+        <p class="font-semibold tracking-tight">Awesome Expat</p>
+        <p class="mt-2 max-w-xs text-[length:var(--text-step--1)] text-ink-soft">
+          A curated directory of practical resources for people moving abroad. Every link is checked and every
+          description is written by a person.
+        </p>
+      </div>
+
+      <nav aria-labelledby="f-countries">
+        <h2 id="f-countries" class="text-[length:var(--text-step--1)] font-semibold uppercase tracking-wide text-ink-faint">
+          Countries
+        </h2>
+        <ul class="mt-3 space-y-1.5 text-[length:var(--text-step--1)]">
+          <li><a href={countries()} class="text-ink-soft hover:text-accent">Browse all</a></li>
+          <li><a href={global()} class="text-ink-soft hover:text-accent">Global resources</a></li>
+          <li><a href={`${countries()}/de`} class="text-ink-soft hover:text-accent">Germany</a></li>
+          <li><a href={`${countries()}/gb`} class="text-ink-soft hover:text-accent">United Kingdom</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="f-categories">
+        <h2 id="f-categories" class="text-[length:var(--text-step--1)] font-semibold uppercase tracking-wide text-ink-faint">
+          Categories
+        </h2>
+        <ul class="mt-3 space-y-1.5 text-[length:var(--text-step--1)]">
+          <li><a href={categories()} class="text-ink-soft hover:text-accent">Browse all</a></li>
+          <li><a href={`${categories()}/housing`} class="text-ink-soft hover:text-accent">Housing</a></li>
+          <li><a href={`${categories()}/jobs`} class="text-ink-soft hover:text-accent">Jobs</a></li>
+          <li><a href={`${categories()}/taxes`} class="text-ink-soft hover:text-accent">Taxes</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-labelledby="f-about">
+        <h2 id="f-about" class="text-[length:var(--text-step--1)] font-semibold uppercase tracking-wide text-ink-faint">
+          About
+        </h2>
+        <ul class="mt-3 space-y-1.5 text-[length:var(--text-step--1)]">
+          <li><a href={contribute()} class="text-ink-soft hover:text-accent">Contribute a link</a></li>
+          <li><a href={roles()} class="text-ink-soft hover:text-accent">Browse by role</a></li>
+          <li><a href={stats()} class="text-ink-soft hover:text-accent">Directory statistics</a></li>
+          <li><a href={about()} class="text-ink-soft hover:text-accent">How this is built</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="mt-10 flex flex-col gap-3 border-t border-rule pt-6 text-[length:var(--text-step--1)] text-ink-faint sm:flex-row sm:items-center sm:justify-between">
+      <p>© {year} Awesome Expat. Content licensed under CC BY-SA 4.0.</p>
+      <p>
+        Built with
+        <a href="https://astro.build" rel="noopener nofollow" class="text-ink-soft hover:text-accent">Astro</a>.
+        Links are third-party; we are not affiliated with anything listed.
+      </p>
+    </div>
+  </div>
+</footer>

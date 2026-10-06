@@ -1,0 +1,227 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { loadContent } from '@engine/content.ts';
+import { computeStats } from '@engine/stats.ts';
+import { category as categoryRoute, country as countryRoute } from '../lib/routes.ts';
+
+/**
+ * Coverage, published.
+ *
+ * The numbers come from `computeStats()` in `engine/lib/stats.ts`, which is the
+ * same function `make stats` runs. A directory that advertises its own gaps is
+ * more useful than one that quietly looks complete, and a separate
+ * implementation here would drift from the CLI within a week.
+ *
+ * `loadContent()` re-reads and re-validates `content/` at build time rather
+ * than reusing the Astro collections. That is deliberate duplication of work
+ * for 67 files: it is the only way the numbers come from the engine's own
+ * loader, so "what the site claims" and "what the validator accepts" cannot
+ * diverge. It throws on a schema violation, which fails the build -- the same
+ * outcome as a broken page, which is the intent.
+ */
+const content = await loadContent();
+const stats = computeStats(content);
+const t = stats.totals;
+
+const pct = (n: number, d: number) => (d === 0 ? '—' : `${Math.round((n / d) * 100)}%`);
+
+const rows: { label: string; value: number; note?: string }[] = [
+  { label: 'Links', value: t.links },
+  { label: 'Countries registered', value: t.countries_registered, note: `${t.countries_with_links} with links` },
+  { label: 'Categories', value: t.categories, note: `${t.categories_with_links} with links` },
+  { label: 'Groups', value: t.groups },
+  { label: 'Roles', value: t.roles },
+  { label: 'Authors', value: t.authors },
+  { label: 'Global (anywhere) links', value: t.global_links },
+  { label: 'Multi-country links', value: t.scoped_links },
+  { label: 'Featured', value: t.featured },
+  { label: 'Tagged', value: t.tagged },
+];
+---
+
+<Base
+  title="Directory statistics"
+  description={`Current coverage of Awesome Expat: ${t.links} links across ${t.countries_with_links} countries and ${t.categories_with_links} categories, with the gaps listed honestly.`}
+  path="/stats"
+  breadcrumbs={[{ name: 'Stats', href: '/stats' }]}
+>
+  <PageHeader
+    eyebrow="Coverage"
+    title="What this directory covers"
+    lede="A directory that only lists what it has is easy to mistake for a complete one. These are the real numbers, gaps included."
+    count={t.links}
+    countNoun="reviewed links"
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <section aria-labelledby="h-totals">
+      <h2 id="h-totals" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">Totals</h2>
+      <dl class="mt-6 grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          rows.map((r) => (
+            <div class="flex items-baseline justify-between gap-3 border-b border-rule py-2.5">
+              <dt class="text-[length:var(--text-step--1)] text-ink-soft">
+                {r.label}
+                {r.note && <span class="ml-1.5 text-ink-faint">({r.note})</span>}
+              </dt>
+              <dd class="font-medium tabular-nums">{r.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="mt-14" aria-labelledby="h-gaps">
+      <h2 id="h-gaps" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">Coverage gaps</h2>
+      <p class="mt-2 max-w-2xl text-[length:var(--text-step--1)] text-ink-soft">
+        The three things that would most improve this directory.
+      </p>
+
+      <ol class="mt-6 space-y-3">
+        <li class="flex gap-4 rounded-lg border border-rule p-4">
+          <span class="shrink-0 font-mono text-[length:var(--text-step-1)] text-ink-faint">1</span>
+          <span>
+            <span class="block font-medium">
+              {t.unverified_descriptions} of {t.links} descriptions are machine-drafted
+            </span>
+            <span class="mt-1 block text-[length:var(--text-step--1)] text-ink-soft">
+              Every link is marked <span class="font-mono">awaiting review</span> until a person has read the
+              page and confirmed the description says something useful ({pct(t.unverified_descriptions, t.links)}
+              of the corpus).
+            </span>
+          </span>
+        </li>
+
+        <li class="flex gap-4 rounded-lg border border-rule p-4">
+          <span class="shrink-0 font-mono text-[length:var(--text-step-1)] text-ink-faint">2</span>
+          <span>
+            <span class="block font-medium">
+              {stats.quality.empty_countries} of {t.countries_registered} countries have no links
+            </span>
+            <span class="mt-1 block text-[length:var(--text-step--1)] text-ink-soft">
+              Their pages exist and are honest about being empty, but there is nothing to read yet.
+            </span>
+          </span>
+        </li>
+
+        {
+          stats.quality.empty_categories.length > 0 && (
+            <li class="flex gap-4 rounded-lg border border-rule p-4">
+              <span class="shrink-0 font-mono text-[length:var(--text-step-1)] text-ink-faint">3</span>
+              <span>
+                <span class="block font-medium">
+                  {stats.quality.empty_categories.length} categories are empty
+                </span>
+                <span class="mt-1 block text-[length:var(--text-step--1)] text-ink-soft">
+                  {stats.quality.empty_categories.map((slug) => (
+                    <a href={categoryRoute(slug)} class="text-accent underline underline-offset-2">
+                      {slug}
+                    </a>
+                  ))}
+                </span>
+              </span>
+            </li>
+          )
+        }
+      </ol>
+
+      <p class="mt-6 text-[length:var(--text-step--1)]">
+        <a href="/contribute" class="rounded bg-ink px-4 py-2 font-medium text-paper">Add a link</a>
+        <span class="ml-3 text-ink-soft">or browse the <a href="/countries" class="text-accent underline underline-offset-2">empty countries</a>.</span>
+      </p>
+    </section>
+
+    <section class="mt-14" aria-labelledby="h-countries">
+      <h2 id="h-countries" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+        Countries with anything in them
+      </h2>
+      <p class="mt-2 max-w-2xl text-[length:var(--text-step--1)] text-ink-soft">
+        <span class="font-medium">Links</span> counts entries filed under that country.{' '}
+        <span class="font-medium">Categories</span> counts distinct categories a reader would see there, which
+        is why Finland has zero links but two categories.
+      </p>
+      <div class="mt-6 overflow-x-auto">
+        <table class="w-full min-w-[28rem] text-left text-[length:var(--text-step--1)]">
+          <thead>
+            <tr class="border-b border-rule">
+              <th scope="col" class="py-2 pr-4 font-semibold">Country</th>
+              <th scope="col" class="py-2 pr-4 text-right font-semibold">Links</th>
+              <th scope="col" class="py-2 text-right font-semibold">Categories</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              stats.countries.map((c) => (
+                <tr class="border-b border-rule">
+                  <th scope="row" class="py-2 pr-4 font-normal">
+                    <a href={countryRoute(c.slug)} class="transition-colors hover:text-accent">
+                      {c.name}
+                    </a>
+                    {c.links === 0 && <span class="ml-2 text-ink-faint">(shared only)</span>}
+                  </th>
+                  <td class="py-2 pr-4 text-right tabular-nums">{c.links}</td>
+                  <td class="py-2 text-right tabular-nums">{c.coverage}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mt-14" aria-labelledby="h-roles">
+      <h2 id="h-roles" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">Role pages</h2>
+      <p class="mt-2 max-w-2xl text-[length:var(--text-step--1)] text-ink-soft">
+        A role page needs at least 3 applicable links to be worth publishing. <span class="font-medium">General</span>{' '}
+        is the count of role-agnostic links, which every role inherits.
+      </p>
+      <ul class="mt-6 divide-y divide-rule border-y border-rule">
+        {
+          stats.roles.map((r) => (
+            <li class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3">
+              <a href={`/roles/${r.slug}`} class="font-medium transition-colors hover:text-accent">
+                {r.name}
+              </a>
+              <span class="text-[length:var(--text-step--1)] text-ink-faint tabular-nums">
+                {r.specific} specific · {r.general} general ·{' '}
+                <span class={r.publishable ? 'text-good' : 'text-warn'}>
+                  {r.publishable ? 'published' : 'below threshold'}
+                </span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="mt-14" aria-labelledby="h-integrity">
+      <h2 id="h-integrity" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">Integrity</h2>
+      <dl class="mt-6 grid gap-x-8 sm:grid-cols-2">
+        <div class="flex items-baseline justify-between gap-3 border-b border-rule py-2.5">
+          <dt class="text-[length:var(--text-step--1)] text-ink-soft">Duplicate URLs</dt>
+          <dd class="font-medium tabular-nums">{t.duplicate_urls}</dd>
+        </div>
+        <div class="flex items-baseline justify-between gap-3 border-b border-rule py-2.5">
+          <dt class="text-[length:var(--text-step--1)] text-ink-soft">Non-canonical URLs</dt>
+          <dd class="font-medium tabular-nums">{t.non_canonical_urls}</dd>
+        </div>
+        <div class="flex items-baseline justify-between gap-3 border-b border-rule py-2.5">
+          <dt class="text-[length:var(--text-step--1)] text-ink-soft">Schema violations</dt>
+          <dd class="font-medium tabular-nums">{stats.quality.validation_issues}</dd>
+        </div>
+        <div class="flex items-baseline justify-between gap-3 border-b border-rule py-2.5">
+          <dt class="text-[length:var(--text-step--1)] text-ink-soft">Links with contributors</dt>
+          <dd class="font-medium tabular-nums">{t.with_contributors}</dd>
+        </div>
+      </dl>
+    </section>
+
+    <p class="mt-14 border-t border-rule pt-6 text-[length:var(--text-step--1)] text-ink-faint">
+      These figures are computed at build time by the same function{' '}
+      <code class="rounded bg-paper-sunk px-1.5 py-0.5 font-mono">engine/lib/stats.ts</code> that{' '}
+      <code class="rounded bg-paper-sunk px-1.5 py-0.5 font-mono">make stats</code> runs, so this page cannot
+      disagree with the CLI.
+    </p>
+  </div>
+</Base>

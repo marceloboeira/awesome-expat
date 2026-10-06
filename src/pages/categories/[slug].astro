@@ -1,0 +1,103 @@
+---
+import { getLinks, getCountries, getCategories } from '../../lib/content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import LinkList from '../../components/LinkList.astro';
+import { linksForCategory, type LoadedLink } from '../../lib/corpus.ts';
+import { category as categoryRoute, categories as categoriesRoute, country as countryRoute } from '../../lib/routes.ts';
+
+export async function getStaticPaths() {
+  const categories = await getCategories();
+  return categories.map((c) => ({ params: { slug: c.slug }, props: { slug: c.slug } }));
+}
+
+const links = await getLinks();
+const categories = await getCategories();
+const allCountries = await getCountries();
+const countryNames = Object.fromEntries(allCountries.map((c) => [c.slug ?? c.code, c.name]));
+
+const { slug } = Astro.props;
+const category = categories.find((c) => c.slug === slug)!;
+const inCategory = linksForCategory(links, slug);
+
+// Grouped by country: someone browsing /categories/housing is usually asking
+// "where do I live" and wants to compare places, not read a flat list of 30
+// links with no geography.
+const groups = new Map<string, LoadedLink[]>();
+for (const link of inCategory) {
+  const key = link.data.country;
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push(link);
+}
+const ordered = [...groups.entries()].sort((a, b) => {
+  if (a[0] === 'global') return 1;
+  if (b[0] === 'global') return -1;
+  return (countryNames[a[0]] ?? a[0]).localeCompare(countryNames[b[0]] ?? b[0]);
+});
+---
+
+<Base
+  title={`${category.name} resources`}
+  description={category.description}
+  path={categoryRoute(slug)}
+  noindex={inCategory.length === 0}
+  breadcrumbs={[
+    { name: 'Categories', href: categoriesRoute() },
+    { name: category.name, href: categoryRoute(slug) },
+  ]}
+>
+  <PageHeader
+    eyebrow="Category"
+    title={category.name}
+    lede={category.description}
+    count={inCategory.length}
+    countNoun={`link${inCategory.length === 1 ? '' : 's'} across ${ordered.length} ${ordered.length === 1 ? 'place' : 'places'}`}
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    {
+      inCategory.length === 0 ? (
+        <div class="mx-auto max-w-2xl text-center">
+          <h2 class="text-[length:var(--text-step-1)] font-semibold">Nothing here yet</h2>
+          <p class="mt-3 text-[length:var(--text-step-0)] text-ink-soft">
+            No one has written up a {category.name.toLowerCase()} resource yet. This page is here because
+            readers ask for it — if you know a good source, it would be the first one listed.
+          </p>
+          <a
+            href={`/contribute?category=${slug}`}
+            class="mt-6 inline-block rounded bg-ink px-5 py-2.5 text-[length:var(--text-step-0)] font-medium text-paper"
+          >
+            Add the first {category.name.toLowerCase()} link
+          </a>
+        </div>
+      ) : (
+        <div class="space-y-12">
+          {ordered.map(([code, group]) => (
+            <section aria-labelledby={`g-${code}`}>
+              <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-rule pb-2">
+                <h2 id={`g-${code}`} class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+                  {code === 'global' ? (
+                    <span>Global and multi-country</span>
+                  ) : (
+                    <a
+                      href={countryRoute(code)}
+                      class="transition-colors hover:text-accent"
+                    >
+                      {countryNames[code] ?? code}
+                    </a>
+                  )}
+                </h2>
+                <span class="text-[length:var(--text-step--1)] text-ink-faint tabular-nums">
+                  {group.length} link{group.length === 1 ? '' : 's'}
+                </span>
+              </div>
+              <div class="mt-4">
+                <LinkList links={group} countryNames={countryNames} showCountry={code === 'global'} />
+              </div>
+            </section>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</Base>

@@ -1,0 +1,103 @@
+---
+/**
+ * A country's flag, inlined.
+ *
+ * Three reasons this is inline SVG rather than `<img src="/flags/de.svg">`:
+ *
+ *  1. An icon this small appears dozens of times on a country index. As an
+ *     `<img>` that is dozens of requests; inlined, the browser parses one
+ *     already-in-flight document and paints them for free.
+ *  2. `width`/`height` attributes reserve the box before the SVG loads, so the
+ *     list does not reflow as flags arrive.
+ *  3. The 151 flags total 532KB raw / 156KB gzipped, but a single page only
+ *     ever inlines the handful it needs, and gzip already compresses the
+ *     repetitive `<path fill="#000001" d="M0 160h640v160H0z">` shapes well.
+ *
+ * The artwork is flag-icons 7.5.0 (MIT), 4x3, vendored under `public/flags/`
+ * and inlined from disk at build time by `make vendor-flags`. 4x3 rather than
+ * square: nearly every national flag is rectangular, and forcing a square box
+ * would letterbox them all.
+ *
+ * The 1x1 and w20 variants in that package exist for CSS sprite use; at 4x3 the
+ * small ones (Germany is 221 bytes) are the cheapest possible payload and the
+ * complex ones (Serbia, 62KB after optimisation) are only paid for on the
+ * Serbia page.
+ */
+
+interface Props {
+  /** ISO 3166-1 alpha-2, lowercase, e.g. `de`. */
+  code: string;
+  /** CSS length. Flags are 4:3, so height follows from width. */
+  size?: string;
+  /** Announced to screen readers. Omit when the country name is adjacent. */
+  label?: string;
+  class?: string;
+}
+
+const { code, size = '1.5rem', label, class: className = '' } = Astro.props;
+
+/**
+ * Vite `?raw` glob, resolved at build time and inlined into the prerender
+ * bundle.
+ *
+ * Two earlier approaches failed here for the same reason:
+ * `readFileSync(join(ROOT, 'public/flags/...'))` and
+ * `new URL('../../public/flags/...', import.meta.url)` both resolve against
+ * the *bundled* module location, which is `dist/.prerender/chunks/` once Astro
+ * prerenders. Every country page threw ENOENT on `dist/public/flags/de.svg`.
+ * A glob is resolved by Vite before bundling, so it does not care where the
+ * chunk is written.
+ *
+ * The 151 files live in `src/flags/`, not `public/flags/`: nothing serves them
+ * as static assets, and keeping them out of `public/` keeps 532KB of
+ * never-requested SVG out of `dist/`.
+ */
+const FLAGS = import.meta.glob<string>('../flags/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+}) as Record<string, string>;
+
+const FLAG_KEY: Record<string, string> = {};
+for (const key of Object.keys(FLAGS)) {
+  FLAG_KEY[key.slice(key.lastIndexOf('/') + 1).replace(/\.svg$/, '')] = key;
+}
+
+/**
+ * Strip everything but the shapes. flag-icons files carry an XML declaration
+ * and an `id` attribute; the declaration is invalid mid-document, and the `id`
+ * would be duplicated by every inline copy of the same flag on a page.
+ *
+ * `aria-hidden` unless a label is supplied: on a country page the flag sits
+ * directly beside the country name, so announcing it would just repeat the
+ * name. Where the flag is the only identifier, pass `label`.
+ */
+function inlineSvg(slug: string): string | null {
+  const key = FLAG_KEY[slug];
+  if (!key) return null;
+  const attrs = label === undefined ? ' aria-hidden="true"' : ' role="img"';
+  return FLAGS[key]!
+    .replace(/<\?xml[^>]*\?>/g, '')
+    .replace(/<svg([^>]*)>/, (_match, original: string) => {
+      const viewBox = /viewBox="([^"]*)"/.exec(original)?.[1] ?? '0 0 640 480';
+      return `<svg viewBox="${viewBox}" preserveAspectRatio="xMidYMid meet"${attrs}>`;
+    });
+}
+
+// Returns null for an unknown slug, including the `global` pseudo-country,
+// which is a content bucket rather than a place and has no flag.
+const svg = inlineSvg(code);
+const alt = label ?? `${code.toUpperCase()} flag`;
+---
+
+{
+  svg && (
+    <span
+      class:list={['inline-block shrink-0 overflow-hidden rounded-[2px] ring-1 ring-black/10', className]}
+      style={`width:${size};aspect-ratio:4/3;line-height:0`}
+    >
+      <span class="block h-full w-full [&>svg]:block [&>svg]:h-full [&>svg]:w-full" set:html={svg} />
+      {label !== undefined && <span class="sr-only">{alt}</span>}
+    </span>
+  )
+}

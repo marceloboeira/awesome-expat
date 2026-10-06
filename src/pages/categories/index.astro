@@ -1,0 +1,98 @@
+---
+import { getLinks, getCountries, getCategories } from '../../lib/content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { categoriesWithLinks, linksForCategory, type LoadedLink } from '../../lib/corpus.ts';
+import { category as categoryRoute, countries as countriesRoute } from '../../lib/routes.ts';
+
+const links = await getLinks();
+const categories = await getCategories();
+const allCountries = await getCountries();
+const countryNames = Object.fromEntries(allCountries.map((c) => [c.slug ?? c.code, c.name]));
+
+const populated = categoriesWithLinks(links, categories);
+const empty = categories.filter((c) => linksForCategory(links, c.slug).length === 0);
+---
+
+<Base
+  title="All categories"
+  description="Browse expat resources by category: housing, jobs, taxes, visas, banking, health, family, and more."
+  path="/categories"
+  breadcrumbs={[{ name: 'Categories', href: '/categories' }]}
+>
+  <PageHeader
+    eyebrow="Browse by need"
+    title="Categories"
+    lede="Every link is filed under exactly one category and one country, so a page here answers a specific question rather than skimming a topic."
+    count={populated.length}
+    countNoun={`of ${categories.length} categories have resources`}
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        populated.map((category) => {
+          const inCategory = linksForCategory(links, category.slug);
+          const countryCodes = [...new Set(inCategory.map((l) => l.data.country))];
+          return (
+            <li>
+              <a
+                href={categoryRoute(category.slug)}
+                class="flex h-full flex-col rounded-lg border border-rule p-5 transition-colors hover:border-ink"
+              >
+                <span class="text-[length:var(--text-step-1)] font-semibold tracking-tight">{category.name}</span>
+                <span class="mt-2 flex-1 text-[length:var(--text-step--1)] text-ink-soft">{category.description}</span>
+                <span class="mt-4 flex flex-wrap gap-1.5">
+                  {countryCodes.slice(0, 4).map((code) => (
+                    <span class="rounded bg-paper-sunk px-2 py-0.5 text-[length:var(--text-step--1)] text-ink-soft">
+                      {countryNames[code] ?? code}
+                    </span>
+                  ))}
+                  {countryCodes.length > 4 && (
+                    <span class="rounded bg-paper-sunk px-2 py-0.5 text-[length:var(--text-step--1)] text-ink-faint">
+                      +{countryCodes.length - 4} more
+                    </span>
+                  )}
+                </span>
+                <span class="mt-4 text-[length:var(--text-step--1)] text-ink-faint tabular-nums">
+                  {inCategory.length} link{inCategory.length === 1 ? '' : 's'}
+                </span>
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    {
+      empty.length > 0 && (
+        <section class="mt-14 border-t border-rule pt-10" aria-labelledby="h-empty">
+          <h2 id="h-empty" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+            {empty.length} categories are still empty
+          </h2>
+          <p class="mt-2 max-w-2xl text-[length:var(--text-step--1)] text-ink-soft">
+            These are in the registry because a reader asked for them. Nobody has written them up yet.
+          </p>
+          <ul class="mt-5 flex flex-wrap gap-2">
+            {empty.map((c) => (
+              <li class="rounded border border-dashed border-rule px-3 py-1.5 text-[length:var(--text-step--1)] text-ink-faint">
+                {c.name}
+              </li>
+            ))}
+          </ul>
+          <p class="mt-6 text-[length:var(--text-step--1)] text-ink-soft">
+            Know a source that belongs in one of these?{' '}
+            <a href="/contribute" class="text-accent underline underline-offset-2">
+              Add it
+            </a>
+            , or see{' '}
+            <a href={countriesRoute()} class="text-accent underline underline-offset-2">
+              which countries have resources
+            </a>
+            .
+          </p>
+        </section>
+      )
+    }
+  </div>
+</Base>

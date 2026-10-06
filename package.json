@@ -1,0 +1,45 @@
+{
+  "name": "awesome-expat",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A curated directory of expat resources, organised by country.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "pnpm run export && astro build",
+    "preview": "astro preview",
+    "export": "tsx ./engine/cmd/export-markdown.ts",
+    "validate": "tsx ./engine/cmd/validate.ts",
+    "seed": "tsx ./engine/cmd/seed.ts",
+    "list": "tsx ./engine/cmd/list.ts",
+    "add-link": "tsx ./engine/cmd/add-link.ts",
+    "add-country": "tsx ./engine/cmd/add-country.ts",
+    "i18n-report": "tsx ./engine/cmd/i18n-report.ts",
+    "check-links": "tsx ./engine/cmd/check-links.ts",
+    "test": "tsx ./engine/test/bin/run.ts",
+    "pool:harvest": "tsx ./engine/cmd/pool-harvest.ts",
+    "pool:dedup": "tsx ./engine/cmd/pool-dedup.ts",
+    "pool:classify": "tsx ./engine/cmd/pool-classify.ts",
+    "pool:describe": "tsx ./engine/cmd/pool-describe.ts",
+    "pool:promote": "tsx ./engine/cmd/pool-promote.ts",
+    "pool:status": "tsx ./engine/cmd/pool-status.ts",
+    "pool:verify": "tsx ./engine/cmd/pool-verify.ts",
+    "stats": "tsx ./engine/cmd/stats.ts"
+  },
+  "dependencies": {
+    "astro": "^7.3.5",
+    "yaml": "^2.9.1",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.3",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  }
+}

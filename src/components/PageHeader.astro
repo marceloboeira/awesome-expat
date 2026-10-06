@@ -1,0 +1,53 @@
+---
+/**
+ * Shared page masthead. Keeping this in one place is what makes the pages
+ * feel like one site rather than eleven templates that drifted apart.
+ */
+import Flag from './Flag.astro';
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lede?: string;
+  /** Rendered under the lede: counts, filters, call to action. */
+  count?: number;
+  countNoun?: string;
+  /**
+   * ISO 3166-1 alpha-2. When set, the title is set with the country's flag
+   * beside it. Pass `null` to suppress on a country page that has no flag
+   * (the `global` pseudo-country).
+   */
+  flag?: string | null;
+  flagSize?: string;
+}
+const { eyebrow, title, lede, count, countNoun = 'resources', flag, flagSize = '2.25rem' } = Astro.props;
+---
+
+<div class="border-b border-rule">
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
+    {eyebrow && <p class="text-[length:var(--text-step--1)] font-medium uppercase tracking-[0.12em] text-accent">{eyebrow}</p>}
+    {
+      flag ? (
+        <div class="mt-3 flex items-center gap-4">
+          <Flag code={flag} size={flagSize} />
+          <h1 class="text-balance text-[length:var(--text-step-3)] font-semibold leading-[1.1] tracking-tight">
+            {title}
+          </h1>
+        </div>
+      ) : (
+        <h1 class="mt-3 text-balance text-[length:var(--text-step-3)] font-semibold leading-[1.1] tracking-tight">
+          {title}
+        </h1>
+      )
+    }
+    {lede && <p class="mt-4 max-w-2xl text-pretty text-[length:var(--text-step-1)] text-ink-soft">{lede}</p>}
+    {
+      count !== undefined && (
+        <p class="mt-5 text-[length:var(--text-step--1)] text-ink-faint tabular-nums">
+          <span class="font-medium text-ink">{count}</span> {countNoun}
+        </p>
+      )
+    }
+    <slot />
+  </div>
+</div>

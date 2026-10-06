@@ -1,0 +1,194 @@
+---
+import { getLinks, getCountries, getCategories, getRoles } from '../../lib/content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import LinkList from '../../components/LinkList.astro';
+import {
+  buildRolePage,
+  categoriesForCountry,
+  countrySlugOf,
+  linksForCountry,
+  primaryLinksForCountry,
+  roleHasEnoughLinks,
+  type LoadedLink,
+} from '../../lib/corpus.ts';
+import {
+  country as countryRoute,
+  categoryInCountry,
+  countries as countriesRoute,
+  roleInCountry,
+  roles as rolesRoute,
+} from '../../lib/routes.ts';
+
+export async function getStaticPaths() {
+  const countries = await getCountries();
+  return countries
+    .filter((c) => !c.global)
+    .map((country) => ({ params: { code: country.code }, props: { code: country.code } }));
+}
+
+const links = await getLinks();
+const categories = await getCategories();
+const roles = await getRoles();
+const allCountries = await getCountries();
+
+const { code } = Astro.props;
+const country = allCountries.find((c) => c.code === code)!;
+const slug = countrySlugOf(country);
+
+const visible = linksForCountry(links, code);
+const primary = primaryLinksForCountry(links, code);
+const shared = visible.filter((l) => l.data.country !== code);
+const byCategory = categoriesForCountry(links, code, categories);
+
+// A role page is only published when the country actually has enough to fill
+// it. Twelve links spread over nine categories is not a landing page.
+const rolePages = roles
+  .map((role) => ({ role, page: buildRolePage(role, visible) }))
+  .filter(({ page }) => roleHasEnoughLinks(page))
+  .sort((a, b) => b.page.applicable - a.page.applicable);
+
+const name = country.name;
+const categoryNames = Object.fromEntries(
+  allCountries.map((c) => [countrySlugOf(c), c.name]),
+);
+
+/**
+ * Only one country in the registry has a `description`; the other 151 have
+ * name/code/region. A `<meta name="description">` is required on every page, so
+ * the fallback states something true and specific -- the region, the coverage
+ * count, and the fact that it is a stub -- instead of being left empty, which
+ * is what a search engine would then have to invent.
+ */
+const REGION_NAMES: Record<string, string> = {
+  europe: 'Europe',
+  asia: 'Asia',
+  africa: 'Africa',
+  americas: 'the Americas',
+  oceania: 'Oceania',
+  'middle-east': 'the Middle East',
+};
+const regionName = country.region ? REGION_NAMES[country.region] ?? country.region : null;
+
+const desc =
+  country.description ??
+  (visible.length > 0
+    ? `${visible.length} reviewed resources for people moving to ${name} in ${regionName ?? 'this country'}: housing, jobs, taxes, visas and more.`
+    : `No reviewed resources for ${name} yet. Part of the Awesome Expat directory, in ${regionName ?? 'this region'}.`);
+---
+
+{/*
+  137 of the 151 countries have no links yet. Those pages are still published --
+  they are a real answer to "is there anything for Bhutan?", they link onward to
+  the global resources, and they carry the /contribute entry point -- but an
+  index of 137 stubs with a sentence of text each would drag down the pages we
+  actually want ranked. So: crawlable and linked, not indexable.
+*/}
+<Base
+  title={`${name} expat guide`}
+  description={desc}
+  path={countryRoute(slug)}
+  noindex={visible.length === 0}
+  breadcrumbs={[
+    { name: 'Countries', href: countriesRoute() },
+    { name, href: countryRoute(slug) },
+  ]}
+>
+  <PageHeader
+    eyebrow={regionName}
+    flag={slug}
+    title={name}
+    lede={desc}
+  >
+    {
+      visible.length > 0 && (
+        <p class="mt-5 text-[length:var(--text-step--1)] text-ink-faint tabular-nums">
+          <span class="font-medium text-ink">{visible.length}</span> resource
+          {visible.length === 1 ? '' : 's'}
+          {shared.length > 0 && (
+            <>
+              {' '}
+              · {shared.length} also filed under other countries
+            </>
+          )}
+        </p>
+      )
+    }
+  </PageHeader>
+
+  {
+    visible.length === 0 ? (
+      <div class="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6">
+        <h2 class="text-[length:var(--text-step-1)] font-semibold">Nothing reviewed for {name} yet</h2>
+        <p class="mt-3 text-[length:var(--text-step-0)] text-ink-soft">
+          {name} is in the registry, but no one has written up a resource for it. If you know a good source
+          for {primary.length === 0 ? 'a newcomer' : 'someone moving to ' + name}, adding it takes a couple of
+          minutes and helps the next person.
+        </p>
+        <a
+          href={`/contribute?country=${code}`}
+          class="mt-6 inline-block rounded bg-ink px-5 py-2.5 text-[length:var(--text-step-0)] font-medium text-paper"
+        >
+          Add the first link
+        </a>
+        <p class="mt-6 text-[length:var(--text-step--1)] text-ink-faint">
+          Or browse{' '}
+          <a href="/global" class="text-accent underline underline-offset-2">
+            resources that work anywhere
+          </a>
+          .
+        </p>
+      </div>
+    ) : (
+      <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+        {rolePages.length > 0 && (
+          <nav aria-label="Jump to topic" class="mb-10 flex flex-wrap gap-2">
+            {rolePages.map(({ role, page }) => (
+              <a
+                href={roleInCountry(role.slug, slug)}
+                class="rounded-full border border-rule px-3.5 py-1.5 text-[length:var(--text-step--1)] font-medium transition-colors hover:border-accent hover:bg-accent-soft hover:text-accent"
+              >
+                {role.name}
+                <span class="ml-1 text-ink-faint tabular-nums">{page.applicable}</span>
+              </a>
+            ))}
+          </nav>
+        )}
+
+        <div class="space-y-12">
+          {byCategory.map(({ category, count }) => (
+            <section aria-labelledby={`cat-${category.slug}`}>
+              <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-rule pb-2">
+                <h2
+                  id={`cat-${category.slug}`}
+                  class="text-[length:var(--text-step-2)] font-semibold tracking-tight"
+                >
+                  <a
+                    href={categoryInCountry(slug, category.slug)}
+                    class="transition-colors hover:text-accent"
+                  >
+                    {category.name}
+                  </a>
+                </h2>
+                <span class="text-[length:var(--text-step--1)] text-ink-faint tabular-nums">
+                  {count} link{count === 1 ? '' : 's'}
+                </span>
+              </div>
+              {category.description && (
+                <p class="mt-2.5 max-w-2xl text-[length:var(--text-step--1)] text-ink-soft">
+                  {category.description}
+                </p>
+              )}
+              <div class="mt-4">
+                <LinkList
+                  links={visible.filter((l) => l.data.category === category.slug)}
+                  countryNames={categoryNames}
+                />
+              </div>
+            </section>
+          ))}
+        </div>
+      </div>
+    )
+  }
+</Base>

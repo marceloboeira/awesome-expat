@@ -1,0 +1,270 @@
+---
+import { getLinks, getCountries, getCategories, getRoles } from '../lib/content';
+import Base from '../layouts/Base.astro';
+import { linksForCategory, countrySlugOf, type LoadedLink } from '../lib/corpus.ts';
+import {
+  country as countryRoute,
+  countries as countriesRoute,
+  categories as categoriesRoute,
+  jobs as jobsRoute,
+  global as globalRoute,
+  stats as statsRoute,
+} from '../lib/routes.ts';
+
+const links = await getLinks();
+const countries = await getCountries();
+const categories = await getCategories();
+const roles = await getRoles();
+const countryNames = Object.fromEntries(countries.map((c) => [c.slug, c.name]));
+
+/**
+ * How to get a link in, and what "good" means.
+ *
+ * The bar stated here is the bar the review step enforces: a description that
+ * restates the page title is rejected, because the title is already on the
+ * page and adds nothing. A description earns its place by saying what the
+ * resource is *good for* and who it suits.
+ */
+const populated = categories
+  .map((c) => ({ c, n: linksForCategory(links, c.slug).length }))
+  .filter((r) => r.n > 0)
+  .sort((a, b) => b.n - a.n || a.c.slug.localeCompare(b.c.slug));
+
+const countriesWithSomething = countries
+  .filter((c) => !c.global && links.some((l) => l.data.country === c.slug))
+  .sort((a, b) => a.name.localeCompare(b.name));
+
+const emptyCodes = new Set(
+  countries.filter((c) => !c.global).map((c) => c.slug).filter((s) => !countriesWithSomething.some((c) => c.slug === s)),
+);
+
+// A pre-filled link for the country/category combination a reader is on.
+const q = Astro.url.searchParams;
+const preselectCountry = q.get('country') ?? '';
+const preselectCategory = q.get('category') ?? '';
+const preselect = (v: string, allowed: Set<string>) => (allowed.has(v) ? v : '');
+---
+
+<Base
+  title="Contribute a link"
+  description="Add a resource to Awesome Expat. What we accept, what gets rejected, and the three fields that matter: a URL, a title, and a description that says what it is good for."
+  path="/contribute"
+  breadcrumbs={[{ name: 'Contribute', href: '/contribute' }]}
+>
+  <div class="border-b border-rule">
+    <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
+      <p class="text-[length:var(--text-step--1)] font-medium uppercase tracking-[0.12em] text-accent">
+        Contribute
+      </p>
+      <h1 class="mt-3 text-balance text-[length:var(--text-step-3)] font-semibold leading-[1.1] tracking-tight">
+        Add a link
+      </h1>
+      <p class="mt-4 max-w-2xl text-pretty text-[length:var(--text-step-1)] text-ink-soft">
+        A directory is only as good as the descriptions in it. Here is exactly what a good submission looks
+        like.
+      </p>
+      <p class="mt-6 rounded-lg border border-rule bg-paper-sunk p-4 text-[length:var(--text-step--1)]">
+        <span class="font-medium">This site has no web form yet.</span> Submissions are handled through the
+        repository, which is deliberate: a link is content, and content belongs in version control where it is
+        reviewable, diffable, and never lost to a spam cleanup.
+      </p>
+    </div>
+  </div>
+
+  <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+    <section aria-labelledby="h-how">
+      <h2 id="h-how" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">How to submit</h2>
+      <ol class="mt-5 space-y-5">
+        {
+          [
+            {
+              n: '1',
+              h: 'Check it is not already here',
+              p: 'Duplicates are the most common rejected submission. Search the category, or run make link-check locally to see every URL in the corpus.',
+            },
+            {
+              n: '2',
+              h: 'Open a pull request adding one YAML file',
+              p: 'Links live in content/links/<country>/<category>/<slug>.yaml. The repository README has the current workflow; make add-link does this locally with validation.',
+            },
+            {
+              n: '3',
+              h: 'Write a description that earns its place',
+              p: 'This is the field that gets read, and the one that gets rejected. More on it below.',
+            },
+          ].map((s) => (
+            <li class="flex gap-4">
+              <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-ink text-[length:var(--text-step--1)] font-medium text-paper">
+                {s.n}
+              </span>
+              <span>
+                <span class="block font-medium">{s.h}</span>
+                <span class="mt-1 block text-[length:var(--text-step--1)] text-ink-soft">{s.p}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="mt-14" aria-labelledby="h-desc">
+      <h2 id="h-desc" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+        What a description has to do
+      </h2>
+      <p class="mt-3 text-[length:var(--text-step--1)] text-ink-soft">
+        It has to tell a reader something they could not get from the title alone, and something they could not
+        get by visiting the page.
+      </p>
+
+      <div class="mt-6 space-y-4">
+        <div class="rounded-lg border-2 border-bad bg-paper p-4">
+          <p class="text-[length:var(--text-step--1)] font-semibold uppercase tracking-wide text-bad">
+            Rejected — restates the title
+          </p>
+          <p class="mt-2 text-[length:var(--text-step--1)]">
+            "A comprehensive guide to finding an apartment in Berlin, including listings, advice, and tips."
+          </p>
+          <p class="mt-2 text-[length:var(--text-step--1)] text-ink-soft">
+            Every word of this is the title again. A reader who saw the title learned nothing.
+          </p>
+        </div>
+
+        <div class="rounded-lg border-2 border-good bg-paper p-4">
+          <p class="text-[length:var(--text-step--1)] font-semibold uppercase tracking-wide text-good">
+            Accepted — says what it is for
+          </p>
+          <p class="mt-2 text-[length:var(--text-step--1)]">
+            "Filterable Berlin flat listings by district and rent ceiling, the only site that shows the
+            Anmeldung requirement per address. Landlords list here directly, so the stock is current."
+          </p>
+          <p class="mt-2 text-[length:var(--text-step--1)] text-ink-soft">
+            Filterable. Shows a constraint a newcomer will hit. Tells you why it beats the other options.
+          </p>
+        </div>
+      </div>
+
+      <ul class="mt-6 space-y-2 text-[length:var(--text-step--1)] text-ink-soft">
+        <li class="flex gap-2">
+          <span class="text-good">✓</span> Two or three sentences. Long enough to be useful, short enough to scan.
+        </li>
+        <li class="flex gap-2">
+          <span class="text-good">✓</span> Written for someone who has not been there yet. No assumed local knowledge.
+        </li>
+        <li class="flex gap-2">
+          <span class="text-good">✓</span> Say what it is <em>bad</em> at, if that is knowable. Honest beats promotional.
+        </li>
+        <li class="flex gap-2">
+          <span class="text-bad">✗</span> Not marketing copy. If it was written by the site's own team, it does not belong here.
+        </li>
+        <li class="flex gap-2">
+          <span class="text-bad">✗</span> Not a link to another list of links, unless it is genuinely the best one.
+        </li>
+      </ul>
+    </section>
+
+    <section class="mt-14" aria-labelledby="h-what">
+      <h2 id="h-what" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">What we accept</h2>
+      <dl class="mt-5 space-y-4">
+        {
+          [
+            {
+              t: 'Government and official sources',
+              p: 'Embassy pages, municipal sites, official immigration portals. Slow and often badly designed, and the most authoritative thing available.',
+            },
+            {
+              t: 'Nonprofit and community organisations',
+              p: 'Established expat networks and advice charities. Check that they are still operating before submitting.',
+            },
+            {
+              t: 'Tools that solve a specific problem',
+              p: 'Calculators, checklists, comparison tools. Not apps that are mostly a homepage with a sign-up form.',
+            },
+            {
+              t: 'Written guides, when they are genuinely good',
+              p: 'Long-form, specific, and about a place rather than about opinions. Light content is the main thing we reject.',
+            },
+          ].map((r) => (
+            <div>
+              <dt class="font-medium">{r.t}</dt>
+              <dd class="mt-0.5 text-[length:var(--text-step--1)] text-ink-soft">{r.p}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    {
+      (preselectCountry || preselectCategory) && (
+        <section class="mt-14 rounded-lg border border-accent bg-accent-soft/40 p-5" aria-labelledby="h-pre">
+          <h2 id="h-pre" class="text-[length:var(--text-step-1)] font-semibold">
+            You came from a specific gap
+          </h2>
+          <p class="mt-2 text-[length:var(--text-step--1)] text-ink-soft">
+            Pre-fill the file path for where this link belongs.
+          </p>
+          <code class="mt-3 block overflow-x-auto rounded bg-paper-sunk p-3 font-mono text-[length:var(--text-step--1)]">
+            content/links/{preselectCountry || '<country>'}/{preselectCategory || '<category>'}/{'<slug>'}.yaml
+          </code>
+        </section>
+      )
+    }
+
+    <section class="mt-14" aria-labelledby="h-next">
+      <h2 id="h-next" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">Pick a gap</h2>
+      <p class="mt-3 text-[length:var(--text-step--1)] text-ink-soft">
+        The fastest contributions fill a hole that is already visible. {emptyCodes.size} countries and{' '}
+        {categories.length - populated.length} categories have nothing at all yet.
+      </p>
+
+      <h3 class="mt-6 text-[length:var(--text-step--1)] font-semibold uppercase tracking-wide text-ink-faint">
+        Categories needing links
+      </h3>
+      <ul class="mt-3 flex flex-wrap gap-2">
+        {
+          categories
+            .filter((c) => !populated.some((p) => p.c.slug === c.slug))
+            .map((c) => (
+              <li>
+                <a
+                  href={`/contribute?category=${c.slug}`}
+                  class="inline-block rounded border border-dashed border-warn px-3 py-1.5 text-[length:var(--text-step--1)] text-ink-soft transition-colors hover:border-ink hover:text-ink"
+                >
+                  {c.name}
+                </a>
+              </li>
+            ))
+        }
+      </ul>
+
+      <h3 class="mt-8 text-[length:var(--text-step--1)] font-semibold uppercase tracking-wide text-ink-faint">
+        Countries with nothing
+      </h3>
+      <ul class="mt-3 flex flex-wrap gap-2">
+        {
+          [...emptyCodes]
+            .map((code) => countries.find((c) => c.slug === code)!)
+            .filter(Boolean)
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((c) => (
+              <li>
+                <a
+                  href={`/contribute?country=${c.slug}`}
+                  class="inline-block rounded border border-dashed border-rule px-3 py-1.5 text-[length:var(--text-step--1)] text-ink-faint transition-colors hover:border-ink hover:text-ink"
+                >
+                  {c.name}
+                </a>
+              </li>
+            ))
+        }
+      </ul>
+    </section>
+
+    <nav aria-label="Related" class="mt-14 flex flex-wrap gap-x-6 gap-y-2 border-t border-rule pt-6 text-[length:var(--text-step--1)]">
+      <a href={categoriesRoute()} class="text-accent underline underline-offset-2">All categories</a>
+      <a href={countriesRoute()} class="text-accent underline underline-offset-2">All countries</a>
+      <a href={jobsRoute()} class="text-accent underline underline-offset-2">Jobs</a>
+      <a href={globalRoute()} class="text-accent underline underline-offset-2">Global resources</a>
+      <a href={statsRoute()} class="text-accent underline underline-offset-2">Coverage stats</a>
+    </nav>
+  </div>
+</Base>

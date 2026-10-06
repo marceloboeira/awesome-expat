@@ -1,0 +1,122 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { getLinks, getCountries, getCategories, getAuthors, getGroups } from '../lib/content';
+import { countriesWithLinks, categoriesWithLinks, countrySlugOf } from '../lib/corpus.ts';
+import { country as countryRoute, categories as categoriesRoute, contribute as contributeRoute, global as globalRoute } from '../lib/routes.ts';
+
+const links = await getLinks();
+const countries = await getCountries();
+const categories = await getCategories();
+const authors = await getAuthors();
+const groups = await getGroups();
+
+const withLinks = countriesWithLinks(links, countries);
+const populated = categoriesWithLinks(links, categories);
+---
+
+<Base
+  title="About this directory"
+  description="How Awesome Expat is built: YAML in version control, descriptions written by people, a build that fails on a broken link reference, and an honest picture of what it does not cover."
+  path="/about"
+  breadcrumbs={[{ name: 'About', href: '/about' }]}
+>
+  <PageHeader
+    eyebrow="How this works"
+    title="About"
+    lede="A directory of practical resources for people moving abroad, built so that every claim on it can be checked."
+  />
+
+  <div class="mx-auto max-w-3xl px-4 py-10 sm:px-6">
+    <div class="space-y-12 text-[length:var(--text-step-0)] text-ink-soft">
+      <section aria-labelledby="h-why">
+        <h2 id="h-why" class="text-[length:var(--text-step-2)] font-semibold tracking-tight text-ink">
+          Why it works this way
+        </h2>
+        <p class="mt-3">
+          Most link directories rot. They accumulate SEO spam, they list things nobody has opened, and their
+          descriptions are generated from the page title, so the directory adds no information beyond the title
+          list you could get from a search engine.
+        </p>
+        <p class="mt-3">
+          The three rules here follow from not wanting that. Descriptions must say what a resource is
+          <em>good for</em>. Nothing reaches the site without passing the same schema the validator uses. And
+          the site's own coverage report is public, including the gaps.
+        </p>
+      </section>
+
+      <section aria-labelledby="h-how">
+        <h2 id="h-how" class="text-[length:var(--text-step-2)] font-semibold tracking-tight text-ink">
+          How it is built
+        </h2>
+        <p class="mt-3">
+          Every link is one YAML file in version control. Those files are the single source of truth: the
+          generated Markdown, the statistics, and the site you are reading are all derived from them. Nothing is
+          typed into two places, so nothing can quietly disagree with itself.
+        </p>
+        <p class="mt-3">
+          The site is a static build. There is no database, no runtime, and no client-side JavaScript beyond
+          what the browser needs to open a menu — the whole thing is files on a CDN. A build fails if a link
+          points at a category that does not exist or a date is in the future, so a broken reference cannot ship.
+        </p>
+      </section>
+
+      <section aria-labelledby="h-honest">
+        <h2 id="h-honest" class="text-[length:var(--text-step-2)] font-semibold tracking-tight text-ink">
+          What is not done yet
+        </h2>
+        <p class="mt-3">
+          Every description currently in the directory was machine-drafted from the source page and has
+          <strong class="font-medium text-ink">not been read by a person</strong>. Each one is marked
+          <span class="font-mono">awaiting review</span> until it is. That is the largest outstanding piece of
+          work on this site, and it is the reason the review count is published on every link.
+        </p>
+        <p class="mt-3">
+          Countries with no reviewed links still have pages, because "is there anything for Bhutan?" deserves a
+          real answer rather than a 404. Those pages are marked <span class="font-mono">noindex</span> and left
+          out of the sitemap — an empty page that ranks is worse for everyone than one that does not.
+        </p>
+        <p class="mt-5">
+          <a href="/stats" class="rounded bg-ink px-4 py-2 font-medium text-paper">See the current numbers</a>
+        </p>
+      </section>
+
+      <section aria-labelledby="h-people">
+        <h2 id="h-people" class="text-[length:var(--text-step-2)] font-semibold tracking-tight text-ink">
+          People
+        </h2>
+        <p class="mt-3">
+          {links.length} links, {withLinks.length} countries, {populated.length} categories, and{' '}
+          {authors.length} people who have contributed something. {groups.length} regional groupings are in
+          the registry to keep the country list navigable.
+        </p>
+        <p class="mt-3">
+          <a href={contributeRoute()} class="text-accent underline underline-offset-2">Add a link</a> or{' '}
+          <a href={globalRoute()} class="text-accent underline underline-offset-2">browse the resources that work anywhere</a>.
+        </p>
+      </section>
+
+      <section aria-labelledby="h-license">
+        <h2 id="h-license" class="text-[length:var(--text-step-2)] font-semibold tracking-tight text-ink">
+          Corrections and licensing
+        </h2>
+        <p class="mt-3">
+          Resources rot. If a link here is dead, has turned into something else, or has a description that no
+          longer matches the page, that is a bug worth reporting and the fastest kind to fix.
+        </p>
+        <p class="mt-3">
+          Site content is licensed under CC BY-SA 4.0. The linked resources belong to their own authors and are
+          not redistributed here — every link is a pointer, nothing more. Nothing listed implies any
+          affiliation or endorsement.
+        </p>
+      </section>
+    </div>
+
+    <nav aria-label="Related" class="mt-14 flex flex-wrap gap-x-6 gap-y-2 border-t border-rule pt-6 text-[length:var(--text-step--1)]">
+      <a href="/countries" class="text-accent underline underline-offset-2">All countries</a>
+      <a href={categoriesRoute()} class="text-accent underline underline-offset-2">All categories</a>
+      <a href="/stats" class="text-accent underline underline-offset-2">Coverage stats</a>
+      <a href={contributeRoute()} class="text-accent underline underline-offset-2">Contribute</a>
+    </nav>
+  </div>
+</Base>

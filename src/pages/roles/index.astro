@@ -1,0 +1,76 @@
+---
+import { getLinks, getCountries, getRoles } from '../../lib/content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import LinkList from '../../components/LinkList.astro';
+import { buildRolePage, countrySlugOf, roleHasEnoughLinks, type LoadedLink } from '../../lib/corpus.ts';
+import { role as roleRoute, countries as countriesRoute } from '../../lib/routes.ts';
+
+const links = await getLinks();
+const roles = await getRoles();
+const allCountries = await getCountries();
+const countryNames = Object.fromEntries(allCountries.map((c) => [countrySlugOf(c), c.name]));
+
+const pages = roles
+  .map((role) => ({ role, page: buildRolePage(role, links) }))
+  .sort((a, b) => b.page.applicable - a.page.applicable);
+const published = pages.filter(({ page }) => roleHasEnoughLinks(page));
+const tooThin = pages.filter(({ page }) => !roleHasEnoughLinks(page));
+---
+
+<Base
+  title="Resources by role"
+  description="Moving for work? Find the paperwork, hiring rules, and career resources for remote workers, employees, freelancers, founders, and researchers."
+  path="/roles"
+  breadcrumbs={[{ name: 'Roles', href: '/roles' }]}
+>
+  <PageHeader
+    eyebrow="Browse by who you are"
+    title="By role"
+    lede="Working abroad is not one problem. A founder, a remote employee and a freelancer each need different documents, so the pages are split by role."
+    count={published.length}
+    countNoun={`of ${roles.length} roles have enough links to publish`}
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <ul class="grid gap-4 sm:grid-cols-2">
+      {
+        published.map(({ role, page }) => (
+          <li>
+            <a
+              href={roleRoute(role.slug)}
+              class="flex h-full flex-col rounded-lg border border-rule p-5 transition-colors hover:border-ink"
+            >
+              <span class="text-[length:var(--text-step-1)] font-semibold tracking-tight">{role.name}</span>
+              <span class="mt-2 flex-1 text-[length:var(--text-step--1)] text-ink-soft">{role.description}</span>
+              <span class="mt-4 text-[length:var(--text-step--1)] text-ink-faint tabular-nums">
+                {page.specific.length} role-specific
+                {page.general.length > 0 && ` + ${page.general.length} general`}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    {
+      tooThin.length > 0 && (
+        <section class="mt-12 border-t border-rule pt-8">
+          <p class="text-[length:var(--text-step--1)] text-ink-soft">
+            {tooThin.map(({ role }) => role.name).join(', ')} {tooThin.length === 1 ? 'is' : 'are'} in the
+            registry but {tooThin.length === 1 ? 'has' : 'have'} too few links to be worth a page yet. If you
+            work in that world and know a good resource,{' '}
+            <a href="/contribute" class="text-accent underline underline-offset-2">
+              add the first one
+            </a>
+            .
+          </p>
+        </section>
+      )
+    }
+
+    <p class="mt-8 text-[length:var(--text-step--1)] text-ink-soft">
+      Prefer to browse by place? <a href={countriesRoute()} class="text-accent underline underline-offset-2">All countries</a>.
+    </p>
+  </div>
+</Base>

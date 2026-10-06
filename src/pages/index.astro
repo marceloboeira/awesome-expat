@@ -1,0 +1,186 @@
+---
+import { getLinks, getCountries, getCategories, getRoles } from '../lib/content';
+import Base from '../layouts/Base.astro';
+import LinkList from '../components/LinkList.astro';
+import WorldMap from '../components/WorldMap.astro';
+import {
+  byTitle,
+  countriesWithLinks,
+  categoriesWithLinks,
+  countrySlugOf,
+  featuredFirst,
+  linksForCountry,
+  primaryLinksForCountry,
+  type LoadedLink,
+} from '../lib/corpus.ts';
+import { country as countryRoute, category as categoryRoute, roles as rolesRoute, global as globalRoute, stats as statsRoute } from '../lib/routes.ts';
+
+const links = await getLinks();
+const countries = await getCountries();
+const categories = await getCategories();
+const roles = await getRoles();
+
+const countryNames = Object.fromEntries(countries.map((c) => [countrySlugOf(c), c.name]));
+// `global` is excluded: it is a content bucket with no country page, and it
+// gets its own section further down the page.
+const withLinks = countriesWithLinks(links, countries).filter((c) => !c.global);
+const catsWithLinks = categoriesWithLinks(links, categories);
+const featured = links.filter((l) => l.data.featured).sort(featuredFirst);
+
+// The map needs a count per country, computed once. Countries with no links
+// are still drawn -- an outline is a promise the directory has not kept yet,
+// which is more honest than omitting them.
+const counts = new Map<string, number>();
+for (const country of countries) {
+  counts.set(countrySlugOf(country), primaryLinksForCountry(links, countrySlugOf(country)).length);
+}
+
+const totalLinks = links.length;
+const totalCountries = withLinks.length;
+const totalCategories = catsWithLinks.length;
+---
+
+<Base
+  title="Practical resources for moving abroad"
+  description={`A curated directory of ${totalLinks} checked resources for expats across ${totalCountries} countries and ${totalCategories} categories. Housing, jobs, taxes, visas and more — every description written by a person.`}
+  bare
+  path="/"
+>
+  <section class="mx-auto max-w-6xl px-4 pb-12 pt-14 sm:px-6 sm:pt-20">
+    <p class="text-[length:var(--text-step--1)] font-medium uppercase tracking-[0.12em] text-accent">
+      A curated expat directory
+    </p>
+    <h1 class="mt-4 max-w-3xl text-balance text-[length:var(--text-step-4)] font-semibold leading-[1.05] tracking-tight">
+      Everything you need to actually move there.
+    </h1>
+    <p class="mt-6 max-w-2xl text-pretty text-[length:var(--text-step-1)] text-ink-soft">
+      {totalLinks} resources across {totalCountries} countries, each one linked to a specific thing it is good
+      for. No listicles, no dead links, no affiliate filler.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        href={countryRoute('de')}
+        class="rounded bg-ink px-5 py-2.5 text-[length:var(--text-step-0)] font-medium text-paper transition-opacity hover:opacity-85"
+      >
+        Start with a country
+      </a>
+      <a
+        href={globalRoute()}
+        class="rounded border border-rule px-5 py-2.5 text-[length:var(--text-step-0)] font-medium transition-colors hover:border-ink"
+      >
+        Resources that work anywhere
+      </a>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pb-16 sm:px-6" aria-labelledby="h-map">
+    <div class="flex items-baseline justify-between gap-4">
+      <h2 id="h-map" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">Where to start</h2>
+      <a href="/countries" class="text-[length:var(--text-step--1)] text-ink-soft hover:text-accent">
+        All {totalCountries} countries →
+      </a>
+    </div>
+    <p class="mt-2 max-w-2xl text-[length:var(--text-step--1)] text-ink-soft">
+      Shaded countries have reviewed resources. The rest are on the roadmap.
+    </p>
+    <div class="mt-6">
+      <WorldMap countries={countries} counts={counts} />
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pb-16 sm:px-6" aria-labelledby="h-countries">
+    <h2 id="h-countries" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+      Countries with resources
+    </h2>
+    <ul class="mt-6 grid gap-x-8 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        withLinks.map((country) => {
+          const slug = countrySlugOf(country);
+          const n = primaryLinksForCountry(links, slug).length;
+          const scoped = linksForCountry(links, slug).length - n;
+          return (
+            <li class="flex items-baseline justify-between gap-3 border-b border-rule py-2.5">
+              <a href={countryRoute(slug)} class="font-medium transition-colors hover:text-accent">
+                {country.name}
+              </a>
+              <span class="shrink-0 text-[length:var(--text-step--1)] text-ink-faint tabular-nums">
+                {n} link{n === 1 ? '' : 's'}
+                {scoped > 0 && <span class="text-ink-faint"> +{scoped} shared</span>}
+              </span>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </section>
+
+  <section class="border-y border-rule bg-paper-sunk" aria-labelledby="h-categories">
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <h2 id="h-categories" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+        Browse by category
+      </h2>
+      <ul class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          catsWithLinks.map((c) => {
+            const n = links.filter((l) => l.data.category === c.slug).length;
+            return (
+              <li>
+                <a
+                  href={categoryRoute(c.slug)}
+                  class="block h-full rounded-lg border border-rule bg-paper p-4 transition-colors hover:border-ink"
+                >
+                  <span class="block font-medium">{c.name}</span>
+                  <span class="mt-1 block text-[length:var(--text-step--1)] text-ink-soft clamp-2">
+                    {c.description}
+                  </span>
+                  <span class="mt-3 block text-[length:var(--text-step--1)] text-ink-faint tabular-nums">
+                    {n} link{n === 1 ? '' : 's'}
+                  </span>
+                </a>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </section>
+
+  {
+    featured.length > 0 && (
+      <section class="mx-auto max-w-6xl px-4 py-16 sm:px-6" aria-labelledby="h-featured">
+        <h2 id="h-featured" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+          Most used
+        </h2>
+        <div class="mt-6">
+          <LinkList links={featured} countryNames={countryNames} />
+        </div>
+      </section>
+    )
+  }
+
+  <section class="mx-auto max-w-6xl px-4 pb-20 sm:px-6" aria-labelledby="h-roles">
+    <h2 id="h-roles" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">Browse by role</h2>
+    <p class="mt-2 max-w-2xl text-[length:var(--text-step--1)] text-ink-soft">
+      If you are moving for work, these are the pages that matter.
+    </p>
+    <ul class="mt-6 flex flex-wrap gap-2">
+      {
+        roles.map((role) => (
+          <li>
+            <a
+              href={`${rolesRoute()}/${role.slug}`}
+              class="inline-block rounded-full border border-rule px-4 py-2 text-[length:var(--text-step--1)] font-medium transition-colors hover:border-accent hover:bg-accent-soft hover:text-accent"
+            >
+              {role.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-6 text-[length:var(--text-step--1)] text-ink-faint">
+      <a href={statsRoute()} class="underline underline-offset-2 hover:text-accent">See what the directory covers</a>
+      and where it is still empty.
+    </p>
+  </section>
+</Base>

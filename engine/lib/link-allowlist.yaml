@@ -1,0 +1,13 @@
+# Domains that block automated requests with 403/429.
+#
+# A 403 here means "a bot asked", not "this page is gone". Deleting these would
+# quietly remove good links, so the checker treats them as healthy and says so.
+#
+# Only add a host here if you have opened the URL in a browser and confirmed the
+# page still exists. The value is the reason, which is what a future maintainer
+# needs when deciding whether to keep the entry.
+
+teleport.org: Cloudflare bot challenge on HEAD, serves fine in a browser
+expatistan.com: Cloudflare bot challenge
+glassdoor.com: Aggressive bot filtering, blocks all non-browser clients
+you-china.com: Rate-limits automated requests, serves 429

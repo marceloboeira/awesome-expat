@@ -1,0 +1,125 @@
+---
+import { getLinks, getCountries, getRoles } from '../../lib/content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import LinkList from '../../components/LinkList.astro';
+import { buildRolePage, countrySlugOf, roleHasEnoughLinks, type LoadedLink } from '../../lib/corpus.ts';
+import {
+  role as roleRoute,
+  roles as rolesRoute,
+  country as countryRoute,
+  global as globalRoute,
+} from '../../lib/routes.ts';
+
+export async function getStaticPaths() {
+  const roles = await getRoles();
+  const links = await getLinks();
+
+  // A role page with two links under it is worse than no page: it ranks, and
+  // then disappoints. Only publish roles that clear the threshold, exactly as
+  // `roleHasEnoughLinks` decides at render time.
+  return roles
+    .filter((role) => roleHasEnoughLinks(buildRolePage(role, links)))
+    .map((role) => ({ params: { slug: role.slug }, props: { slug: role.slug } }));
+}
+
+const links = await getLinks();
+const roles = await getRoles();
+const allCountries = await getCountries();
+const countryNames = Object.fromEntries(allCountries.map((c) => [countrySlugOf(c), c.name]));
+
+const { slug } = Astro.props;
+const role = roles.find((r) => r.slug === slug)!;
+const page = buildRolePage(role, links);
+
+// Where this role actually has country-specific material. The rest of the
+// directory is the same for everyone, so it is summarised rather than repeated
+// under every country.
+const countryCodes = [...new Set(page.all.map((l) => l.data.country))].sort((a, b) => {
+  if (a === 'global') return 1;
+  if (b === 'global') return -1;
+  return (countryNames[a] ?? a).localeCompare(countryNames[b] ?? b);
+});
+---
+
+<Base
+  title={`${role.name} resources`}
+  description={role.description}
+  path={roleRoute(slug)}
+  breadcrumbs={[
+    { name: 'Roles', href: rolesRoute() },
+    { name: role.name, href: roleRoute(slug) },
+  ]}
+>
+  <PageHeader
+    eyebrow="By role"
+    title={role.name}
+    lede={role.description}
+    count={page.applicable}
+    countNoun={`link${page.applicable === 1 ? '' : 's'}`}
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    {
+      page.specific.length > 0 && (
+        <section aria-labelledby="h-specific">
+          <h2 id="h-specific" class="border-b border-rule pb-2 text-[length:var(--text-step-2)] font-semibold tracking-tight">
+            Written for {role.name.toLowerCase()}s
+          </h2>
+          <div class="mt-4">
+            <LinkList links={page.specific} countryNames={countryNames} />
+          </div>
+        </section>
+      )
+    }
+
+    {page.general.length > 0 && (
+      <section class="mt-12" aria-labelledby="h-general">
+        <h2 id="h-general" class="border-b border-rule pb-2 text-[length:var(--text-step-2)] font-semibold tracking-tight">
+          Applies to any role
+        </h2>
+        <p class="mt-2.5 max-w-2xl text-[length:var(--text-step--1)] text-ink-soft">
+          Not specific to being a {role.name.toLowerCase()}, but you will still need it.
+        </p>
+        <div class="mt-4">
+          <LinkList links={page.general} countryNames={countryNames} />
+        </div>
+      </section>
+    )}
+
+    {
+      countryCodes.length > 0 && (
+        <section class="mt-12 border-t border-rule pt-8" aria-labelledby="h-where">
+          <h2 id="h-where" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+            Where these apply
+          </h2>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {countryCodes.map((code) =>
+              // `global` has no country page, so it links to the section that
+              // lists it rather than to a /countries/global that never existed.
+              code === 'global' ? (
+                <li>
+                  <a
+                    href={globalRoute()}
+                    class="inline-block rounded-full border border-rule px-3.5 py-1.5 text-[length:var(--text-step--1)] transition-colors hover:border-accent hover:bg-accent-soft hover:text-accent"
+                  >
+                    Anywhere
+                  </a>
+                </li>
+              ) : (
+                <li>
+                  <a
+                    href={countryRoute(code)}
+                    class="inline-block rounded-full border border-rule px-3.5 py-1.5 text-[length:var(--text-step--1)] transition-colors hover:border-accent hover:bg-accent-soft hover:text-accent"
+                  >
+                    {countryNames[code] ?? code}
+                  </a>
+                </li>
+              ),
+            )}
+          </ul>
+        </section>
+      )
+    }
+  </div>
+</Base>

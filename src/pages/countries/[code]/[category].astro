@@ -1,0 +1,117 @@
+---
+import { getLinks, getCountries, getCategories } from '../../../lib/content';
+import Base from '../../../layouts/Base.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import LinkList from '../../../components/LinkList.astro';
+import { linksForCountryCategory, type LoadedLink } from '../../../lib/corpus.ts';
+import { categoryInCountry, categories as categoriesRoute, category as categoryRoute, country as countryRoute, countries as countriesRoute } from '../../../lib/routes.ts';
+
+export async function getStaticPaths() {
+  const countries = await getCountries();
+  const categories = await getCategories();
+  const links = await getLinks();
+
+  // Only combinations that actually have a link. Generating all 151 x 12
+  // would produce 1812 pages, the large majority of them empty.
+  const paths: { params: { code: string; category: string }; props: { code: string; category: string } }[] = [];
+  for (const country of countries) {
+    if (country.global) continue;
+    const code = country.slug ?? country.code;
+    for (const category of categories) {
+      if (linksForCountryCategory(links, code, category.slug).length > 0) {
+        paths.push({ params: { code, category: category.slug }, props: { code, category: category.slug } });
+      }
+    }
+  }
+  return paths;
+}
+
+const links = await getLinks();
+const countries = await getCountries();
+const categories = await getCategories();
+const countryNames = Object.fromEntries(countries.map((c) => [c.slug, c.name]));
+
+const { code, category: categorySlug } = Astro.props;
+const country = countries.find((c) => c.slug === code)!;
+const category = categories.find((c) => c.slug === categorySlug)!;
+
+const inPair = linksForCountryCategory(links, code, categorySlug);
+const name = country.name;
+
+const REGION_NAMES: Record<string, string> = {
+  europe: 'Europe',
+  asia: 'Asia',
+  africa: 'Africa',
+  americas: 'the Americas',
+  oceania: 'Oceania',
+  'middle-east': 'the Middle East',
+};
+const regionName = country.region ? REGION_NAMES[country.region] ?? country.region : null;
+
+// Sibling categories on this country, so a reader in /countries/de/housing can
+// step sideways to /countries/de/taxes without going back up the tree.
+const siblings = categories
+  .map((c) => ({ c, n: linksForCountryCategory(links, code, c.slug).length }))
+  .filter((r) => r.n > 0)
+  .sort((a, b) => b.n - a.n || a.c.slug.localeCompare(b.c.slug));
+---
+
+<Base
+  title={`${category.name} in ${name}`}
+  description={`${inPair.length} reviewed ${category.name.toLowerCase()} resources for people moving to ${name}.`}
+  path={categoryInCountry(code, categorySlug)}
+  breadcrumbs={[
+    { name: 'Countries', href: countriesRoute() },
+    { name, href: countryRoute(code) },
+    { name: category.name, href: categoryInCountry(code, categorySlug) },
+  ]}
+>
+  <PageHeader
+    eyebrow={`${name} · Category`}
+    title={`${category.name} in ${name}`}
+    lede={category.description}
+    count={inPair.length}
+    countNoun={`link${inPair.length === 1 ? '' : 's'}`}
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <div class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
+      <div>
+        <LinkList links={inPair} countryNames={countryNames} showCountry={false} />
+      </div>
+
+      <aside class="lg:sticky lg:top-20 lg:self-start" aria-labelledby="h-siblings">
+        <h2 id="h-siblings" class="text-[length:var(--text-step--1)] font-semibold uppercase tracking-wide text-ink-faint">
+          {name} by category
+        </h2>
+        <ul class="mt-3 space-y-0.5">
+          {
+            siblings.map(({ c, n }) => (
+              <li>
+                <a
+                  href={categoryInCountry(code, c.slug)}
+                  aria-current={c.slug === categorySlug ? 'page' : undefined}
+                  class:list={[
+                    'flex items-baseline justify-between gap-2 rounded px-2 py-1.5 text-[length:var(--text-step--1)] transition-colors',
+                    c.slug === categorySlug
+                      ? 'bg-accent-soft font-medium text-accent'
+                      : 'text-ink-soft hover:bg-paper-sunk hover:text-ink',
+                  ]}
+                >
+                  <span>{c.name}</span>
+                  <span class="text-ink-faint tabular-nums">{n}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-5 border-t border-rule pt-4 text-[length:var(--text-step--1)]">
+          <a href={countryRoute(code)} class="text-accent underline underline-offset-2">All {name} resources</a>
+          <span class="mt-1 block">
+            <a href={categoriesRoute()} class="text-ink-soft hover:text-accent">All categories</a>
+          </span>
+        </p>
+      </aside>
+    </div>
+  </div>
+</Base>

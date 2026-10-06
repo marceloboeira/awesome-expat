@@ -1,0 +1,77 @@
+---
+import { getLinks, getCountries, getCategories } from '../lib/content';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import LinkList from '../components/LinkList.astro';
+import { linksForCategory, countrySlugOf, type LoadedLink } from '../lib/corpus.ts';
+import { country as countryRoute } from '../lib/routes.ts';
+
+const links = await getLinks();
+const categories = await getCategories();
+const allCountries = await getCountries();
+const countryNames = Object.fromEntries(allCountries.map((c) => [countrySlugOf(c), c.name]));
+
+// /jobs is a curated cross-country view, not an alias for the jobs category:
+// a reader on this page is looking for work, which spans "interviewing",
+// "jobs" and the visa paperwork that gates both.
+const jobCategories = categories.filter((c) => ['jobs', 'interviewing'].includes(c.slug));
+const jobLinks = links.filter((l) => jobCategories.some((c) => c.slug === l.data.category));
+
+const groups = new Map<string, LoadedLink[]>();
+for (const link of jobLinks) {
+  const key = link.data.country;
+  if (!groups.has(key)) groups.set(key, []);
+  groups.get(key)!.push(link);
+}
+const ordered = [...groups.entries()].sort((a, b) => {
+  if (a[0] === 'global') return 1;
+  if (b[0] === 'global') return -1;
+  return (countryNames[a[0]] ?? a[0]).localeCompare(countryNames[b[0]] ?? b[0]);
+});
+---
+
+<Base
+  title="Jobs and hiring expats"
+  description="Find work in a new country: job boards, hiring rules, interview advice, and the visa questions to ask before you accept an offer."
+  path="/jobs"
+  breadcrumbs={[{ name: 'Jobs', href: '/jobs' }]}
+>
+  <PageHeader
+    eyebrow="Finding work"
+    title="Jobs"
+    lede="Job boards, hiring rules, and interview advice — for people who need to work in a country they do not already live in."
+    count={jobLinks.length}
+    countNoun={`link${jobLinks.length === 1 ? '' : 's'} across ${ordered.length} ${ordered.length === 1 ? 'place' : 'places'}`}
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    {
+      ordered.map(([code, group]) => (
+        <section class="mb-12" aria-labelledby={`j-${code}`}>
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-rule pb-2">
+            <h2 id={`j-${code}`} class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+              {code === 'global' ? (
+                <span>Anywhere</span>
+              ) : (
+                <a href={countryRoute(code)} class="transition-colors hover:text-accent">
+                  {countryNames[code] ?? code}
+                </a>
+              )}
+            </h2>
+            <span class="text-[length:var(--text-step--1)] text-ink-faint tabular-nums">
+              {group.length} link{group.length === 1 ? '' : 's'}
+            </span>
+          </div>
+          <div class="mt-4">
+            <LinkList links={group} countryNames={countryNames} showCountry={code === 'global'} />
+          </div>
+        </section>
+      ))
+    }
+
+    <p class="border-t border-rule pt-8 text-[length:var(--text-step--1)] text-ink-soft">
+      Know a job board or hiring guide we are missing?{' '}
+      <a href="/contribute?category=jobs" class="text-accent underline underline-offset-2">Add it</a>.
+    </p>
+  </div>
+</Base>

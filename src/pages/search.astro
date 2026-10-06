@@ -1,0 +1,211 @@
+---
+import { getLinks, getCountries, getCategories, getRoles } from '../lib/content';
+import { countrySlugOf, type LoadedLink } from '../lib/corpus.ts';
+import { country as countryRoute, category as categoryRoute } from '../lib/routes.ts';
+
+export const prerender = true;
+
+/**
+ * Static search, no client JavaScript.
+ *
+ * With 218 pages and 67 links, a reader who knows what they want ("how do I
+ * get an Anmeldung") should not have to pick a country and then scroll. The
+ * whole corpus is ~40KB of JSON, so it is inlined into this page and filtered
+ * in the browser with a few lines of vanilla JS. That keeps the site a static
+ * build with no runtime, which is the constraint the rest of it was designed
+ * around -- a search service would be the one thing here that needs a server.
+ *
+ * The index is derived from the same `links` the rest of the site renders, so
+ * it cannot surface a link that is not on a country page.
+ */
+
+const links = await getLinks();
+const countries = await getCountries();
+const categories = await getCategories();
+const roles = await getRoles();
+
+const countryNames = Object.fromEntries(countries.map((c) => [c.slug, c.name]));
+const categoryNames = Object.fromEntries(categories.map((c) => [c.slug, c.name]));
+const roleNames = Object.fromEntries(roles.map((r) => [r.slug, r.name]));
+
+const index = links
+  .map(({ data }) => ({
+    t: data.title,
+    d: data.description ?? '',
+    u: data.url,
+    c: data.country,
+    k: data.category,
+    r: data.roles ?? [],
+    f: data.featured ? 1 : 0,
+  }))
+  .sort((a, b) => b.f - a.f || a.t.localeCompare(b.t));
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Search · Awesome Expat</title>
+    <meta
+      name="description"
+      content="Search every link in the Awesome Expat directory by name, description, country, or category."
+    />
+    <link rel="canonical" href="https://awesome-expat.com/search" />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body class="min-h-dvh bg-paper text-ink">
+    <div class="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+      <p class="font-mono text-[length:var(--text-step--1)] text-ink-faint">Search</p>
+      <h1 class="mt-2 text-[length:var(--text-step-2)] font-semibold tracking-tight">
+        Find a link
+      </h1>
+      <p class="mt-2 text-[length:var(--text-step--1)] text-ink-soft">
+        {links.length} resources, filtered in your browser. Nothing is sent anywhere.
+      </p>
+
+      <label for="q" class="sr-only-focusable">Search all links</label>
+      <input
+        id="q"
+        type="search"
+        autocomplete="off"
+        autocapitalize="off"
+        spellcheck="false"
+        placeholder="Anmeldung, health insurance, freelance visa…"
+        class="mt-6 w-full rounded-lg border border-rule bg-paper px-4 py-3 text-[length:var(--text-step-0)] placeholder:text-ink-faint"
+      />
+
+      <p id="count" class="mt-3 text-[length:var(--text-step--1)] text-ink-faint" role="status" aria-live="polite">
+        Type to filter {links.length} links.
+      </p>
+
+      <ul id="out" class="mt-4 divide-y divide-rule border-y border-rule"></ul>
+
+      <p id="empty" class="mt-8 hidden text-[length:var(--text-step--1)] text-ink-soft">
+        No match. Try a broader word, or <a href="/contribute" class="text-accent underline underline-offset-2"
+          >add the link yourself</a
+        >.
+      </p>
+
+      <noscript>
+        <p class="mt-6 rounded border border-rule bg-paper-sunk p-4 text-[length:var(--text-step--1)]">
+          Search needs JavaScript. Without it, browse
+          <a href="/countries" class="text-accent underline underline-offset-2">by country</a> or
+          <a href="/categories" class="text-accent underline underline-offset-2">by category</a>.
+        </p>
+      </noscript>
+
+      <p class="mt-12 border-t border-rule pt-6 text-[length:var(--text-step--1)]">
+        <a href="/countries" class="text-accent underline underline-offset-2">Countries</a>
+        <a href="/categories" class="text-accent underline underline-offset-2">Categories</a>
+        <a href="/global" class="text-accent underline underline-offset-2">Global</a>
+        <a href="/stats" class="text-accent underline underline-offset-2">Stats</a>
+      </p>
+    </div>
+
+    <script is:inline type="application/json" id="index" set:html={JSON.stringify(index)} />
+    <script is:inline define:vars={{ countryNames, categoryNames, roleNames }}>
+      const DATA = JSON.parse(document.getElementById('index').textContent);
+      const input = document.getElementById('q');
+      const out = document.getElementById('out');
+      const count = document.getElementById('count');
+      const empty = document.getElementById('empty');
+
+      // Scoring is deliberately simple and explainable. Title hits beat
+      // description hits, and every term must appear somewhere -- an AND, not
+      // an OR, because "how much is health insurance in Germany" should not
+      // return every link containing "in".
+      const terms = (s) => s.toLowerCase().split(/[^a-z0-9]+/).filter((t) => t.length > 1);
+
+      function score(item, qs) {
+        const title = item.t.toLowerCase();
+        const desc = item.d.toLowerCase();
+        const meta = `${categoryNames[item.k] ?? ''} ${countryNames[item.c] ?? ''} ${item.r
+          .map((r) => roleNames[r] ?? '')
+          .join(' ')}`.toLowerCase();
+
+        let total = 0;
+        for (const q of qs) {
+          let best = 0;
+          if (title.includes(q)) best = title.startsWith(q) ? 12 : 8;
+          else if (meta.includes(q)) best = 4;
+          else if (desc.includes(q)) best = 2;
+          if (best === 0) return 0; // every term must match somewhere
+          total += best;
+        }
+        return total + item.f * 2;
+      }
+
+      function render(qs) {
+        if (qs.length === 0) {
+          out.innerHTML = '';
+          empty.classList.add('hidden');
+          count.textContent = `Type to filter ${DATA.length} links.`;
+          return;
+        }
+        const hits = DATA.map((item) => ({ item, s: score(item, qs) }))
+          .filter((h) => h.s > 0)
+          .sort((a, b) => b.s - a.s || a.item.t.localeCompare(b.item.t))
+          .slice(0, 100);
+
+        out.innerHTML = hits
+          .map(({ item }) => {
+            const where = [countryNames[item.c], categoryNames[item.k]]
+              .filter(Boolean)
+              .join(' · ');
+            return (
+              `<li class="py-3.5">` +
+              `<a href="${escapeAttr(item.u)}" rel="noopener noreferrer external" target="_blank" ` +
+              `class="font-medium underline decoration-rule underline-offset-[3px] hover:text-accent">` +
+              `${escapeHtml(item.t)}</a>` +
+              (item.d ? `<p class="clamp-2 mt-1 text-[color:var(--color-ink-soft)]">${escapeHtml(item.d)}</p>` : '') +
+              (where ? `<p class="mt-1 text-[color:var(--color-ink-faint)]">${escapeHtml(where)}</p>` : '') +
+              `</li>`
+            );
+          })
+          .join('');
+
+        empty.classList.toggle('hidden', hits.length > 0);
+        count.textContent =
+          hits.length === 1 ? '1 link.' : `${hits.length} link${hits.length === 100 ? 's (showing 100)' : 's'}.`;
+      }
+
+      // The URL is the shareable state: ?q=anmeldung should restore the search.
+      function fromUrl() {
+        const q = new URLSearchParams(location.search).get('q') ?? '';
+        input.value = q;
+        render(terms(q));
+      }
+
+      let timer;
+      input.addEventListener('input', () => {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+          const q = input.value.trim();
+          const url = new URL(location.href);
+          if (q) url.searchParams.set('q', q);
+          else url.searchParams.delete('q');
+          history.replaceState(null, '', url);
+          render(terms(q));
+        }, 90);
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement !== input) {
+          e.preventDefault();
+          input.focus();
+        }
+      });
+
+      function escapeHtml(s) {
+        return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+      }
+      function escapeAttr(s) {
+        return escapeHtml(s);
+      }
+
+      fromUrl();
+      input.focus();
+    </script>
+  </body>
+</html>

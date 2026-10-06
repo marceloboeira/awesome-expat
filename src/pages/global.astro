@@ -1,0 +1,115 @@
+---
+import { getLinks, getCountries, getCategories } from '../lib/content';
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+import LinkList from '../components/LinkList.astro';
+import { linksForCategory, countrySlugOf, type LoadedLink } from '../lib/corpus.ts';
+import { category as categoryRoute, countries as countriesRoute, country as countryRoute } from '../lib/routes.ts';
+
+const links = await getLinks();
+const categories = await getCategories();
+const allCountries = await getCountries();
+const countryNames = Object.fromEntries(allCountries.map((c) => [countrySlugOf(c), c.name]));
+
+const globalLinks = links.filter((l) => l.data.country === 'global');
+const multiCountry = links.filter((l) => l.data.country !== 'global' && (l.data.scopes ?? []).length > 0);
+
+const byCategory = categories
+  .map((c) => ({ c, n: globalLinks.filter((l) => l.data.category === c.slug).length }))
+  .filter((r) => r.n > 0)
+  .sort((a, b) => b.n - a.n || a.c.slug.localeCompare(b.c.slug));
+---
+
+<Base
+  title="Global expat resources"
+  description={`${globalLinks.length} resources that apply wherever you land — visa checklists, banking for foreigners, health insurance, and the paperwork nobody warns you about.`}
+  path="/global"
+  breadcrumbs={[{ name: 'Global', href: '/global' }]}
+>
+  <PageHeader
+    eyebrow="Applies everywhere"
+    title="Global resources"
+    lede="Some problems are not country-specific. These links work wherever you end up — what to bring, what to register, what to do in the first month."
+    count={globalLinks.length}
+    countNoun="country-independent resources"
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <nav aria-label="Jump to category" class="mb-10 flex flex-wrap gap-2 border-b border-rule pb-6">
+      {
+        byCategory.map(({ c, n }) => (
+          <a
+            href={`#g-${c.slug}`}
+            class="rounded-full border border-rule px-3.5 py-1.5 text-[length:var(--text-step--1)] transition-colors hover:border-accent hover:bg-accent-soft hover:text-accent"
+          >
+            {c.name} <span class="text-ink-faint tabular-nums">{n}</span>
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="space-y-12">
+      {
+        byCategory.map(({ c, n }) => (
+          <section aria-labelledby={`g-${c.slug}`}>
+            <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-rule pb-2">
+              <h2 id={`g-${c.slug}`} class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+                <a href={categoryRoute(c.slug)} class="transition-colors hover:text-accent">
+                  {c.name}
+                </a>
+              </h2>
+              <span class="text-[length:var(--text-step--1)] text-ink-faint tabular-nums">{n}</span>
+            </div>
+            <div class="mt-4">
+              <LinkList links={globalLinks.filter((l) => l.data.category === c.slug)} showCountry={false} />
+            </div>
+          </section>
+        ))
+      }
+    </div>
+
+    {
+      multiCountry.length > 0 && (
+        <section class="mt-14 border-t border-rule pt-10" aria-labelledby="h-multi">
+          <h2 id="h-multi" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+            Filed under more than one country
+          </h2>
+          <p class="mt-2 max-w-2xl text-[length:var(--text-step--1)] text-ink-soft">
+            These are written for specific places but are useful in others too, so they show up on every
+            country page they apply to.
+          </p>
+          <ul class="mt-5 divide-y divide-rule border-y border-rule">
+            {multiCountry.map((l) => (
+              <li class="py-3.5">
+                <a
+                  href={l.data.url}
+                  rel="noopener noreferrer external"
+                  target="_blank"
+                  class="font-medium underline decoration-rule underline-offset-[3px] hover:text-accent"
+                >
+                  {l.data.title}
+                  <span class="sr-only-focusable"> (opens in a new tab)</span>
+                </a>
+                <span class="mt-1 flex flex-wrap gap-1.5">
+                  {(l.data.scopes ?? []).map((code) => (
+                    <a
+                      href={countryRoute(code)}
+                      class="rounded bg-paper-sunk px-2 py-0.5 text-[length:var(--text-step--1)] text-ink-soft hover:text-accent"
+                    >
+                      {countryNames[code] ?? code}
+                    </a>
+                  ))}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <p class="mt-14 text-[length:var(--text-step--1)] text-ink-soft">
+      Looking for something specific to a place?{' '}
+      <a href={countriesRoute()} class="text-accent underline underline-offset-2">Browse all countries</a>.
+    </p>
+  </div>
+</Base>

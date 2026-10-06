@@ -1,144 +1,82 @@
-# Awesome Expat
-> A curated list of resources for expat developers
+<!--
+  AUTO-GENERATED — do not edit by hand.
+  Source: content/links/**
+  Regenerate: make export
+  See: CONTRIBUTING.md
+-->
 
-## Destination
+# awesome-expat
 
-* [Expatisan](https://www.expatistan.com/cost-of-living) - The original source for International Cost-of-Living Comparisons
-* [Numbeo](http://www.numbeo.com) - Check the cost of living of different cities, compare them, and more (info about other living aspects, like crime, traffic, quality of life, etc)
-* [Teleport](https://teleport.org) - Explore and compare the best cities based on your personal preferences.
-* [ReloMap](https://relomap.app) - Free cost of living comparison for 208 cities with verified data, tax calculator, visa guides, and 3,000+ in-depth city guides.
-* [Cheaper Abroad](https://cheaper-abroad.com) - Dated prices from named clinics and shops in Da Nang, Bangkok and Budapest (dental, scans, glasses, repairs) compared with home-country prices for the Netherlands, Germany, the UK, the US and Australia. Free, no signup.
-* [Visa Income Calculator](https://expatcove.com/visa-income-calculator/) - Free tool showing which countries' 2026 residence and digital-nomad visas you qualify for by income, plus an Affordability Index ranking each visa's income requirement against local cost of living.
-* [Transita](https://transita.app) - AI visa-pathway matcher: answer a short quiz and get ranked residence/work visa options across 10 countries (US, Canada, UK, Australia, Germany, Spain, Netherlands, Portugal, New Zealand, Ireland) with eligibility scores, processing times, costs, official sources, side-by-side comparisons, and points calculators.
-* [Coworking Price Index](https://coworkingview.com/en/tools/price-index) - Median monthly prices for flex desks, fixed desks and private offices by city in Germany, Spain, the UK, the Netherlands and the UAE, built from the rates coworking operators publish. Free CC BY 4.0 data with JSON and CSV downloads, no signup; small-sample cities are flagged.
-* [Take Root Abroad](https://takerootabroad.com) - Move-abroad planner for US citizens: a free country-fit quiz and a comparison of 20+ countries by visa route for remote workers and retirees, all-in cost and the US tax picture, then per-country plans with timelines. Free compare, 14-day free trial, then paid.
-* [VivaMap](https://vivamap.ch) - Free map comparing where to live in Switzerland (every commune, in English, French and German) and the Netherlands ([vivamap.nl](https://vivamap.nl)) on taxes, public transport, schools, noise, air quality, sunshine, nature, restaurants and healthcare, plus a Swiss income-tax comparison for 40 household profiles.
+[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)
+[![License: MIT](https://img.shields.io/badge/License-MIT-black.svg)](./LICENSE)
+[![CI](https://img.shields.io/badge/CI-passing-green)](https://github.com/marceloboeira/awesome-expat/actions)
+[![Links](https://img.shields.io/badge/Links-checked%20nightly-blue)](https://github.com/marceloboeira/awesome-expat/actions)
 
-## Jobs
+> A curated directory of expat resources, organised by country.
 
-* [AngelList](https://angel.co/jobs) - "The world's best startups are hiring on AngelList".
-* [HN Hiring](http://hnhiring.me) - Montly updated software related jobs.
-* [Landing.jobs](https://landing.jobs) - Europe&#39;s best tech jobs marketplace
-* [WhoIsHiring](https://whoishiring.io) - Map with the collection of jobs for Software Engineers, Developers, and Designers.
-* [Startup List](http://startups-list.com) - Startup all around the world.
-* [Berlin Startup Jobs](http://berlinstartupjobs.com/) - Startup Jobs in Berlin.
-* [London Startup Jobs](http://londonstartupjobs.co.uk/) - Startup Jobs in London.
-* [List of job boards for Berlin](http://allaboutberlin.com/guides/find-a-job-in-berlin)
-* [Jobs in Malta](https://jobsinmalta.com) - Jobs in Malta.
-* [Seoulstart Jobs](https://seoulstart.com/jobs) - Jobs in Korea hiring foreign residents, filterable by English / Korean / bilingual posting language.
-* [JobCrawls](https://www.jobcrawls.com/en) - Jobs in Finland from employers' own career pages, searchable in English with a "no Finnish required" filter.
-* [Work in Finland](https://www.workinfinland.com/en/) - Jobs in Finland for international applicants, every listing in English, run by Business Finland.
+**[awesome-expat.com](https://awesome-expat.com)** — browse it by map, country, or job role.
 
-## Compensation
+## At a glance
 
-* [Glassdoor](https://www.glassdoor.com/index.htm) - Compare compensation between companies and positions
+| | |
+| --- | ---: |
+| Countries with resources | 18 |
+| Resources | 73 |
+| Categories | 12 |
+| Job roles | 5 |
 
-## Temporary accommodation
+## Browse by country
 
-* [SpotAHome](https://www.spotahome.com/)
-* [Couch Surfing](https://www.couchsurfing.com/) - Stay with locals and meet travelers
-* [Airbnb](https://www.airbnb.com/) - Rent unique accommodations from local hosts in 191+ countries
-* [How to find a flat in Berlin](https://allaboutberlin.com/guides/find-a-flat-in-berlin)
-* [StayingAPI](https://stayingapi.com/) - API for accommodation data across Airbnb, Booking.com, Vrbo & Google Hotels (listings, pricing, availability)
-* [yumpara](https://yumpara.com) - Rooms and studios to rent directly from the host, with no agency and no commission: you message whoever has the room and you agree on everything together. Organised by city and neighbourhood in Barcelona, Berlin, Bucharest, Dublin, Edinburgh, Lisbon, Milan, Tallinn and Toulouse, for stays from one month upwards. Free, on the web and in the mobile apps.
+- **[Australia](https://awesome-expat.com/au/)** — 1 resource
+- **[China](https://awesome-expat.com/cn/)** — 1 resource
+- **[Denmark](https://awesome-expat.com/dk/)** — 2 resources
+- **[Finland](https://awesome-expat.com/fi/)** — 4 resources
+- **[France](https://awesome-expat.com/fr/)** — 1 resource
+- **[Germany](https://awesome-expat.com/de/)** — 12 resources
+- **[Italy](https://awesome-expat.com/it/)** — 2 resources
+- **[Japan](https://awesome-expat.com/jp/)** — 1 resource
+- **[Malta](https://awesome-expat.com/mt/)** — 1 resource
+- **[Netherlands](https://awesome-expat.com/nl/)** — 1 resource
+- **[Norway](https://awesome-expat.com/no/)** — 2 resources
+- **[South Korea](https://awesome-expat.com/kr/)** — 2 resources
+- **[Spain](https://awesome-expat.com/es/)** — 3 resources
+- **[Sweden](https://awesome-expat.com/se/)** — 2 resources
+- **[Switzerland](https://awesome-expat.com/ch/)** — 1 resource
+- **[United Kingdom](https://awesome-expat.com/gb/)** — 3 resources
+- **[United States](https://awesome-expat.com/us/)** — 3 resources
+- **[Global](https://awesome-expat.com/global/)** — 42 resources that apply anywhere
 
-## Flights
+Full directory: [docs/index.md](docs/index.md)
 
-* [Sky Scanner](https://www.skyscanner.net/) - Compare cheap flights, hotels & car hire from different providers
-* [Google Flights](https://www.google.com/flights/) - Find cheap flights in seconds, explore destinations on a map, and sign up for fare alerts
-* [Kiwi](https://kiwi.com) - Cheap flights, trains, hotels, and car hire with 24/7 customer support & the Kiwi.com Guarantee.
+## Browse by category
 
-## Knowing about
+| Category | Slug | Resources |
+| --- | --- | ---: |
+| Housing | `housing` | 9 |
+| Jobs & Work | `jobs` | 12 |
+| Taxes | `taxes` | 2 |
+| Health & Insurance | `healthcare` | 2 |
+| Finances & Banking | `finances` | 21 |
+| Visas & Residency | `visa` | 7 |
+| Permanent Residency | `permanent-residency` | 0 |
+| Citizenship | `citizenship` | 0 |
+| Moving | `moving` | 6 |
+| Interviewing | `interviewing` | 4 |
+| Community & Groups | `community` | 5 |
+| Learning & Language | `education` | 5 |
 
-### Germany
+## Browse by role
 
-* [How to become a freelancer in Germany](https://allaboutberlin.com/guides/become-a-freelancer-in-germany)
-* [An intro to German health insurance](https://allaboutberlin.com/guides/german-health-insurance)
-* [German banks that don't require an Anmeldung](https://allaboutberlin.com/guides/german-banks-no-address)
-* [Understanding & picking the right health insurance in Germany](https://www.settle-in-berlin.com/health-insurance-germany/)
-* [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in Germany handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
+Find resources relevant to your job: [docs/jobs.md](docs/jobs.md), or on the site at https://awesome-expat.com/jobs/.
 
-### Berlin
-  * [Settle in Berlin](https://www.settle-in-berlin.com) - Information about registration, bank account, finding a flat and etc.
-  * [All About Berlin](http://allaboutberlin.com/) - Guides on settling in Berlin, finding an apartment, a job, a bank, etc.
-      * [Moving to Berlin: the definitive guide](https://allaboutberlin.com/guides/moving-to-berlin)
-  * [BerlinCheap.com](https://berlincheap.com/guide/) - Low-Budget solutions for Berlin: Free furniture, cheap apartments & public transport.
-  * [John Worth Euroblog](https://jonworth.eu/how-to-find-a-flat-in-berlin/) - How to find a flat in Berlin
+## Contribute
 
-### Italy
+Read [CONTRIBUTING.md](CONTRIBUTING.md). If you use an AI coding agent, read
+[AGENTS.md](AGENTS.md) instead — it maps the same rules onto the repo layout.
 
-* [TaxCompass](https://taxcompass.it) - AI tax co-pilot for foreigners opening a business in Italy: sourced, English-native answers on the forfettario regime, partita IVA, INPS and ATECO codes, with a licensed commercialista who signs off before you file. Free to use.
-* [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in Italy handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
+One YAML file per resource under `content/links/<country>/<category>/`.
+`make help` lists every task.
 
-### Japan
+## License
 
-* [Engawa](https://engawahomes.com) - English-language search for buying property in Japan as a foreigner: akiya, kominka, apartments and land on a map with hazard and transit data, plus a closing-cost calculator and furnished long-stay placements.
-
-### Korea
-
-* [Awesome Living in Korea](https://github.com/seoulstart/awesome-living-in-korea) - Curated list of resources for foreign residents in Korea: visa categories, ARC registration, housing (jeonse/wolse), NHIS health insurance, banking, taxes, work, and Korean government portals. Available in English, Korean, Vietnamese, Filipino, Russian, and Chinese.
-
-### Nordics (Denmark, Sweden, Norway, Finland)
-
-* [NordicExpat](https://nordicexpat.com) - Comprehensive relocation guides for non-EU expats moving to Denmark, Sweden, Norway, and Finland. Covers banking (Wise, Revolut), housing, taxes, healthcare, visas, and everyday life. Includes free tools: Copenhagen zone calculator, Nordic tax calculators, and country-specific benefit guides. 160+ in-depth articles authored by an expat in the region.
-
-### France
-
-* [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in France handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
-
-### Spain
-
-* [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in Spain handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
-* [ES Extranjería](https://esextranjeria.es/en/) - Free English guides to Spanish visas and residence permits (digital nomad, non-lucrative, student visa, Beckham law, citizenship by residency, cost of moving), written against the official texts in the BOE, plus a Spanish-language immigration deadline calculator.
-* [Guía Extranjeros](https://guiaextranjeros.es/en/) - Free guide to Spanish immigration paperwork in English, Spanish and Ukrainian (NIE and TIE, Cl@ve, cita previa, an index of the official EX forms, temporary protection for Ukrainians, taxes for foreigners). Every page cites the official source (BOE, SEM) and shows its last review date; includes a free CCSE citizenship practice test.
-
-### United Kingdom
-
-* [Actero](https://actero.ro) - Free Romanian-language guide for Romanians in the UK handling paperwork at the Romanian Consulate: passport renewal, national ID (buletin), powers of attorney (procură notarială), and birth/marriage certificate transcriptions.
-* [UK SIM Keep-Number Reminder](https://getgiffgaff.com/tools/keep-number-reminder/) - Free browser-only tool that turns the last qualifying giffgaff activity date into an early fifth-month calendar reminder, exports an ICS file, and stores no phone number or account details.
-
-### China
-
-* [YouChina](https://www.you-china.com/en/alipay-for-foreigners) - English Alipay and WeChat Pay setup for overseas visitors: foreign cards, official app sources, and what to do when a shop only takes mainland wallets.
-
-## Interviewing
-
-* [Awesome Interview Questions](https://github.com/MaximAbramchuck/awesome-interview-questions) - A curated awesome list of lists of interview questions.
-* [HackerRank](https://www.hackerrank.com) - Practice coding. Compete. Find jobs.
-* [Interview](https://github.com/andreis/interview) - Everything you need to kick ass on your coding interview.
-* [interviewing.io](http://interviewing.io) - Practice interviewing with engineers from top companies, anonymously. Get better at algorithmic problems, find a job, or just see if you've still got it.
-
-## Education
-
-### Technical
-* [OSSU Computer Science](https://ossu.firebaseapp.com/) - Path to a free self-taught education in Computer Science!
-* [OSSU Data Science](https://github.com/open-source-society/data-science) - Path to a free self-taught education in Data Science!
-* [The Programmer Competency Matrix](http://competency-checklist.appspot.com/) - The idea behind the project is to help people track their software skills studies.
-
-### Languages
-
-* [Duolingo](https://www.duolingo.com) - Duolingo is the world's most popular way to learn a language.
-* [Memrise](https://www.memrise.com) - Memrise uses images and science to make learning easy and fun.
-* [Babbel](http://babbel.com) - Another language learning app that's closer to a language course.
-
-## Finances
-
-* [Equity Compensation Guide](https://github.com/jlevy/og-equity-compensation) - Stock options, RSUs, taxes — a guide for humans.
-* [Wise](https://wise.com/) - Transfer money abroad easily and quickly with our low-cost money transfers.
-* [Xoom](https://www.xoom.com/) - The easiest way to send money, reload phones, and pay bills worldwide.
-* [German Salary Calculator](https://lohntastik.de/gns/gross-net-salary-calculator) - The calculator will assist you in determining how much of your gross salary will remain after taxes and social contributions have been deducted.
-* [FEIE vs Foreign Tax Credit Calculator](https://expatcove.com/feie-vs-foreign-tax-credit-calculator/) - Free, no-signup calculator for US citizens abroad: runs both tax elections (Foreign Earned Income Exclusion / Form 2555 and the Foreign Tax Credit / Form 1116) on official 2025/2026 IRS brackets and shows which one keeps more.
-* [Nordic Take-Home Pay Calculator](https://nordicexpat.com/tools) - Free, no-signup gross-to-net salary calculators for Denmark, Sweden, Norway, and Finland on official 2026 tax rates, plus feriepenge (holiday pay), dagpenge, and gross-up tools.
-* [Paycheck Calculator](https://nutilz.com/paycheck-calculator) - Free, no-signup US paycheck calculator for anyone relocating to or working in the US — estimates take-home pay after federal, state, and FICA withholding.
-* [US Expat Tax Guide: Maintaining Florida Domicile](https://yourtaxbase.com/expat-tax-guide) - Free 2026 guide for US citizens abroad on legally eliminating state income tax by keeping domicile in a no-tax state, alongside federal exclusions and filing requirements.
-* [Awesome Digital Nomads](https://github.com/cloudfloo/awesome-digital-nomads) - Curated, link-checked list of tools and resources for digital nomads: finance and FIRE, visas, insurance, eSIMs, accommodation, and communities.
-* [Banking Access Index](https://www.globalsolo.global/data/banking-access-index) - Free CC-BY dataset of which 18 US banking providers accept non-US-resident business owners, across 8 countries — 239 claims verified against published policies, with CSV/JSON downloads.
-* [IndepAI Coast FIRE Calculator](https://indepai.app/tools/coast-fire-calculator) - Free calculator that shows the age you can stop saving and coast to retirement, built for expats juggling multiple currencies and relocation plans. No signup needed.
-* [Paperpack](https://paperpack-7v7.pages.dev/) - Free, no-signup calculator for working holidaymakers in Australia: works out income tax on official ATO rates, runs the treaty-country comparison where it applies, and estimates the departing superannuation payment (DASP). Runs entirely in the browser, in 8 languages. [Source](https://github.com/ChangkeunJ/paperpack).
-* [Tax Residency Days](https://taxresidencydays.com) - Free, no-signup calculator that checks one travel ledger against 16 countries' tax-residency day-count tests (US Substantial Presence Test, UK Statutory Residence Test, the 183-day family) plus the Schengen 90/180 stay limit, with the exact arithmetic shown per country. Runs entirely in the browser.
-
-## Misc
-
-* [SeeYourFolks](http://seeyourfolks.com) - We’re so busy growing up that we sometimes forget that they are also growing old.
-* [IDPhotoSnap](https://idphotosnap.com) - Free browser-only passport, visa, residence permit, and biometric ID photo tool for 100+ countries (248 document formats). Validated against 15+ official issuing-authority sources. No upload, no signup, no watermark. Useful for expat document renewals at consulates (passport-of-origin), host-country residence permits (BRP, TIE, PR Card, Aufenthaltstitel, Verblijfsvergunning, etc.), and visa applications when relocating again.
-* [Daybound](https://daybound.9ek.ru/) - Free Schengen 90/180 calculator and per-country stay-day tracker (calendar year and rolling 12 months), no signup, useful for managing visa-free day limits while abroad. Also a Telegram app with GPS country auto-detection and alerts.
+[MIT](LICENSE)

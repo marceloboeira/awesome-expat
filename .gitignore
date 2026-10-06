@@ -1,0 +1,37 @@
+# Build output
+dist/
+.astro/
+.output/
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Editors / OS
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# TypeScript build info
+*.tsbuildinfo
+
+# Local agent workspace. Everything here is machine-local and unvetted:
+# .agents/plans/**/status.md  plan state and decision log
+# .agents/pool/**            harvested candidates, machine-drafted descriptions
+# .agents/link-report.json   link-check output
+# One `git add .` with any of that staged would put unreviewed content into
+# permanent history, which is unrecoverable. Do not remove this rule.
+.agents/

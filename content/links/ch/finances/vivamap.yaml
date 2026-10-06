@@ -1,0 +1,15 @@
+---
+title: VivaMap
+url: https://vivamap.ch
+country: ch
+scopes:
+  - ch
+  - nl
+category: finances
+description: "Free map comparing where to live in Switzerland and the Netherlands on taxes, public transport, schools, noise, air quality, sunshine, nature and healthcare."
+added_at: 2026-10-04
+last_checked: null
+featured: false
+tags:
+  - switzerland
+  - netherlands

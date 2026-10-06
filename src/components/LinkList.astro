@@ -1,0 +1,79 @@
+---
+import type { LoadedLink } from '../lib/corpus.ts';
+import { country as countryRoute } from '../lib/routes.ts';
+
+interface Props {
+  links: LoadedLink[];
+  /** Slug -> display name, for showing where a link is filed. */
+  countryNames?: Record<string, string>;
+  showCountry?: boolean;
+  emptyMessage?: string;
+}
+
+const { links, countryNames = {}, showCountry = true, emptyMessage = 'Nothing here yet.' } = Astro.props;
+
+/**
+ * The workhorse. A dense, scannable list of links.
+ *
+ * The description is a real, human-written sentence -- never a truncated
+ * template -- because the whole value of the site is that someone read the
+ * page and said what it is good for. Links that are still awaiting review
+ * (description_verified false) say so, rather than being passed off as
+ * curated.
+ */
+const isVerified = (l: LoadedLink) => l.data.description_verified === true;
+---
+
+{
+  links.length === 0 ? (
+    <p class="rounded border border-dashed border-rule px-4 py-6 text-center text-[length:var(--text-step--1)] text-ink-faint">
+      {emptyMessage}
+    </p>
+  ) : (
+    <ul class="divide-y divide-rule border-y border-rule">
+      {links.map(({ id, data }) => (
+        <li class="group py-3.5">
+          <div class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+            <a
+              href={data.url}
+              rel="noopener noreferrer external"
+              target="_blank"
+              class="font-medium text-ink underline decoration-rule underline-offset-[3px] transition-colors group-hover:decoration-accent hover:text-accent"
+            >
+              {data.title}
+              <span class="sr-only-focusable"> (opens in a new tab)</span>
+            </a>
+
+            {data.featured && (
+              <span class="rounded bg-accent-soft px-1.5 py-0.5 text-[length:var(--text-step--1)] font-medium text-accent">
+                Popular
+              </span>
+            )}
+
+            {showCountry && data.country !== 'global' && countryNames[data.country] && (
+              <a
+                href={countryRoute(data.country)}
+                class="text-[length:var(--text-step--1)] text-ink-faint transition-colors hover:text-accent"
+              >
+                {countryNames[data.country]}
+              </a>
+            )}
+
+            {!isVerified({ id, data }) && (
+              <span
+                class="text-[length:var(--text-step--1)] text-warn"
+                title="This description has not been reviewed by a person yet"
+              >
+                awaiting review
+              </span>
+            )}
+          </div>
+
+          {data.description && (
+            <p class="clamp-2 mt-1 text-[length:var(--text-step--1)] text-ink-soft">{data.description}</p>
+          )}
+        </li>
+      ))}
+    </ul>
+  )
+}

@@ -1,0 +1,17 @@
+---
+title: Landing.jobs
+url: https://landing.jobs
+country: global
+category: jobs
+roles:
+  - software-engineer
+  - data-scientist
+  - product-designer
+  - product-manager
+  - devops-sre
+description: Europe's best tech jobs marketplace, with relocation support.
+added_at: 2016-07-07
+last_checked: 2026-09-29
+featured: false
+tags:
+  - relocation

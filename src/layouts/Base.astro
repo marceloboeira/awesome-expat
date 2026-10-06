@@ -1,0 +1,98 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../lib/routes.ts';
+import type { Link } from '@engine/schema.ts';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Appended to the site name. Home passes nothing. */
+  bare?: boolean;
+  /** Path of the current page, for nav highlighting. */
+  path?: string;
+  /** Set on pages that must never be indexed. */
+  noindex?: boolean;
+  /** Breadcrumb trail; rendered as JSON-LD too. */
+  breadcrumbs?: { name: string; href: string }[];
+  ogType?: 'website' | 'article';
+  publishedAt?: string;
+}
+
+const {
+  title,
+  description,
+  bare = false,
+  path = Astro.url.pathname,
+  noindex = false,
+  breadcrumbs = [],
+  ogType = 'website',
+  publishedAt,
+} = Astro.props;
+
+const siteName = 'Awesome Expat';
+const fullTitle = bare ? title : `${title} · ${siteName}`;
+const canonical = new URL(Astro.url.pathname, SITE).toString();
+const ogImage = new URL('/og-default.png', SITE).toString();
+
+// Breadcrumbs are emitted as structured data. On a directory site this is the
+// single highest-value SEO surface: it is how a search engine learns that
+// /countries/de/housing sits inside /countries/de.
+const breadcrumbLd =
+  breadcrumbs.length > 0
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
+          ...breadcrumbs.map((b, i) => ({
+            '@type': 'ListItem',
+            position: i + 2,
+            name: b.name,
+            item: new URL(b.href, SITE).toString(),
+          })),
+        ],
+      }
+    : null;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#ffffff" />
+
+    {breadcrumbLd && (
+      <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+    )}
+  </head>
+  <body class="min-h-dvh flex flex-col">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header path={path} />
+    <main id="main" class="flex-1 w-full">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

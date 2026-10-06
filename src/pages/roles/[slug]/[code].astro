@@ -1,0 +1,94 @@
+---
+import { getLinks, getCountries, getRoles } from '../../../lib/content';
+import Base from '../../../layouts/Base.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import LinkList from '../../../components/LinkList.astro';
+import { buildRolePage, countrySlugOf, linksForCountry, roleHasEnoughLinks, type LoadedLink } from '../../../lib/corpus.ts';
+import { roleInCountry, country as countryRoute, role as roleRoute, roles as rolesRoute } from '../../../lib/routes.ts';
+
+export async function getStaticPaths() {
+  const roles = await getRoles();
+  const countries = await getCountries();
+  const links = await getLinks();
+
+  const paths: { params: { slug: string; code: string }; props: { slug: string; code: string } }[] = [];
+  for (const role of roles) {
+    for (const country of countries) {
+      if (country.global) continue;
+      const code = countrySlugOf(country);
+      const inCountry = buildRolePage(role, linksForCountry(links, code));
+      if (roleHasEnoughLinks(inCountry)) {
+        paths.push({ params: { slug: role.slug, code }, props: { slug: role.slug, code } });
+      }
+    }
+  }
+  return paths;
+}
+
+const links = await getLinks();
+const roles = await getRoles();
+const allCountries = await getCountries();
+const countryNames = Object.fromEntries(allCountries.map((c) => [countrySlugOf(c), c.name]));
+
+const { slug, code } = Astro.props;
+const role = roles.find((r) => r.slug === slug)!;
+const country = allCountries.find((c) => countrySlugOf(c) === code)!;
+
+const visible = links.filter((l) => l.data.country === code || (l.data.scopes ?? []).includes(code));
+const page = buildRolePage(role, visible);
+const name = country.name;
+---
+
+<Base
+  title={`${role.name} in ${name}`}
+  description={`${page.applicable} resources for ${role.name.toLowerCase()}s moving to ${name}: work rules, visas, and paperwork.`}
+  path={roleInCountry(slug, code)}
+  breadcrumbs={[
+    { name: 'Roles', href: rolesRoute() },
+    { name: role.name, href: roleRoute(slug) },
+    { name: name, href: roleInCountry(slug, code) },
+  ]}
+>
+  <PageHeader
+    eyebrow={`${role.name} · ${name}`}
+    title={`${role.name} in ${name}`}
+    lede={
+      country.description ??
+      `Everything in the directory that applies to ${name} and matters for someone working there as a ${role.name.toLowerCase()}.`
+    }
+    count={page.applicable}
+    countNoun={`link${page.applicable === 1 ? '' : 's'}`}
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    {
+      page.specific.length > 0 && (
+        <section aria-labelledby="h-specific">
+          <h2 id="h-specific" class="border-b border-rule pb-2 text-[length:var(--text-step-2)] font-semibold tracking-tight">
+            For {role.name.toLowerCase()}s in {name}
+          </h2>
+          <div class="mt-4">
+            <LinkList links={page.specific} countryNames={countryNames} showCountry={false} />
+          </div>
+        </section>
+      )
+    }
+
+    {page.general.length > 0 && (
+      <section class="mt-12" aria-labelledby="h-general">
+        <h2 id="h-general" class="border-b border-rule pb-2 text-[length:var(--text-step-2)] font-semibold tracking-tight">
+          Also applies in {name}
+        </h2>
+        <div class="mt-4">
+          <LinkList links={page.general} countryNames={countryNames} showCountry={false} />
+        </div>
+      </section>
+    )}
+
+    <p class="mt-12 border-t border-rule pt-8 text-[length:var(--text-step--1)] text-ink-soft">
+      <a href={countryRoute(code)} class="text-accent underline underline-offset-2">All {name} resources</a>
+      <span class="mx-2">·</span>
+      <a href={roleRoute(slug)} class="text-accent underline underline-offset-2">All {role.name} resources</a>
+    </p>
+  </div>
+</Base>

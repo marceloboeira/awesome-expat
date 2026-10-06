@@ -1,0 +1,209 @@
+---
+import { CENTROIDS } from '../lib/centroids.ts';
+import { LAND_PATH } from '../lib/land.ts';
+import { country as countryRoute } from '../lib/routes.ts';
+import { countrySlugOf } from '../lib/corpus.ts';
+import type { Country } from '@engine/schema.ts';
+
+interface Props {
+  countries: Country[];
+  /** country slug -> number of primary links */
+  counts: Map<string, number>;
+}
+
+const { countries, counts } = Astro.props;
+
+/**
+ * A schematic world map, drawn at build time.
+ *
+ * Deliberately NOT a real cartographic projection. A true map needs either a
+ * large GeoJSON asset (hundreds of KB, and it would be the largest thing on
+ * the page) or a d3-geo dependency, in exchange for coastlines. What a reader
+ * of a reference directory actually needs is "roughly where on Earth is this,
+ * and does it have resources yet" -- so this is an equirectangular scatter of
+ * centroids, with a graticule for orientation.
+ *
+ * Every country is drawn, including those with zero links. An empty outline is
+ * an honest promise about coverage; omitting them would make the directory
+ * look far more complete than it is.
+ *
+ * Crawlable: each country is a real <a> with the country name as its text, so
+ * a crawler sees the same navigation a reader does. The SVG is inline rather
+ * than an <img>, which is what makes that possible.
+ */
+
+const W = 960;
+const H = 500;
+
+// Equirectangular, trimmed to the inhabited latitudes so the poles do not
+// waste a third of the canvas on nothing.
+const LAT_TOP = 84;
+const LAT_BOTTOM = -60;
+const project = (lat: number, lng: number) => ({
+  x: ((lng + 180) / 360) * W,
+  y: ((LAT_TOP - lat) / (LAT_TOP - LAT_BOTTOM)) * H,
+});
+
+// Four bands. Buckets rather than a continuous scale: with 11 countries
+// holding links and 141 holding none, a continuous ramp would render almost
+// every dot identically dark and communicate nothing.
+//
+// The uncovered band is the one that was wrong. It was `var(--color-rule)`,
+// which is oklch(88%) -- 1.30:1 against the paper background, far under the
+// 3:1 WCAG requires for non-text. 141 of 151 dots were therefore invisible,
+// which is what made the map look broken: 151 dots in the DOM, ten visible.
+// These four are explicit oklch values chosen for contrast against
+// --color-paper, not derived from the palette, because the palette's greys are
+// tuned for hairline borders, not for marks that carry meaning on their own.
+const BAND = {
+  none: { fill: 'oklch(0.72 0.02 258)', label: 'no links yet' },
+  few: { fill: 'oklch(0.66 0.11 258)', label: 'a few links' },
+  some: { fill: 'oklch(0.56 0.15 258)', label: 'some links' },
+  well: { fill: 'oklch(0.45 0.19 258)', label: 'well covered' },
+} as const;
+
+const band = (n: number) => {
+  if (n === 0) return BAND.none;
+  if (n < 3) return BAND.few;
+  if (n < 8) return BAND.some;
+  return BAND.well;
+};
+
+const plotted = countries
+  .map((c) => {
+    const slug = countrySlugOf(c);
+    // The global pseudo-country has no coordinates and is not a place.
+    if (c.global) return null;
+    const centroid = CENTROIDS[slug];
+    if (!centroid) return null;
+    return { country: c, slug, count: counts.get(slug) ?? 0, ...project(centroid.lat, centroid.lng) };
+  })
+  .filter((d): d is NonNullable<typeof d> => d !== null);
+
+const covered = plotted.filter((d) => d.count > 0);
+const missing = plotted.filter((d) => d.count === 0);
+const maxCount = Math.max(1, ...plotted.map((d) => d.count));
+// Uncovered dots are 2.2 against a 640-unit-tall viewBox that renders at most
+// ~500 CSS px: roughly 2 device px. Below that they stop being dots and become
+// grey noise, so 2.2 is the floor rather than a decorative choice.
+const radius = (n: number) => (n === 0 ? 2.2 : Math.min(11, 4.5 + Math.sqrt(n / maxCount) * 6.5));
+---
+
+<figure class="rounded-lg border border-rule bg-paper-sunk p-3 sm:p-5">
+  <svg
+    viewBox={`0 0 ${W} ${H}`}
+    class="h-auto w-full"
+    role="img"
+    aria-labelledby="map-title map-desc"
+    preserveAspectRatio="xMidYMid meet"
+  >
+    <title id="map-title">World map of Awesome Expat coverage</title>
+    <desc id="map-desc">
+      {covered.length} of {plotted.length} countries have reviewed resources. Each dot is a link to that
+      country's page.
+    </desc>
+
+    <defs>
+      <clipPath id="frame">
+        <rect x="0" y="0" width={W} height={H} rx="6" />
+      </clipPath>
+    </defs>
+
+    <g clip-path="url(#frame)">
+      <rect width={W} height={H} fill="var(--color-paper)" />
+
+      {/*
+        Landmasses, from the vendored Natural Earth 110m outline. This is what
+        was missing: without a coastline, a scatter of 151 dots on a lat/long
+        grid gives the reader no frame of reference at all, because there is
+        nothing to say *where* on the grid any dot is. `fill-rule` matters --
+        the Caspian and Great Lakes are separate rings, and nonzero would
+        swallow the lakes.
+      */}
+      <path d={LAND_PATH} fill="var(--color-paper-sunk)" stroke="var(--color-rule)" stroke-width="0.5" fill-rule="evenodd" />
+
+      <!-- Graticule every 30 degrees: enough to orient without becoming a grid
+           the eye reads as data. Drawn over the land so it stays continuous
+           across coastlines. -->
+      <g stroke="var(--color-rule)" stroke-width="0.5" opacity="0.7">
+        {
+          [60, 30, 0, -30].map((lat) => {
+            const { y } = project(lat, 0);
+            return <line x1="0" y1={y} x2={W} y2={y} />;
+          })
+        }
+        {
+          [-150, -120, -90, -60, -30, 0, 30, 60, 90, 120, 150].map((lng) => {
+            const { x } = project(0, lng);
+            return <line x1={x} y1="0" x2={x} y2={H} />;
+          })
+        }
+        <line x1="0" y1={project(0, 0).y} x2={W} y2={project(0, 0).y} stroke-width="1" opacity="1" />
+      </g>
+
+      <!-- Covered countries first so an empty dot never sits on top of a full
+           one where two centroids are close (Benin and Togo, say). -->
+      <g>
+        {
+          covered.map((d) => (
+            <a href={countryRoute(d.slug)} aria-label={`${d.country.name} — ${d.count} links`}>
+              <circle
+                cx={d.x}
+                cy={d.y}
+                r={radius(d.count)}
+                fill={band(d.count).fill}
+                stroke="var(--color-paper)"
+                stroke-width="1"
+              />
+            </a>
+          ))
+        }
+      </g>
+      <g>
+        {
+          missing.map((d) => (
+            <circle
+              cx={d.x}
+              cy={d.y}
+              r={radius(0)}
+              fill={band(0).fill}
+              // A paper-coloured ring separates the dot from the land fill
+              // behind it. Without it a dot sitting on the same tone as the
+              // land dissolves into the coastline.
+              stroke="var(--color-paper)"
+              stroke-width="0.8"
+            />
+          ))
+        }
+      </g>
+    </g>
+  </svg>
+
+  <figcaption class="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 px-1 text-[length:var(--text-step--1)] text-ink-soft">
+    <span class="font-medium text-ink">
+      {covered.length} of {plotted.length} countries covered
+    </span>
+    {
+      [
+        { n: 0, label: 'No links yet' },
+        { n: 2, label: 'A few' },
+        { n: 6, label: 'Some' },
+        { n: 20, label: 'Well covered' },
+      ].map((k) => (
+        <span class="flex items-center gap-1.5">
+          <svg width="22" height="12" aria-hidden="true" class="shrink-0">
+            <circle
+              cx="11"
+              cy="6"
+              r={radius(k.n)}
+              fill={band(k.n).fill}
+              stroke="var(--color-paper)"
+              stroke-width="0.8"
+            />
+          </svg>
+          {k.label}
+        </span>
+      ))
+    }
+  </figcaption>
+</figure>

@@ -1,0 +1,11 @@
+---
+title: StayingAPI
+url: https://stayingapi.com
+country: global
+category: housing
+description: API for accommodation data across Airbnb, Booking.com, Vrbo and Google Hotels.
+added_at: 2026-09-28
+last_checked: 2026-09-29
+featured: false
+tags:
+  - api

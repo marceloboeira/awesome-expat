@@ -1,0 +1,15 @@
+---
+title: HN Hiring
+url: https://hnhiring.me
+country: global
+category: jobs
+roles:
+  - software-engineer
+  - data-scientist
+  - product-designer
+  - product-manager
+  - devops-sre
+description: Monthly-updated software jobs aggregated from Who Is Hiring threads.
+added_at: 2026-09-29
+last_checked: 2026-09-29
+featured: false

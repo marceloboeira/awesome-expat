@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import { countries as countriesRoute, categories as categoriesRoute, jobs as jobsRoute, global as globalRoute, contribute as contributeRoute, search as searchRoute } from '../lib/routes.ts';
+---
+
+{/*
+  The 404 is a real page, not a dead end.
+
+  Every section of the directory is listed here, because the overwhelmingly
+  likely reason someone landed on a 404 is that they guessed a URL shape
+  (`/countries/de/insurance` when the category is `healthcare`) or followed a
+  stale link. Guessing again would be the wrong advice; the real paths are one
+  click away.
+
+  `noindex` because it must never appear in a search result. The layout sets
+  `robots: noindex, follow`, which still lets a crawler follow the links out
+  of it.
+*/}
+<Base
+  title="Page not found"
+  description="That page does not exist. Every section of the Awesome Expat directory is listed here."
+  path="/404"
+  noindex
+>
+  <div class="mx-auto max-w-3xl px-4 py-16 sm:px-6 sm:py-24">
+    <p class="font-mono text-[length:var(--text-step--1)] text-ink-faint">404</p>
+    <h1 class="mt-3 text-balance text-[length:var(--text-step-3)] font-semibold leading-[1.1] tracking-tight">
+      There is no page at that address
+    </h1>
+    <p class="mt-4 max-w-xl text-[length:var(--text-step-1)] text-ink-soft">
+      The directory is organised by country and by category, so a guessed URL like
+      <code class="rounded bg-paper-sunk px-1.5 py-0.5 font-mono text-[length:var(--text-step--1)]">/countries/de/insurance</code>{' '}
+      will not resolve even when the resource exists. Here is everything.
+    </p>
+
+    <ul class="mt-10 grid gap-3 sm:grid-cols-2">
+      {
+        [
+          { href: countriesRoute(), label: 'Countries', note: 'All 151, by letter' },
+          { href: categoriesRoute(), label: 'Categories', note: 'By what you need' },
+          { href: jobsRoute(), label: 'Jobs', note: 'Boards, hiring rules, interviews' },
+          { href: globalRoute(), label: 'Global', note: 'Applies anywhere' },
+          { href: searchRoute(), label: 'Search', note: 'Find a link by name' },
+          { href: '/stats', label: 'Stats', note: 'What is covered, and what is not' },
+        ].map((l) => (
+          <li>
+            <a
+              href={l.href}
+              class="block rounded-lg border border-rule p-4 transition-colors hover:border-ink"
+            >
+              <span class="block font-medium">{l.label}</span>
+              <span class="mt-0.5 block text-[length:var(--text-step--1)] text-ink-soft">{l.note}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p class="mt-10 border-t border-rule pt-6 text-[length:var(--text-step--1)] text-ink-soft">
+      If you followed a link from elsewhere that led here, that link is a bug on our side —{' '}
+      <a href={contributeRoute()} class="text-accent underline underline-offset-2">tell us which one</a>.
+    </p>
+  </div>
+</Base>

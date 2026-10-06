@@ -1,0 +1,35 @@
+---
+name: Europe
+description: EU and EEA countries, plus the UK and Switzerland.
+countries:
+  - at
+  - be
+  - bg
+  - hr
+  - cy
+  - cz
+  - dk
+  - ee
+  - fi
+  - fr
+  - de
+  - gr
+  - hu
+  - ie
+  - it
+  - lv
+  - lt
+  - lu
+  - mt
+  - nl
+  - pl
+  - pt
+  - ro
+  - sk
+  - si
+  - es
+  - se
+  - gb
+  - ch
+  - no
+  - is

@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Agent-only endpoints. Nothing here is for a crawler to rank; the point is
+# to let a tool fetch the corpus as data instead of scraping the HTML.
+# https://awesome-expat.com/llms.txt explains the format in prose.
+
+Sitemap: https://awesome-expat.com/sitemap-index.xml

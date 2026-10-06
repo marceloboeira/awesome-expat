@@ -1,0 +1,162 @@
+---
+import { getLinks, getCountries, getGroups } from '../../lib/content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Flag from '../../components/Flag.astro';
+import {
+  countriesWithLinks,
+  countrySlugOf,
+  primaryLinksForCountry,
+  linksForCountry,
+  type LoadedLink,
+} from '../../lib/corpus.ts';
+import { country as countryRoute, categories as categoriesRoute, global as globalRoute } from '../../lib/routes.ts';
+
+const links = await getLinks();
+const countries = await getCountries();
+
+// The `global` pseudo-country is a content bucket, not a place: it has no
+// country page, no map dot, and no letter. It gets its own section below, so
+// it is filtered out of the A–Z index rather than rendered as a broken link.
+const withLinks = countriesWithLinks(links, countries).filter((c) => !c.global);
+const totalPrimary = links.length;
+const globalCount = links.filter((l) => l.data.country === 'global').length;
+
+// Countries on the roadmap are grouped rather than listed 141 deep, which would
+// bury the eleven that actually have content. Group slugs match `content/groups`.
+const groups = await getGroups();
+const roadmap = countries.filter((c) => !c.global && primaryLinksForCountry(links, countrySlugOf(c)).length === 0);
+const byGroup = new Map<string, typeof roadmap>();
+for (const country of roadmap) {
+  const g = country.group ?? 'other';
+  if (!byGroup.has(g)) byGroup.set(g, []);
+  byGroup.get(g)!.push(country);
+}
+const groupName = (slug: string) => groups.find((g) => g.slug === slug)?.name ?? 'Other';
+
+// A letter index, so a reader who already has a country in mind does not scroll.
+const alphabet = [...new Set(withLinks.map((c) => c.name[0]!.toUpperCase()))].sort();
+---
+
+<Base
+  title="All countries"
+  description={`Browse expat resources by country. ${withLinks.length} countries have reviewed links on housing, jobs, taxes, visas and more.`}
+  path="/countries"
+  breadcrumbs={[{ name: 'Countries', href: '/countries' }]}
+>
+  <PageHeader
+    eyebrow="Browse by place"
+    title="Countries"
+    lede="Pick where you are going. Each country's page groups its resources by the thing you need to sort out — housing, visas, banking, health."
+    count={withLinks.length}
+    countNoun={`of ${totalPrimary} resources live in ${withLinks.length} countries`}
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <nav aria-label="Jump to letter" class="flex flex-wrap gap-1.5 border-b border-rule pb-6">
+      {
+        alphabet.map((letter) => (
+          <a
+            href={`#${letter}`}
+            class="rounded px-2.5 py-1 font-mono text-[length:var(--text-step--1)] text-ink-soft transition-colors hover:bg-accent-soft hover:text-accent"
+          >
+            {letter}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="mt-8">
+      {
+        alphabet.map((letter) => (
+          <section class="mb-10" aria-labelledby={`h-${letter}`}>
+            <h2 id={letter} class="sticky top-16 z-10 -mx-1 mb-3 inline-block bg-paper px-1 pb-1 text-[length:var(--text-step-2)] font-semibold tracking-tight">
+              <span id={`h-${letter}`} class="sr-only">Countries starting with {letter}</span>
+              <span aria-hidden="true">{letter}</span>
+            </h2>
+            <ul class="grid gap-x-8 sm:grid-cols-2 lg:grid-cols-3">
+              {withLinks
+                .filter((c) => c.name.toUpperCase().startsWith(letter))
+                .map((c) => {
+                  const slug = countrySlugOf(c);
+                  const n = primaryLinksForCountry(links, slug).length;
+                  const shared = linksForCountry(links, slug).length - n;
+                  return (
+                    <li class="flex items-center gap-2.5 border-b border-rule py-2.5">
+                      <Flag code={slug} size="1.125rem" />
+                      <a href={countryRoute(slug)} class="flex-1 font-medium transition-colors hover:text-accent">
+                        {c.name}
+                      </a>
+                      <span class="shrink-0 text-[length:var(--text-step--1)] text-ink-faint tabular-nums">
+                        {n}
+                        {shared > 0 && <span class="text-ink-faint"> +{shared}</span>}
+                      </span>
+                    </li>
+                  );
+                })}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+
+    <section class="mt-4 rounded-lg border border-rule bg-paper-sunk p-6" aria-labelledby="h-global">
+      <h2 id="h-global" class="text-[length:var(--text-step-1)] font-semibold tracking-tight">Not country specific?</h2>
+      <p class="mt-2 max-w-2xl text-[length:var(--text-step--1)] text-ink-soft">
+        {globalCount} resources apply wherever you land — visa
+        checklists, banking for foreigners, packing lists, and the like.
+      </p>
+      <a href={globalRoute()} class="mt-4 inline-block text-[length:var(--text-step--1)] font-medium text-accent underline underline-offset-4">
+        Browse global resources →
+      </a>
+    </section>
+
+    {roadmap.length > 0 && (
+      <section class="mt-14" aria-labelledby="h-roadmap">
+        <h2 id="h-roadmap" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+          {roadmap.length} more countries are on the roadmap
+        </h2>
+        <p class="mt-2 max-w-2xl text-[length:var(--text-step--1)] text-ink-soft">
+          These are in the registry but have no reviewed links yet.
+          <a href={categoriesRoute()} class="text-accent underline underline-offset-2">
+            See what is missing by category
+          </a>
+          , or
+          <a href="/contribute" class="text-accent underline underline-offset-2">add the first link</a>.
+        </p>
+        {
+          [...byGroup.entries()]
+            .sort((a, b) => b[1].length - a[1].length)
+            .map(([groupSlug, members]) => (
+              <details class="group mt-4 border-b border-rule pb-3">
+                <summary class="flex cursor-pointer list-none items-baseline justify-between gap-4 py-2 marker:content-none">
+                  <span class="font-medium">
+                    {groupName(groupSlug)}{' '}
+                    <span class="text-[length:var(--text-step--1)] font-normal text-ink-faint">({members.length})</span>
+                  </span>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                    class="shrink-0 text-ink-faint transition-transform group-open:rotate-180"
+                  >
+                    <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                  </svg>
+                </summary>
+                <ul class="mt-2 flex flex-wrap gap-x-4 gap-y-1.5 pb-2 text-[length:var(--text-step--1)] text-ink-soft">
+                  {members
+                    .sort((a, b) => a.name.localeCompare(b.name))
+                    .map((c) => (
+                      <li>
+                        <span class="text-ink-faint">{c.name}</span>
+                      </li>
+                    ))}
+                </ul>
+              </details>
+            ))
+        }
+      </section>
+    )}
+  </div>
+</Base>
