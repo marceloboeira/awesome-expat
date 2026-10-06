@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { getLinks, getCountries, getCategories, getAuthors, getGroups } from '../lib/content';
 import { countriesWithLinks, categoriesWithLinks, countrySlugOf } from '../lib/corpus.ts';
-import { country as countryRoute, categories as categoriesRoute, contribute as contributeRoute, global as globalRoute } from '../lib/routes.ts';
+import { country as countryRoute, categories as categoriesRoute, contribute as contributeRoute, global as globalRoute, repo as repoUrl, contributingGuide, repoNewIssue } from '../lib/routes.ts';
 
 const links = await getLinks();
 const countries = await getCountries();
@@ -91,7 +91,8 @@ const populated = categoriesWithLinks(links, categories);
           the registry to keep the country list navigable.
         </p>
         <p class="mt-3">
-          <a href={contributeRoute()} class="text-accent underline underline-offset-2">Add a link</a> or{' '}
+          <a href={contributingGuide()} target="_blank" rel="noopener" class="text-accent underline underline-offset-2">Contribute on GitHub</a>,{' '}
+          <a href={contributeRoute()} class="text-accent underline underline-offset-2">see how a submission works</a>, or{' '}
           <a href={globalRoute()} class="text-accent underline underline-offset-2">browse the resources that work anywhere</a>.
         </p>
       </section>
@@ -102,12 +103,16 @@ const populated = categoriesWithLinks(links, categories);
         </h2>
         <p class="mt-3">
           Resources rot. If a link here is dead, has turned into something else, or has a description that no
-          longer matches the page, that is a bug worth reporting and the fastest kind to fix.
+          longer matches the page, that is a{' '}
+          <a href={repoNewIssue()} target="_blank" rel="noopener" class="text-accent underline underline-offset-2">
+            bug worth reporting on GitHub</a>{' '}
+          and the fastest kind to fix.
         </p>
         <p class="mt-3">
           Site content is licensed under CC BY-SA 4.0. The linked resources belong to their own authors and are
           not redistributed here — every link is a pointer, nothing more. Nothing listed implies any
-          affiliation or endorsement.
+          affiliation or endorsement. The directory itself is
+          <a href={repoUrl()} target="_blank" rel="noopener" class="text-accent underline underline-offset-2">open source on GitHub</a>.
         </p>
       </section>
     </div>

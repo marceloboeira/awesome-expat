@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import { loadContent } from '@engine/content.ts';
 import { computeStats } from '@engine/stats.ts';
-import { category as categoryRoute, country as countryRoute } from '../lib/routes.ts';
+import { category as categoryRoute, country as countryRoute, repoNewFile, repoNewIssue } from '../lib/routes.ts';
 
 /**
  * Coverage, published.
@@ -127,8 +127,17 @@ const rows: { label: string; value: number; note?: string }[] = [
       </ol>
 
       <p class="mt-6 text-[length:var(--text-step--1)]">
-        <a href="/contribute" class="rounded bg-ink px-4 py-2 font-medium text-paper">Add a link</a>
-        <span class="ml-3 text-ink-soft">or browse the <a href="/countries" class="text-accent underline underline-offset-2">empty countries</a>.</span>
+        <a
+          href={repoNewFile('content/links')}
+          target="_blank"
+          rel="noopener"
+          class="rounded bg-ink px-4 py-2 font-medium text-paper"
+          >Add a link on GitHub</a
+        >
+        <span class="ml-3 text-ink-soft">
+          or <a href={repoNewIssue()} target="_blank" rel="noopener" class="text-accent underline underline-offset-2">request one</a>,
+          or browse the <a href="/countries" class="text-accent underline underline-offset-2">empty countries</a>.
+        </span>
       </p>
     </section>
 

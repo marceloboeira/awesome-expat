@@ -121,3 +121,55 @@ export function categoriesForCountry(
     .filter((r) => r.count > 0)
     .sort((a, b) => b.count - a.count || a.category.slug.localeCompare(b.category.slug));
 }
+
+// ---------------------------------------------------------------------------
+// Contributors
+// ---------------------------------------------------------------------------
+
+/**
+ * A contributor is a GitHub username that appears in at least one link's
+ * `contributors` array. The identity is the normalised username (lowercased,
+ * `@` stripped by `githubUserSchema`), not an author registry slug -- so a
+ * person with no `content/authors` entry still gets a page from the corpus
+ * alone. The registry, where it matches, only adds a display name and bio.
+ */
+export interface Contributor {
+  handle: string;
+  /** The links this person contributed, most recent first. */
+  links: LoadedLink[];
+}
+
+/**
+ * Every contributor, most contributions first, ties broken by handle so the
+ * order never flickers between builds.
+ *
+ * Built from the union of all `link.data.contributors`. A link that lists no
+ * contributors contributes nothing here -- there is no invented attribution.
+ */
+export function buildContributors(links: LoadedLink[]): Contributor[] {
+  const byHandle = new Map<string, LoadedLink[]>();
+  for (const link of links) {
+    for (const handle of link.data.contributors ?? []) {
+      const bucket = byHandle.get(handle);
+      if (bucket) bucket.push(link);
+      else byHandle.set(handle, [link]);
+    }
+  }
+  return [...byHandle.entries()]
+    .map(([handle, owned]) => ({ handle, links: [...owned].sort(byNewest) }))
+    .sort((a, b) => b.links.length - a.links.length || a.handle.localeCompare(b.handle));
+}
+
+/** The links a single contributor added, newest first. */
+export function linksForContributor(links: LoadedLink[], handle: string): LoadedLink[] {
+  return links.filter((l) => (l.data.contributors ?? []).includes(handle)).sort(byNewest);
+}
+
+/** Distinct countries a contributor's links touch, global last. */
+export function countriesForContributor(contrib: Contributor, countryNames: Record<string, string>): string[] {
+  return [...new Set(contrib.links.map((l) => l.data.country))].sort((a, b) => {
+    if (a === 'global') return 1;
+    if (b === 'global') return -1;
+    return (countryNames[a] ?? a).localeCompare(countryNames[b] ?? b);
+  });
+}

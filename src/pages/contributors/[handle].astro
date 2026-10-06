@@ -1,0 +1,134 @@
+---
+import { getAuthors, getCountryNames, getLinks } from '../../lib/content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import LinkList from '../../components/LinkList.astro';
+import { buildContributors, countriesForContributor, type LoadedLink } from '../../lib/corpus.ts';
+import { contributor as contributorRoute, contributors as contributorsRoute, country as countryRoute, githubProfile, global as globalRoute } from '../../lib/routes.ts';
+
+export async function getStaticPaths() {
+  const links = await getLinks();
+  // A page exists exactly for the handles the corpus attributes links to. An
+  // author with a registry entry but no contributed link gets no page — there
+  // is nothing honest to show under it.
+  return buildContributors(links).map((c) => ({ params: { handle: c.handle }, props: { handle: c.handle } }));
+}
+
+const { handle } = Astro.props;
+
+const links = await getLinks();
+const authors = await getAuthors();
+const countryNames = await getCountryNames();
+
+const contrib = buildContributors(links).find((c) => c.handle === handle)!;
+
+// The authors registry is optional garnish: it can supply a real name and a
+// bio. When absent, the GitHub handle is the whole identity — it is the fact
+// the corpus actually carries.
+const author = authors.find((a) => a.github === handle);
+const displayName = author?.name ?? handle;
+const profileUrl = githubProfile(handle);
+
+const countryCodes = countriesForContributor(contrib, countryNames);
+const firstContribution = contrib.links.at(-1)?.data.added_at;
+const lastContribution = contrib.links[0]?.data.added_at;
+---
+
+<Base
+  title={`${displayName} on Awesome Expat`}
+  description={`${displayName} (@${handle}) contributed ${contrib.links.length} ${contrib.links.length === 1 ? 'link' : 'links'} to the Awesome Expat directory of resources for people moving abroad.`}
+  path={contributorRoute(handle)}
+  breadcrumbs={[
+    { name: 'Contributors', href: contributorsRoute() },
+    { name: displayName, href: contributorRoute(handle) },
+  ]}
+>
+  <PageHeader eyebrow="Contributor" title={displayName}>
+    <div class="mt-5 flex flex-wrap items-center gap-4">
+      <img
+        src={`${profileUrl}.png?size=120`}
+        alt={`GitHub avatar for ${displayName}`}
+        width="56"
+        height="56"
+        class="h-14 w-14 rounded-full border border-rule"
+        loading="eager"
+        decoding="async"
+      />
+      <div class="min-w-0">
+        <p class="text-[length:var(--text-step-0)] text-ink-soft">
+          @{handle} · <span class="tabular-nums">{contrib.links.length}</span> {contrib.links.length === 1 ? 'link' : 'links'}
+        </p>
+        <a
+          href={profileUrl}
+          rel="noopener noreferrer me"
+          target="_blank"
+          class="mt-0.5 inline-block text-[length:var(--text-step--1)] text-accent underline underline-offset-4"
+        >
+          GitHub profile →
+        </a>
+      </div>
+    </div>
+    {author?.bio && <p class="mt-5 max-w-2xl text-[length:var(--text-step-1)] text-ink-soft">{author.bio}</p>}
+  </PageHeader>
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <section aria-labelledby="h-contributions">
+      <h2 id="h-contributions" class="border-b border-rule pb-2 text-[length:var(--text-step-2)] font-semibold tracking-tight">
+        Contributed links
+      </h2>
+      {
+        (firstContribution || lastContribution) && (
+          <p class="mt-2.5 text-[length:var(--text-step--1)] text-ink-faint">
+            {firstContribution === lastContribution
+              ? `Added ${firstContribution}.`
+              : `Adding from ${firstContribution} to ${lastContribution}.`}
+          </p>
+        )
+      }
+      <div class="mt-4">
+        <LinkList
+          links={contrib.links}
+          countryNames={countryNames}
+          emptyMessage="No links attributed yet."
+        />
+      </div>
+    </section>
+
+    {
+      countryCodes.length > 0 && (
+        <section class="mt-12 border-t border-rule pt-8" aria-labelledby="h-where">
+          <h2 id="h-where" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">
+            Countries they helped with
+          </h2>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {countryCodes.map((code) =>
+              code === 'global' ? (
+                <li>
+                  <a
+                    href={globalRoute()}
+                    class="inline-block rounded-full border border-rule px-3.5 py-1.5 text-[length:var(--text-step--1)] transition-colors hover:border-accent hover:bg-accent-soft hover:text-accent"
+                  >
+                    Anywhere
+                  </a>
+                </li>
+              ) : (
+                <li>
+                  <a
+                    href={countryRoute(code)}
+                    class="inline-block rounded-full border border-rule px-3.5 py-1.5 text-[length:var(--text-step--1)] transition-colors hover:border-accent hover:bg-accent-soft hover:text-accent"
+                  >
+                    {countryNames[code] ?? code}
+                  </a>
+                </li>
+              ),
+            )}
+          </ul>
+        </section>
+      )
+    }
+
+    <p class="mt-12 text-[length:var(--text-step--1)] text-ink-soft">
+      Added a resource and want your own page? <a href="/contribute" class="text-accent underline underline-offset-2">Add a link</a> and put your GitHub username on it.
+    </p>
+  </div>
+</Base>

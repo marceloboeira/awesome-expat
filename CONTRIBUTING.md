@@ -1,6 +1,6 @@
 # Contributing
 
-Everything on [awesome-expat.com](https://awesome-expat.com) is generated from YAML files in `content/`.
+Every link on [awesome-expat.com](https://awesome-expat.com) comes from a YAML file in `content/`.
 There is no web form and no database, and that is deliberate: a link is content, content belongs in version
 control, where it is reviewable, diffable, and never lost to a spam cleanup.
 
@@ -35,7 +35,7 @@ parameter count as one link, and the validator will reject the second file.
 
 ```
 grep -ril "example.com" content/links/   # by domain
-make list                                # every country that has resources
+make list                                # what exists, counted by country and category
 ```
 
 Or search the site: https://awesome-expat.com/search/.
@@ -108,6 +108,10 @@ tags:
 ---
 ```
 
+`description_verified: true` is a claim that a person has read the description and the page it describes. If
+you drafted the wording with an assistant, or you have not opened the URL yourself, drop the line — the
+default is `false`, the site marks the entry as awaiting review, and a maintainer flips it after reading.
+
 ### 5. Write a description that earns its place
 
 This is the field that gets read, and the one that gets rejected. It has to tell a reader something they
@@ -133,10 +137,11 @@ Errors to fix, in the order you will hit them:
 - `country` not matching the directory the file sits in
 - an unknown `category`, `country`, `scope` or `role`
 - a `url` that is not `https://`, carries tracking parameters, or duplicates another file
-- `description_verified: true` on a description nobody has read — see the field reference
 - `added_at` or `last_checked` in the future
 
-Warnings are not optional in practice: `not canonical — prefer <url>` means paste the suggested URL back in.
+The validator cannot judge whether your description is honest — `description_verified: true` is a promise to
+the reviewer, not a check. Warnings are not optional in practice either: `not canonical — prefer <url>` means
+paste the suggested URL back in.
 
 ### 7. Prove the URL is alive
 
@@ -190,7 +195,7 @@ enforces.
 | `category` | yes | Registered category slug. |
 | `description` | yes | 10–200 characters. This is the review gate. |
 | `added_at` | yes | `YYYY-MM-DD`, the day you created the file. Never a future date. |
-| `last_checked` | no | `null` until `make links-check` stamps it, or `YYYY-MM-DD` and never before `added_at`. |
+| `last_checked` | no | `null` until `make links-check-update` stamps it, or `YYYY-MM-DD` and never before `added_at`. |
 | `description_verified` | no | Default `false`. `true` only when a human has read the description and the page it describes. The site marks unverified entries as awaiting review, and `make pool-promote-apply` refuses anything still `false`. |
 | `scopes` | no | Every country the link is useful for, `country` included. Replaces copying a file five times. |
 | `roles` | no | Role slugs from `content/roles/`. An empty list means "useful to everyone" — leave it out for general resources. |

@@ -1,0 +1,78 @@
+---
+import { getAuthors, getLinks } from '../../lib/content';
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { buildContributors, type Contributor } from '../../lib/corpus.ts';
+import { contributor as contributorRoute, githubProfile } from '../../lib/routes.ts';
+
+const links = await getLinks();
+const authors = await getAuthors();
+
+const contributors = buildContributors(links);
+
+// The registry can turn a bare handle into a real name; without an entry the
+// handle stands alone. Matching is on the normalised GitHub username.
+const nameFor = (c: Contributor): string => authors.find((a) => a.github === c.handle)?.name ?? c.handle;
+
+const totalLinks = links.filter((l) => (l.data.contributors ?? []).length > 0).length;
+const handle = (c: Contributor) => c.handle;
+---
+
+<Base
+  title="Contributors"
+  description="The people who add and review the links in the Awesome Expat directory. Every resource is contributed by someone who has actually used it."
+  path="/contributors"
+  breadcrumbs={[{ name: 'Contributors', href: '/contributors' }]}
+>
+  <PageHeader
+    eyebrow="The people behind it"
+    title="Contributors"
+    lede="Awesome Expat is maintained by travellers who add what they wish they had known. Each page lists the resources a person contributed and links to their GitHub profile."
+    count={contributors.length}
+    countNoun={`contributors to ${totalLinks} links`}
+  />
+
+  <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    {
+      contributors.length === 0 ? (
+        <p class="rounded border border-dashed border-rule px-4 py-6 text-center text-[length:var(--text-step--1)] text-ink-faint">
+          No contributors are attributed to links yet.
+          <a href="/contribute" class="ml-1 text-accent underline underline-offset-2">Add the first one</a>.
+        </p>
+      ) : (
+        <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {contributors.map((c) => (
+            <li>
+              <a
+                href={contributorRoute(handle(c))}
+                class="flex h-full items-center gap-4 rounded-lg border border-rule p-4 transition-colors hover:border-ink"
+              >
+                <img
+                  src={`${githubProfile(handle(c))}.png?size=96`}
+                  alt=""
+                  width="44"
+                  height="44"
+                  aria-hidden="true"
+                  class="h-11 w-11 shrink-0 rounded-full border border-rule"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="min-w-0 flex-1">
+                  <span class="block truncate font-medium tracking-tight">{nameFor(c)}</span>
+                  <span class="block truncate text-[length:var(--text-step--1)] text-ink-faint">@{handle(c)}</span>
+                </span>
+                <span class="shrink-0 text-[length:var(--text-step--1)] text-ink-soft tabular-nums">
+                  {c.links.length}
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <p class="mt-12 text-[length:var(--text-step--1)] text-ink-soft">
+      Contributor pages are built from the GitHub usernames on each link. Want one? <a href="/contribute" class="text-accent underline underline-offset-2">Add a link</a> and include your username as a contributor.
+    </p>
+  </div>
+</Base>
