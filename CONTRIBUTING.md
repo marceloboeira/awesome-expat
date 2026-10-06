@@ -201,12 +201,16 @@ enforces.
 ## Add a country
 
 ```
-make add-country CODE=pt --region=europe
+pnpm run add-country -- --code=pt --region=europe
 ```
 
 `--region` is required and has no default: guessing it puts the country in the wrong part of the map and the
-wrong sitemap group. Plausible regions are printed when you omit it. The command writes
+wrong sitemap group. Omit it and the command prints the plausible regions for that code. It writes
 `content/countries/<code>.yaml` and re-checks the registry, so a typo cannot land unnoticed.
+
+Pass the flags through `pnpm`, not `make`: `make add-country CODE=pt --region=europe` currently fails, because
+GNU make consumes `--region=...` as its own option and forwards the bare `--` to the script as the country
+code.
 
 ## Add a category or a role
 

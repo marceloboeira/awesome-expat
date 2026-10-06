@@ -71,11 +71,11 @@ Find resources relevant to your job: [docs/jobs.md](docs/jobs.md), or on the sit
 
 ## Contribute
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md). If you use an AI coding agent, read
-[AGENTS.md](AGENTS.md) instead — it maps the same rules onto the repo layout.
+Add a resource in nine steps: [CONTRIBUTING.md → Add a link](CONTRIBUTING.md#add-a-link). If you use an AI
+coding agent, have it read [AGENTS.md](AGENTS.md) — the same rules, mapped onto the repo layout.
 
-One YAML file per resource under `content/links/<country>/<category>/`.
-`make help` lists every task.
+One YAML file per resource under `content/links/<country>/<category>/`. There is no web form, which is
+deliberate: a link is content, and content belongs in version control. `make help` lists every task.
 
 ## License
 

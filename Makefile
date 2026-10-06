@@ -9,19 +9,28 @@ SHELL := /bin/bash
 PNPM ?= pnpm
 PKG  = awesome-expat
 
-.PHONY: help setup dev build preview check export validate seed links-check links-check-update \
-        site-check test i18n-report clean distclean add-link add-country list status
+# The single source of truth for phony targets. Add a target here once; there
+# is no second list to keep in sync. `.PHONY` is declared from it below, and
+# `check-phony` proves that every real target appears here.
+PHONY_TARGETS := help setup dev build preview check export validate seed \
+        links-check links-check-update site-check test i18n-report clean distclean \
+        add-link add-country list status ci \
+        stats stats-json \
+        pool-status pool-harvest pool-dedup pool-verify pool-classify pool-describe \
+        pool-promote pool-promote-apply pool-pipeline \
+        check-phony
+
+.PHONY: $(PHONY_TARGETS)
 
 # The `## name:` comments above are the single source of truth for the target
 # list. This check fails the build if a real target is missing from .PHONY,
-# which is what silently lets a same-named file shadow a target.
-.PHONY: check-phony
+# which is what silently lets a same-named file shadow a target. It reads the
+# list from PHONY_TARGETS, so it can never go stale against a second hardcoded
+# copy — the bug it exists to prevent.
 check-phony:
 	@missing=$$(comm -23 \
-		<(grep -E '^[a-z][a-z-]*:' Makefile | sed -E 's/:.*//' | sort -u) \
-		<(printf '%s\n' help setup dev build preview check export validate seed links-check \
-			links-check-update site-check test i18n-report clean distclean add-link add-country list status \
-			check-phony | sort -u)); \
+		<(grep -E '^[a-z][a-z0-9-]*:' Makefile | sed -E 's/:.*//' | sort -u) \
+		<(printf '%s\n' $(PHONY_TARGETS) | sort -u)); \
 	if [ -n "$$missing" ]; then echo "targets missing from .PHONY: $$missing"; exit 1; fi
 
 ## help: List available targets
@@ -48,52 +57,59 @@ build: validate export
 preview:
 	$(PNPM) run preview
 
-## Directory statistics: totals, per-category, per-country, per-role, coverage gaps.
+## stats: Totals, per-category, per-country, per-role, coverage gaps.
 stats:
 	@$(PNPM) run stats
 
-## Same numbers as JSON, for diffing across runs.
+## stats-json: Same numbers as JSON, for diffing across runs.
 stats-json:
 	@$(PNPM) run stats -- --format=json --out=.agents/stats.json
 
-## --- Local content pool (Ollama; quarantined under .agents/pool/) ---------
-##
-## Make target names use dashes, not colons. GNU Make 3.81 parses
-## "pool:status:" as target 'pool' with a static-pattern prerequisite, so a
-## colon in a target name is a hard parse error on the macOS system make.
-## The pnpm scripts keep the colon form.
-##
-## Every target is dry-run by default. The pool can never reach content/
-## except through pool-promote-apply, which refuses any candidate whose
-## description_verified is still false.
+# --- Local content pool (Ollama; quarantined under .agents/pool/) ---------
+#
+# Make target names use dashes, not colons. GNU Make 3.81 parses
+# "pool:status:" as target 'pool' with a static-pattern prerequisite, so a
+# colon in a target name is a hard parse error on the macOS system make.
+# The pnpm scripts keep the colon form.
+#
+# Every target is dry-run by default. The pool can never reach content/
+# except through pool-promote-apply, which refuses any candidate whose
+# description_verified is still false.
 
+## pool-status: Show pool candidates and their stage
 pool-status:
 	@$(PNPM) run pool:status
 
+## pool-harvest: Pull candidate URLs into the pool
 pool-harvest:
 	@$(PNPM) run pool:harvest
 
+## pool-dedup: Collapse duplicate candidates
 pool-dedup:
 	@$(PNPM) run pool:dedup
 
+## pool-verify: Check each pool URL is alive
 pool-verify:
 	@$(PNPM) run pool:verify
 
+## pool-classify: Assign country + category to pool candidates
 pool-classify:
 	@$(PNPM) run pool:classify
 
+## pool-describe: Draft descriptions (always sets description_verified: false)
 pool-describe:
 	@$(PNPM) run pool:describe
 
+## pool-promote: Dry-run of promoting pool candidates into content/
 pool-promote:
 	@$(PNPM) run pool:promote
 
-## The one target that lets agent output into content/. Always re-checks after.
+## pool-promote-apply: The one target that lets agent output into content/. Always re-checks after.
 pool-promote-apply:
 	@$(PNPM) run pool:promote -- --apply
 	@$(MAKE) --no-print-directory check
 
-## Full pipeline, dry run end to end.
+## pool-pipeline: Full pool pipeline, dry run end to end.
 pool-pipeline:
 	@$(MAKE) --no-print-directory pool-harvest
 	@$(MAKE) --no-print-directory pool-dedup
@@ -170,6 +186,15 @@ links-check-update:
 ## test: Run the engine test suite
 test:
 	@$(PNPM) exec tsx ./engine/test/bin/run.ts
+
+## ci: Everything CI runs, in order. Run this before opening a PR.
+#
+# The full gate as a single command. Each step already stops the build on
+# failure, so this is just the ordered sequence a reviewer expects. `links-check`
+# is read-only (it does not stamp files); use `make links-check-update` when you
+# deliberately want to record that links are healthy.
+ci: validate export check test links-check
+	@echo "ci: all checks passed"
 
 ## i18n-report: Show which content needs translating
 i18n-report:

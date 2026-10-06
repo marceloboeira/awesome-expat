@@ -35,6 +35,14 @@ const args = new Set(process.argv.slice(2));
 const shouldUpdate = args.has('--update');
 const reportOnly = args.has('--report');
 
+const inCI = process.env.GITHUB_ACTIONS === 'true';
+function annotate(level: 'error' | 'warning', title: string, file: string | null, message: string) {
+  if (!inCI) return;
+  const where = file ? `file=${file},` : '';
+  const safe = message.replace(/\n/g, '%0A');
+  process.stdout.write(`::${level} ${where}title=${title}::${safe}\n`);
+}
+
 /** Simple per-host throttle so we never hammer one server. */
 const lastHit = new Map<string, number>();
 async function throttle(host: string) {
@@ -193,6 +201,20 @@ async function main() {
   console.log('\nlinks: ' + Object.entries(tally).map(([k, v]) => `${v} ${k}`).join(', '));
 
   const fatal = results.filter((r) => r.state === 'dead' || r.state === 'error');
+
+  // Surface findings in the PR too: an error on anything that is not a 2xx, a
+  // warning on the two healthy-but-noteworthy cases (a redirect we followed,
+  // and a bot-walled host that has not been allowlisted yet). Local runs print
+  // the same states in the tally above and never emit these markers.
+  for (const r of results) {
+    if (r.state === 'dead') annotate('error', 'Dead link', r.file, `${r.url} — ${r.detail}`);
+    else if (r.state === 'error') annotate('error', 'Link check error', r.file, `${r.url} — ${r.detail}`);
+    else if (r.state === 'redirected')
+      annotate('warning', 'Redirect followed', r.file, `${r.url} redirects to ${r.finalUrl ?? 'unknown'}`);
+    else if (r.state === 'blocked')
+      annotate('warning', 'Bot-walled (needs manual check)', r.file, `${r.url} returned ${r.status ?? '?'} and is not allowlisted`);
+  }
+
   if (fatal.length) {
     console.log(`\n${fatal.length} URL(s) need attention:`);
     for (const r of fatal) console.log(`  ${r.file ?? '-'}\n    ${r.url}\n    ${r.detail}`);

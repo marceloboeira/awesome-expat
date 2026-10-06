@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@11.24.0",
   "description": "A curated directory of expat resources, organised by country.",
   "license": "MIT",
   "engines": {

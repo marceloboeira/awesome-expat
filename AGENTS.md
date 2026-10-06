@@ -29,17 +29,21 @@ engine/lib/url.ts       URL canonicalisation and the dedup identity.
 engine/lib/content.ts   loader, indexes, cross-reference checks.
 engine/cmd/             one file per command; `make help` maps targets to them.
 engine/test/            the suites `make test` runs.
-src/                    Astro site, generated from content/ by the same schemas.
+src/                    Astro site. Hand-written pages that read content/ through the same schemas.
 README.md, docs/**      GENERATED artifacts. Never hand-edit.
 .agents/                machine-local, unvetted, gitignored. Never commit anything in here.
 ```
 
 ## Generated files, do not edit
 
-`README.md`, `docs/index.md`, `docs/jobs.md`, `docs/countries/*.md` and every page under `src/pages/` are
-derived from `content/`. `make check` regenerates them into a scratch directory and fails on any diff, which
-is how a hand edit gets caught. If a generated page says the wrong thing, fix the generator
-(`engine/cmd/export-markdown.ts`) or the content it reads.
+`README.md`, `docs/index.md`, `docs/jobs.md` and every page under `docs/countries/` are derived from
+`content/` by `engine/cmd/export-markdown.ts`. `make check` regenerates them into a scratch directory and
+fails on any diff, which is how a hand edit gets caught. If one of those pages says the wrong thing, fix the
+generator or the content it reads — never the Markdown.
+
+`src/` is the opposite case: the Astro pages there are hand-written and you may edit them, but they read
+`content/` through the same Zod schemas, so most content work never touches them. Prove an edit there with
+`make site-check`, which builds and then checks every internal link and each page's own invariants.
 
 ## Commands
 
@@ -112,6 +116,13 @@ make ci                  validate + export + check + test + links-check
 git status --short       nothing under .agents/ staged
 ```
 
-`make add-link` is wired in `package.json` and the Makefile, but `engine/cmd/add-link.ts` does not exist in
-the repository yet — the command fails. Create the YAML file by hand per CONTRIBUTING.md instead, and do not
-report that gap as fixed unless you have written and tested the command.
+## Known gaps
+
+Verified on 2026-10-06 by running the commands. Do not report one of these as fixed unless you have run the
+command and seen it pass.
+
+| Gap | Symptom | Do instead |
+| --- | --- | --- |
+| `engine/cmd/add-link.ts` does not exist | `make add-link` fails on a missing module | write the YAML by hand, per [CONTRIBUTING.md → Add a link](CONTRIBUTING.md#add-a-link) |
+| `make add-country` forwards arguments wrongly | make eats `--region=...`, then passes the bare `--` to the script as the country code | `pnpm run add-country -- --code=pt --region=europe` |
+| content validation and tests are not in CI | a PR with a schema error or a stale README can still be green | run `make ci` locally, every time |
