@@ -39,10 +39,10 @@ const alphabet = [...new Set(withLinks.map((c) => c.name[0]!.toUpperCase()))].so
 ---
 
 <Base
-  title="All countries"
-  description={`Browse expat resources by country. ${withLinks.length} countries have reviewed links on housing, jobs, taxes, visas and more.`}
-  path="/countries"
-  breadcrumbs={[{ name: 'Countries', href: '/countries' }]}
+  title="Browse every country in the expat directory"
+  description={`Browse expat resources by country. ${withLinks.length} countries have reviewed links on housing, jobs, taxes, visas and more — and every page says honestly what is still missing.`}
+  path="/countries/"
+  breadcrumbs={[{ name: 'Countries', href: '/countries/' }]}
 >
   <PageHeader
     eyebrow="Browse by place"
@@ -122,7 +122,7 @@ const alphabet = [...new Set(withLinks.map((c) => c.name[0]!.toUpperCase()))].so
             See what is missing by category
           </a>
           , or
-          <a href="/contribute" class="text-accent underline underline-offset-2">add the first link</a>.
+          <a href="/contribute/" class="text-accent underline underline-offset-2">add the first link</a>.
         </p>
         {
           [...byGroup.entries()]

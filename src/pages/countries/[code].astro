@@ -19,6 +19,7 @@ import {
   roleInCountry,
   roles as rolesRoute,
 } from '../../lib/routes.ts';
+import { collectionPageLd } from '../../lib/ld.ts';
 
 export async function getStaticPaths() {
   const countries = await getCountries();
@@ -70,11 +71,31 @@ const REGION_NAMES: Record<string, string> = {
 };
 const regionName = country.region ? REGION_NAMES[country.region] ?? country.region : null;
 
-const desc =
-  country.description ??
-  (visible.length > 0
-    ? `${visible.length} reviewed resources for people moving to ${name} in ${regionName ?? 'this country'}: housing, jobs, taxes, visas and more.`
-    : `No reviewed resources for ${name} yet. Part of the Awesome Expat directory, in ${regionName ?? 'this region'}.`);
+// Card copy is always generated from the corpus, even where the registry
+// carries a hand-written `description`: that prose is the on-page lede, but
+// the meta must track the live link count. The SEO contract
+// (engine/lib/seo-contract.ts) enforces the length windows at build time.
+const generatedDesc = visible.length > 0
+  ? (() => {
+      const cats = byCategory.map((r) => r.category.name.toLowerCase());
+      const list =
+        cats.length === 1
+          ? cats[0]
+          : cats.length === 2
+            ? `${cats[0]} and ${cats[1]}`
+            : cats.length === 3
+              ? `${cats[0]}, ${cats[1]} and ${cats[2]}`
+              : `${cats[0]}, ${cats[1]} and ${cats.length - 2} more`;
+      return `${visible.length} checked ${visible.length === 1 ? 'resource' : 'resources'} for people moving to ${name}: ${list}. Human-written descriptions, dated link checks.`;
+    })()
+  : `No reviewed resources for ${name} yet. Part of the Awesome Expat directory, in ${regionName ?? 'this region'}.`;
+
+const desc = country.description ?? generatedDesc;
+const cardTitle =
+  visible.length > 0
+    ? `Moving to ${name}: ${visible.length} verified expat resource${visible.length === 1 ? '' : 's'}`
+    : `${name} expat guide`;
+const cardDesc = generatedDesc;
 ---
 
 {/*
@@ -85,10 +106,16 @@ const desc =
   actually want ranked. So: crawlable and linked, not indexable.
 */}
 <Base
-  title={`${name} expat guide`}
-  description={desc}
+  title={cardTitle}
+  description={cardDesc}
   path={countryRoute(slug)}
   noindex={visible.length === 0}
+  ld={collectionPageLd({
+    title: cardTitle,
+    description: cardDesc,
+    path: countryRoute(slug),
+    items: visible.map((l) => ({ name: l.data.title, url: l.data.url })),
+  })}
   breadcrumbs={[
     { name: 'Countries', href: countriesRoute() },
     { name, href: countryRoute(slug) },
@@ -126,14 +153,14 @@ const desc =
           minutes and helps the next person.
         </p>
         <a
-          href={`/contribute?country=${code}`}
+          href={`/contribute/?country=${code}`}
           class="mt-6 inline-block rounded bg-ink px-5 py-2.5 text-[length:var(--text-step-0)] font-medium text-paper"
         >
           Add the first link
         </a>
         <p class="mt-6 text-[length:var(--text-step--1)] text-ink-faint">
           Or browse{' '}
-          <a href="/global" class="text-accent underline underline-offset-2">
+          <a href="/global/" class="text-accent underline underline-offset-2">
             resources that work anywhere
           </a>
           .

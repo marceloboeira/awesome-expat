@@ -1,5 +1,5 @@
 ---
-import { categories, countries, roles, global, contribute, about, stats, contributors, repo, repoNewIssue } from '../lib/routes.ts';
+import { categories, countries, country, category, roles, global, contribute, about, stats, contributors, repo, repoNewIssue } from '../lib/routes.ts';
 const year = new Date().getFullYear();
 ---
 
@@ -21,8 +21,8 @@ const year = new Date().getFullYear();
         <ul class="mt-3 space-y-1.5 text-[length:var(--text-step--1)]">
           <li><a href={countries()} class="text-ink-soft hover:text-accent">Browse all</a></li>
           <li><a href={global()} class="text-ink-soft hover:text-accent">Global resources</a></li>
-          <li><a href={`${countries()}/de`} class="text-ink-soft hover:text-accent">Germany</a></li>
-          <li><a href={`${countries()}/gb`} class="text-ink-soft hover:text-accent">United Kingdom</a></li>
+          <li><a href={country('de')} class="text-ink-soft hover:text-accent">Germany</a></li>
+          <li><a href={country('gb')} class="text-ink-soft hover:text-accent">United Kingdom</a></li>
         </ul>
       </nav>
 
@@ -32,9 +32,9 @@ const year = new Date().getFullYear();
         </h2>
         <ul class="mt-3 space-y-1.5 text-[length:var(--text-step--1)]">
           <li><a href={categories()} class="text-ink-soft hover:text-accent">Browse all</a></li>
-          <li><a href={`${categories()}/housing`} class="text-ink-soft hover:text-accent">Housing</a></li>
-          <li><a href={`${categories()}/jobs`} class="text-ink-soft hover:text-accent">Jobs</a></li>
-          <li><a href={`${categories()}/taxes`} class="text-ink-soft hover:text-accent">Taxes</a></li>
+          <li><a href={category('housing')} class="text-ink-soft hover:text-accent">Housing</a></li>
+          <li><a href={category('jobs')} class="text-ink-soft hover:text-accent">Jobs</a></li>
+          <li><a href={category('taxes')} class="text-ink-soft hover:text-accent">Taxes</a></li>
         </ul>
       </nav>
 

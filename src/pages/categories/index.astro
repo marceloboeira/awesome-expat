@@ -15,10 +15,14 @@ const empty = categories.filter((c) => linksForCategory(links, c.slug).length ==
 ---
 
 <Base
-  title="All categories"
-  description="Browse expat resources by category: housing, jobs, taxes, visas, banking, health, family, and more."
-  path="/categories"
-  breadcrumbs={[{ name: 'Categories', href: '/categories' }]}
+  title="Browse expat resources by category"
+  description={`Expat resources by category: ${
+    populated.length > 4
+      ? `${populated.slice(0, 3).map((c) => c.name.toLowerCase()).join(', ')} and ${populated.length - 3} more`
+      : populated.map((c) => c.name.toLowerCase()).join(', ')
+  }. Each category page lists the countries with checked links.`}
+  path="/categories/"
+  breadcrumbs={[{ name: 'Categories', href: '/categories/' }]}
 >
   <PageHeader
     eyebrow="Browse by need"
@@ -82,7 +86,7 @@ const empty = categories.filter((c) => linksForCategory(links, c.slug).length ==
           </ul>
           <p class="mt-6 text-[length:var(--text-step--1)] text-ink-soft">
             Know a source that belongs in one of these?{' '}
-            <a href="/contribute" class="text-accent underline underline-offset-2">
+            <a href="/contribute/" class="text-accent underline underline-offset-2">
               Add it
             </a>
             , or see{' '}

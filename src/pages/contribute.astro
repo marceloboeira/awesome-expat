@@ -48,10 +48,10 @@ const newFileDir =
 ---
 
 <Base
-  title="Contribute a link on GitHub"
-  description="Add a resource to Awesome Expat. Everything is contributed on GitHub: open a pull request with one YAML file, or request a link in an issue. What we accept, what gets rejected, and the three fields that matter."
-  path="/contribute"
-  breadcrumbs={[{ name: 'Contribute', href: '/contribute' }]}
+  title="Contribute a link to the expat directory"
+  description="Add a resource to Awesome Expat on GitHub: open a pull request with one YAML file, or request a link in an issue. What we accept, and what gets rejected."
+  path="/contribute/"
+  breadcrumbs={[{ name: 'Contribute', href: '/contribute/' }]}
 >
   <div class="border-b border-rule">
     <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
@@ -287,7 +287,7 @@ const newFileDir =
             .map((c) => (
               <li>
                 <a
-                  href={`/contribute?category=${c.slug}`}
+                  href={`/contribute/?category=${c.slug}`}
                   class="inline-block rounded border border-dashed border-warn px-3 py-1.5 text-[length:var(--text-step--1)] text-ink-soft transition-colors hover:border-ink hover:text-ink"
                 >
                   {c.name}
@@ -309,7 +309,7 @@ const newFileDir =
             .map((c) => (
               <li>
                 <a
-                  href={`/contribute?country=${c.slug}`}
+                  href={`/contribute/?country=${c.slug}`}
                   class="inline-block rounded border border-dashed border-rule px-3 py-1.5 text-[length:var(--text-step--1)] text-ink-faint transition-colors hover:border-ink hover:text-ink"
                 >
                   {c.name}

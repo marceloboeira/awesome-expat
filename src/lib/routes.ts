@@ -35,28 +35,28 @@ export const repoNewFile = (dir: string) => `${REPO}/new/${REPO_BRANCH}/${trimSl
 export const repoTree = (path: string) => `${REPO}/blob/${REPO_BRANCH}/${trimSlashes(path)}`;
 
 export const home = () => '/';
-export const countries = () => '/countries';
-export const categories = () => '/categories';
-export const global = () => '/global';
-export const jobs = () => '/jobs';
-export const roles = () => '/roles';
-export const search = () => '/search';
-export const blog = () => '/blog';
-export const contribute = () => '/contribute';
-export const about = () => '/about';
-export const stats = () => '/stats';
-export const contributors = () => '/contributors';
+export const countries = () => '/countries/';
+export const categories = () => '/categories/';
+export const global = () => '/global/';
+export const jobs = () => '/jobs/';
+export const roles = () => '/roles/';
+export const search = () => '/search/';
+export const blog = () => '/blog/';
+export const contribute = () => '/contribute/';
+export const about = () => '/about/';
+export const stats = () => '/stats/';
+export const contributors = () => '/contributors/';
 
-export const country = (code: string) => `/countries/${code}`;
-export const category = (slug: string) => `/categories/${slug}`;
+export const country = (code: string) => `/countries/${code}/`;
+export const category = (slug: string) => `/categories/${slug}/`;
 export const categoryInCountry = (countrySlug: string, categorySlug: string) =>
-  `/countries/${countrySlug}/${categorySlug}`;
-export const role = (slug: string) => `/roles/${slug}`;
-export const roleInCountry = (roleSlug: string, countrySlug: string) => `/roles/${roleSlug}/${countrySlug}`;
-export const group = (slug: string) => `/groups/${slug}`;
-export const post = (slug: string) => `/blog/${slug}`;
-export const author = (handle: string) => `/authors/${handle}`;
-export const contributor = (handle: string) => `/contributors/${handle}`;
+  `/countries/${countrySlug}/${categorySlug}/`;
+export const role = (slug: string) => `/roles/${slug}/`;
+export const roleInCountry = (roleSlug: string, countrySlug: string) => `/roles/${roleSlug}/${countrySlug}/`;
+export const group = (slug: string) => `/groups/${slug}/`;
+export const post = (slug: string) => `/blog/${slug}/`;
+export const author = (handle: string) => `/authors/${handle}/`;
+export const contributor = (handle: string) => `/contributors/${handle}/`;
 
 /** A contributor's GitHub profile. `handle` is already a normalised username. */
 export const githubProfile = (handle: string) => `https://github.com/${handle}`;

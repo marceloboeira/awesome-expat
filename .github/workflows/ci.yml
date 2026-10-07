@@ -1,0 +1,39 @@
+name: CI
+
+# The gate `astro build` enforces (SEO contract + generated artifacts in
+# engine/lib/{artifacts,seo-contract}.ts) and the Markdown-freshness check
+# (`make check`) run on every push and PR, not just at deploy time. External
+# links are the separate `Link Check` workflow, kept apart so a blocked bot
+# cannot turn a content failure red or vice versa.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  content-and-site:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Validate content and prove generated Markdown is current
+        run: make check
+      - name: Engine tests
+        run: make test
+      - name: Build site, enforce the SEO contract, check internal links and invariants
+        run: make site-check

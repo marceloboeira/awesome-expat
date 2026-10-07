@@ -30,12 +30,15 @@ const walk = (dir: string): string[] =>
     entry.isDirectory() ? walk(`${dir}/${entry.name}`) : [`${dir}/${entry.name}`],
   );
 
-/** A rendered route: `dist/about/index.html` is the page at `/about`. */
+/** A rendered route: `dist/about/index.html` is the page at `/about/`. */
 const isPage = (f: string): boolean => f === `${DIST}/index.html` || f.endsWith('/index.html');
 
+// The site's canonical form carries the trailing slash (trailingSlash 'always'
+// + directory format, matching what the host serves at 200), so route,
+// canonical and sitemap entry all agree on `/about/`.
 const routeOf = (f: string): string => {
   const raw = '/' + f.slice(DIST.length + 1).replace(/index\.html$/, '');
-  return raw === '/' ? '/' : raw.replace(/\/$/, '');
+  return raw === '/' ? '/' : raw;
 };
 
 const pages = walk(DIST).filter(isPage);

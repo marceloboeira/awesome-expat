@@ -170,6 +170,7 @@ make export
 
 ```
 make ci        # validate + export + check + test + links-check, in order
+make site-check  # build the site: SEO contract, internal links, page invariants
 ```
 
 Or the pieces, if you want them separately:
@@ -178,6 +179,13 @@ Or the pieces, if you want them separately:
 make check     # content valid + generated Markdown current
 make test      # engine test suite
 ```
+
+`make site-check` matters most if you touched `src/` or a registry: `astro build` regenerates the agent
+artifacts (`corpus.json`, `llms.txt`, `llms-full.txt`) and enforces the SEO contract
+(`engine/lib/seo-contract.ts`) — per-page title and description lengths, word-count floors, required
+JSON-LD — and fails the build when any of it disagrees with `content/`. A new country page with a title
+that is too short cannot merge, because CI runs this build on every push and pull request
+(`.github/workflows/ci.yml`).
 
 Then push a branch and open a pull request ([git workflow](#git-workflow)). One link per pull request: a
 reviewer has to read the description, and a ten-link PR gets closed for being unreviewable.

@@ -5,6 +5,7 @@ import PageHeader from '../../components/PageHeader.astro';
 import LinkList from '../../components/LinkList.astro';
 import { linksForCategory, type LoadedLink } from '../../lib/corpus.ts';
 import { category as categoryRoute, categories as categoriesRoute, country as countryRoute } from '../../lib/routes.ts';
+import { collectionPageLd } from '../../lib/ld.ts';
 
 export async function getStaticPaths() {
   const categories = await getCategories();
@@ -34,13 +35,32 @@ const ordered = [...groups.entries()].sort((a, b) => {
   if (b[0] === 'global') return -1;
   return (countryNames[a[0]] ?? a[0]).localeCompare(countryNames[b[0]] ?? b[0]);
 });
+
+// Card copy derived from the same groups the page renders; the SEO contract
+// (engine/lib/seo-contract.ts) enforces the length window at build time.
+const catLower = category.name.toLowerCase().replace(/ & /g, ' and ');
+const countryCount = ordered.filter(([key]) => key !== 'global').length;
+const cardTitle =
+  inCategory.length > 0
+    ? `Expat ${catLower} resources in ${countryCount} ${countryCount === 1 ? 'country' : 'countries'}`
+    : `${category.name} resources`;
+const cardDesc =
+  inCategory.length > 0
+    ? `${inCategory.length} checked ${catLower} resources for people moving abroad, across ${ordered.length} ${ordered.length === 1 ? 'place' : 'places'}. Every description is written by a person and dated.`
+    : category.description;
 ---
 
 <Base
-  title={`${category.name} resources`}
-  description={category.description}
+  title={cardTitle}
+  description={cardDesc}
   path={categoryRoute(slug)}
   noindex={inCategory.length === 0}
+  ld={collectionPageLd({
+    title: cardTitle,
+    description: cardDesc,
+    path: categoryRoute(slug),
+    items: inCategory.map((l) => ({ name: l.data.title, url: l.data.url })),
+  })}
   breadcrumbs={[
     { name: 'Categories', href: categoriesRoute() },
     { name: category.name, href: categoryRoute(slug) },
@@ -64,7 +84,7 @@ const ordered = [...groups.entries()].sort((a, b) => {
             readers ask for it — if you know a good source, it would be the first one listed.
           </p>
           <a
-            href={`/contribute?category=${slug}`}
+            href={`/contribute/?category=${slug}`}
             class="mt-6 inline-block rounded bg-ink px-5 py-2.5 text-[length:var(--text-step-0)] font-medium text-paper"
           >
             Add the first {category.name.toLowerCase()} link

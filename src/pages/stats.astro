@@ -41,10 +41,10 @@ const rows: { label: string; value: number; note?: string }[] = [
 ---
 
 <Base
-  title="Directory statistics"
+  title="Directory statistics: coverage and honest gaps"
   description={`Current coverage of Awesome Expat: ${t.links} links across ${t.countries_with_links} countries and ${t.categories_with_links} categories, with the gaps listed honestly.`}
-  path="/stats"
-  breadcrumbs={[{ name: 'Stats', href: '/stats' }]}
+  path="/stats/"
+  breadcrumbs={[{ name: 'Stats', href: '/stats/' }]}
 >
   <PageHeader
     eyebrow="Coverage"
@@ -136,7 +136,7 @@ const rows: { label: string; value: number; note?: string }[] = [
         >
         <span class="ml-3 text-ink-soft">
           or <a href={repoNewIssue()} target="_blank" rel="noopener" class="text-accent underline underline-offset-2">request one</a>,
-          or browse the <a href="/countries" class="text-accent underline underline-offset-2">empty countries</a>.
+          or browse the <a href="/countries/" class="text-accent underline underline-offset-2">empty countries</a>.
         </span>
       </p>
     </section>
@@ -189,7 +189,7 @@ const rows: { label: string; value: number; note?: string }[] = [
         {
           stats.roles.map((r) => (
             <li class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3">
-              <a href={`/roles/${r.slug}`} class="font-medium transition-colors hover:text-accent">
+              <a href={`/roles/${r.slug}/`} class="font-medium transition-colors hover:text-accent">
                 {r.name}
               </a>
               <span class="text-[length:var(--text-step--1)] text-ink-faint tabular-nums">

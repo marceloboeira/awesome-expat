@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE } from '../lib/routes.ts';
+import { siteGraph } from '../lib/ld.ts';
 import type { Link } from '@engine/schema.ts';
 
 interface Props {
@@ -16,6 +17,8 @@ interface Props {
   noindex?: boolean;
   /** Breadcrumb trail; rendered as JSON-LD too. */
   breadcrumbs?: { name: string; href: string }[];
+  /** Page-level JSON-LD graph (CollectionPage, ProfilePage, ...). */
+  ld?: Record<string, unknown> | null;
   ogType?: 'website' | 'article';
   publishedAt?: string;
 }
@@ -27,6 +30,7 @@ const {
   path = Astro.url.pathname,
   noindex = false,
   breadcrumbs = [],
+  ld = null,
   ogType = 'website',
   publishedAt,
 } = Astro.props;
@@ -86,6 +90,12 @@ const breadcrumbLd =
 
     {breadcrumbLd && (
       <script type="application/ld+json" set:html={JSON.stringify(breadcrumbLd)} />
+    )}
+
+    <script type="application/ld+json" set:html={JSON.stringify(siteGraph(path === '/'))} />
+
+    {ld && (
+      <script type="application/ld+json" set:html={JSON.stringify(ld)} />
     )}
 
     {gaId && (

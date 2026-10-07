@@ -19,10 +19,10 @@ const handle = (c: Contributor) => c.handle;
 ---
 
 <Base
-  title="Contributors"
+  title="The people who curate Awesome Expat"
   description="The people who add and review the links in the Awesome Expat directory. Every resource is contributed by someone who has actually used it."
-  path="/contributors"
-  breadcrumbs={[{ name: 'Contributors', href: '/contributors' }]}
+  path="/contributors/"
+  breadcrumbs={[{ name: 'Contributors', href: '/contributors/' }]}
 >
   <PageHeader
     eyebrow="The people behind it"
@@ -37,7 +37,7 @@ const handle = (c: Contributor) => c.handle;
       contributors.length === 0 ? (
         <p class="rounded border border-dashed border-rule px-4 py-6 text-center text-[length:var(--text-step--1)] text-ink-faint">
           No contributors are attributed to links yet.
-          <a href="/contribute" class="ml-1 text-accent underline underline-offset-2">Add the first one</a>.
+          <a href="/contribute/" class="ml-1 text-accent underline underline-offset-2">Add the first one</a>.
         </p>
       ) : (
         <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -72,7 +72,7 @@ const handle = (c: Contributor) => c.handle;
     }
 
     <p class="mt-12 text-[length:var(--text-step--1)] text-ink-soft">
-      Contributor pages are built from the GitHub usernames on each link. Want one? <a href="/contribute" class="text-accent underline underline-offset-2">Add a link</a> and include your username as a contributor.
+      Contributor pages are built from the GitHub usernames on each link. Want one? <a href="/contribute/" class="text-accent underline underline-offset-2">Add a link</a> and include your username as a contributor.
     </p>
   </div>
 </Base>

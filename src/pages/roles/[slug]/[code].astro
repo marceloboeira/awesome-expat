@@ -5,6 +5,7 @@ import PageHeader from '../../../components/PageHeader.astro';
 import LinkList from '../../../components/LinkList.astro';
 import { buildRolePage, countrySlugOf, linksForCountry, roleHasEnoughLinks, type LoadedLink } from '../../../lib/corpus.ts';
 import { roleInCountry, country as countryRoute, role as roleRoute, roles as rolesRoute } from '../../../lib/routes.ts';
+import { collectionPageLd } from '../../../lib/ld.ts';
 
 export async function getStaticPaths() {
   const roles = await getRoles();
@@ -40,9 +41,15 @@ const name = country.name;
 ---
 
 <Base
-  title={`${role.name} in ${name}`}
-  description={`${page.applicable} resources for ${role.name.toLowerCase()}s moving to ${name}: work rules, visas, and paperwork.`}
+  title={`Working in ${name} as a ${role.name}`}
+  description={`${page.applicable} checked resources for ${role.name} roles in ${name}: work permits, hiring rules, taxes and the paperwork in between.`}
   path={roleInCountry(slug, code)}
+  ld={collectionPageLd({
+    title: `Working in ${name} as a ${role.name}`,
+    description: `${page.applicable} resources for ${role.name.toLowerCase()} moving to ${name}.`,
+    path: roleInCountry(slug, code),
+    items: page.all.map((l) => ({ name: l.data.title, url: l.data.url })),
+  })}
   breadcrumbs={[
     { name: 'Roles', href: rolesRoute() },
     { name: role.name, href: roleRoute(slug) },

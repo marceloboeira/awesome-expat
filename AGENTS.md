@@ -45,6 +45,14 @@ generator or the content it reads — never the Markdown.
 `content/` through the same Zod schemas, so most content work never touches them. Prove an edit there with
 `make site-check`, which builds and then checks every internal link and each page's own invariants.
 
+`astro build` also generates the agent artifacts — `corpus.json`, `llms.txt`, `llms-full.txt` — from
+`content/` into `dist/` (never committed; see `engine/lib/artifacts.ts`), and enforces the SEO contract
+(`engine/lib/seo-contract.ts`) in the same step: per-page title/description/word-count floors and required
+JSON-LD, plus cross-checks that the sitemap, the artifacts and the corpus agree. A new route kind that the
+contract does not know about fails the build — extend `contracts` in that file. Invalid content or a page
+below the bar cannot ship, because shipping means building — and `.github/workflows/ci.yml` runs exactly
+that build on every push and PR, so a contract violation now fails CI too, not just the deploy.
+
 ## Commands
 
 ```
@@ -63,8 +71,10 @@ make help               the full list
 ```
 
 CI runs the link check on every push and PR (`.github/workflows/links.yml`) and deploys from `deploy.yml`.
-Nothing in CI validates content or runs the test suite yet — **you** are that gate: `make ci` must pass
-locally before you claim a change is done.
+CI runs the link check on every push and PR (`.github/workflows/links.yml`), the full content/test/build
+gate on every push and PR (`.github/workflows/ci.yml` — `make check`, `make test`, `make site-check`), and
+deploys from `deploy.yml`. Still run `make ci` locally before you claim a change is done: the CI gate is
+real, but a 20-minute round trip is a slow way to find out.
 
 ## Two ways to add a link
 
@@ -125,4 +135,3 @@ command and seen it pass.
 | --- | --- | --- |
 | `engine/cmd/add-link.ts` does not exist | `make add-link` fails on a missing module | write the YAML by hand, per [CONTRIBUTING.md → Add a link](CONTRIBUTING.md#add-a-link) |
 | `make add-country` forwards arguments wrongly | make eats `--region=...`, then passes the bare `--` to the script as the country code | `pnpm run add-country -- --code=pt --region=europe` |
-| content validation and tests are not in CI | a PR with a schema error or a stale README can still be green | run `make ci` locally, every time |

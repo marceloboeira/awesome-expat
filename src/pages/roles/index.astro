@@ -19,10 +19,10 @@ const tooThin = pages.filter(({ page }) => !roleHasEnoughLinks(page));
 ---
 
 <Base
-  title="Resources by role"
-  description="Moving for work? Find the paperwork, hiring rules, and career resources for remote workers, employees, freelancers, founders, and researchers."
-  path="/roles"
-  breadcrumbs={[{ name: 'Roles', href: '/roles' }]}
+  title="Career resources for expats, by job role"
+  description="Moving for work? Find the paperwork, hiring rules, and career resources for the roles this directory covers — engineers, designers, managers and researchers."
+  path="/roles/"
+  breadcrumbs={[{ name: 'Roles', href: '/roles/' }]}
 >
   <PageHeader
     eyebrow="Browse by who you are"
@@ -60,7 +60,7 @@ const tooThin = pages.filter(({ page }) => !roleHasEnoughLinks(page));
             {tooThin.map(({ role }) => role.name).join(', ')} {tooThin.length === 1 ? 'is' : 'are'} in the
             registry but {tooThin.length === 1 ? 'has' : 'have'} too few links to be worth a page yet. If you
             work in that world and know a good resource,{' '}
-            <a href="/contribute" class="text-accent underline underline-offset-2">
+            <a href="/contribute/" class="text-accent underline underline-offset-2">
               add the first one
             </a>
             .

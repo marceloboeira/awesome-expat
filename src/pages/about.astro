@@ -4,6 +4,7 @@ import PageHeader from '../components/PageHeader.astro';
 import { getLinks, getCountries, getCategories, getAuthors, getGroups } from '../lib/content';
 import { countriesWithLinks, categoriesWithLinks, countrySlugOf } from '../lib/corpus.ts';
 import { country as countryRoute, categories as categoriesRoute, contribute as contributeRoute, global as globalRoute, repo as repoUrl, contributingGuide, repoNewIssue } from '../lib/routes.ts';
+import { aboutPageLd } from '../lib/ld.ts';
 
 const links = await getLinks();
 const countries = await getCountries();
@@ -16,14 +17,15 @@ const populated = categoriesWithLinks(links, categories);
 ---
 
 <Base
-  title="About this directory"
-  description="How Awesome Expat is built: YAML in version control, descriptions written by people, a build that fails on a broken link reference, and an honest picture of what it does not cover."
-  path="/about"
-  breadcrumbs={[{ name: 'About', href: '/about' }]}
+  title="How this expat directory is built"
+  description="How Awesome Expat is built: YAML in version control, human-written descriptions, a build that fails on broken links, and honest coverage gaps."
+  path="/about/"
+  ld={aboutPageLd()}
+  breadcrumbs={[{ name: 'About', href: '/about/' }]}
 >
   <PageHeader
     eyebrow="How this works"
-    title="About"
+    title="How this expat directory is built"
     lede="A directory of practical resources for people moving abroad, built so that every claim on it can be checked."
   />
 
@@ -77,7 +79,7 @@ const populated = categoriesWithLinks(links, categories);
           out of the sitemap — an empty page that ranks is worse for everyone than one that does not.
         </p>
         <p class="mt-5">
-          <a href="/stats" class="rounded bg-ink px-4 py-2 font-medium text-paper">See the current numbers</a>
+          <a href="/stats/" class="rounded bg-ink px-4 py-2 font-medium text-paper">See the current numbers</a>
         </p>
       </section>
 
@@ -118,9 +120,9 @@ const populated = categoriesWithLinks(links, categories);
     </div>
 
     <nav aria-label="Related" class="mt-14 flex flex-wrap gap-x-6 gap-y-2 border-t border-rule pt-6 text-[length:var(--text-step--1)]">
-      <a href="/countries" class="text-accent underline underline-offset-2">All countries</a>
+      <a href="/countries/" class="text-accent underline underline-offset-2">All countries</a>
       <a href={categoriesRoute()} class="text-accent underline underline-offset-2">All categories</a>
-      <a href="/stats" class="text-accent underline underline-offset-2">Coverage stats</a>
+      <a href="/stats/" class="text-accent underline underline-offset-2">Coverage stats</a>
       <a href={contributeRoute()} class="text-accent underline underline-offset-2">Contribute</a>
     </nav>
   </div>

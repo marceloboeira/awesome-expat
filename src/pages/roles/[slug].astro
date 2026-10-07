@@ -10,6 +10,7 @@ import {
   country as countryRoute,
   global as globalRoute,
 } from '../../lib/routes.ts';
+import { collectionPageLd } from '../../lib/ld.ts';
 
 export async function getStaticPaths() {
   const roles = await getRoles();
@@ -43,9 +44,15 @@ const countryCodes = [...new Set(page.all.map((l) => l.data.country))].sort((a, 
 ---
 
 <Base
-  title={`${role.name} resources`}
-  description={role.description}
+  title={`${role.name} expat resources in ${countryCodes.length} ${countryCodes.length === 1 ? 'country' : 'countries'}`}
+  description={`${role.description} ${page.applicable} checked links for moving abroad in this role — from visas and job boards to salaries and paperwork.`}
   path={roleRoute(slug)}
+  ld={collectionPageLd({
+    title: `${role.name} expat resources in ${countryCodes.length} ${countryCodes.length === 1 ? 'country' : 'countries'}`,
+    description: `${role.description} ${page.applicable} checked links for moving abroad in this role.`,
+    path: roleRoute(slug),
+    items: page.all.map((l) => ({ name: l.data.title, url: l.data.url })),
+  })}
   breadcrumbs={[
     { name: 'Roles', href: rolesRoute() },
     { name: role.name, href: roleRoute(slug) },

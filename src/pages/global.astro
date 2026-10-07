@@ -5,6 +5,7 @@ import PageHeader from '../components/PageHeader.astro';
 import LinkList from '../components/LinkList.astro';
 import { linksForCategory, countrySlugOf, type LoadedLink } from '../lib/corpus.ts';
 import { category as categoryRoute, countries as countriesRoute, country as countryRoute } from '../lib/routes.ts';
+import { collectionPageLd } from '../lib/ld.ts';
 
 const links = await getLinks();
 const categories = await getCategories();
@@ -21,10 +22,16 @@ const byCategory = categories
 ---
 
 <Base
-  title="Global expat resources"
+  title="Global expat resources that work anywhere you move"
   description={`${globalLinks.length} resources that apply wherever you land — visa checklists, banking for foreigners, health insurance, and the paperwork nobody warns you about.`}
-  path="/global"
-  breadcrumbs={[{ name: 'Global', href: '/global' }]}
+  path="/global/"
+  ld={collectionPageLd({
+    title: 'Global expat resources',
+    description: `${globalLinks.length} resources that apply wherever you land.`,
+    path: '/global/',
+    items: globalLinks.map((l) => ({ name: l.data.title, url: l.data.url })),
+  })}
+  breadcrumbs={[{ name: 'Global', href: '/global/' }]}
 >
   <PageHeader
     eyebrow="Applies everywhere"
