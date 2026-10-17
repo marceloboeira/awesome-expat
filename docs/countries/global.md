@@ -8,7 +8,7 @@
 
 Resources that apply wherever you land — money, flights, accommodation, and job boards.
 
-42 resources across 8 categories.
+43 resources across 8 categories.
 
 [Browse on the site](https://awesome-expat.com/global/)
 
@@ -58,6 +58,8 @@ Resources that apply wherever you land — money, flights, accommodation, and jo
   Crowdsourced cost-of-living data for cities worldwide, covering rent, food, transport and crime. — `cost-of-living`
 - [ReloMap](https://relomap.app)  
   Cost-of-living comparisons for 208 cities, with a tax calculator and visa guides. — `cost-of-living`
+- [SwapGo.me](https://swapgo.me)  
+  Free map of currency exchange offices in 100+ countries with addresses, hours and today's rates where offices publish them; anyone can post a listing to exchange cash, transfers or crypto. — `free` `currency-exchange` `cash` `crypto`
 - [Tax Residency Days](https://taxresidencydays.com)  
   Free, no-signup calculator that checks one travel ledger against 16 countries' tax-residency day-count tests plus the Schengen 90/180 stay limit. — `tax-residency` `schengen`
 - [Teleport](https://teleport.org)  

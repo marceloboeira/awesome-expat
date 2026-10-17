@@ -21,7 +21,7 @@
 | | |
 | --- | ---: |
 | Countries with resources | 18 |
-| Resources | 73 |
+| Resources | 74 |
 | Categories | 12 |
 | Job roles | 5 |
 
@@ -44,7 +44,7 @@
 - **[Switzerland](https://awesome-expat.com/ch/)** — 1 resource
 - **[United Kingdom](https://awesome-expat.com/gb/)** — 3 resources
 - **[United States](https://awesome-expat.com/us/)** — 3 resources
-- **[Global](https://awesome-expat.com/global/)** — 42 resources that apply anywhere
+- **[Global](https://awesome-expat.com/global/)** — 43 resources that apply anywhere
 
 Full directory: [docs/index.md](docs/index.md)
 
@@ -56,7 +56,7 @@ Full directory: [docs/index.md](docs/index.md)
 | Jobs & Work | `jobs` | 12 |
 | Taxes | `taxes` | 2 |
 | Health & Insurance | `healthcare` | 2 |
-| Finances & Banking | `finances` | 21 |
+| Finances & Banking | `finances` | 22 |
 | Visas & Residency | `visa` | 7 |
 | Permanent Residency | `permanent-residency` | 0 |
 | Citizenship | `citizenship` | 0 |

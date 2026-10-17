@@ -14,11 +14,11 @@ page, because a general job board is useful to everyone.
 
 | Role | Slug | Links | Countries | Page generated |
 | --- | --- | ---: | ---: | --- |
-| [Data Scientist](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/data-scientist.yaml) | `data-scientist` | 72 | 14 | yes |
-| [DevOps / SRE](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/devops-sre.yaml) | `devops-sre` | 72 | 14 | yes |
-| [Product Designer](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/product-designer.yaml) | `product-designer` | 69 | 14 | yes |
-| [Product Manager](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/product-manager.yaml) | `product-manager` | 69 | 14 | yes |
-| [Software Engineer](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/software-engineer.yaml) | `software-engineer` | 73 | 14 | yes |
+| [Data Scientist](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/data-scientist.yaml) | `data-scientist` | 73 | 14 | yes |
+| [DevOps / SRE](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/devops-sre.yaml) | `devops-sre` | 73 | 14 | yes |
+| [Product Designer](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/product-designer.yaml) | `product-designer` | 70 | 14 | yes |
+| [Product Manager](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/product-manager.yaml) | `product-manager` | 70 | 14 | yes |
+| [Software Engineer](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/software-engineer.yaml) | `software-engineer` | 74 | 14 | yes |
 
 A role page is only published once it has at least 3 links, to avoid thin
 duplicate pages competing with each other in search results.

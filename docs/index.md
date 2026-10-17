@@ -28,6 +28,6 @@ Every country below has at least one resource. 152 countries are registered in t
 | [Switzerland](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/ch) | `ch` | 1 | 1 |
 | [United Kingdom](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/gb) | `gb` | 3 | 3 |
 | [United States](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/us) | `us` | 3 | 1 |
-| [Global](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/global) | `global` | 42 | 8 |
+| [Global](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/global) | `global` | 43 | 8 |
 
 Browse the live site: https://awesome-expat.com
