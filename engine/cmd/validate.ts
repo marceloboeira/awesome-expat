@@ -1,10 +1,7 @@
-import { loadContent, linksForCountry, type ValidationIssue } from '../lib/content.ts';
-import { isNonCanonical } from '../lib/url.ts';
-import { repoRelative } from '../lib/write.ts';
-import { writeFile, readFile } from 'node:fs/promises';
+import { loadContent, linksForCountry, ROOT } from '../lib/content.ts';
+import { isNonCanonical, normaliseUrl } from '../lib/url.ts';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { ROOT } from '../lib/content.ts';
-import { normaliseUrl } from '../lib/url.ts';
 
 const SEVERITY = { error: '✗', warn: '⚠', info: '·' } as const;
 type Severity = keyof typeof SEVERITY;
@@ -93,6 +90,7 @@ async function main() {
 
   // --- Write JSON report for the link checker and CI ---------------------
   const reportDir = join(ROOT, '.agents');
+  await mkdir(reportDir, { recursive: true });
   await writeFile(
     join(reportDir, 'link-report.json'),
     JSON.stringify(
