@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 import { ROOT, loadContent } from '../lib/content.ts';
 import { normaliseUrl } from '../lib/url.ts';
+import { applyAllowlist, safeHost, type LinkState, type ProbeResult } from '../lib/link-health.ts';
 
 /**
  * Link health checker.
@@ -11,6 +12,12 @@ import { normaliseUrl } from '../lib/url.ts';
  * provably gone. 403 and 429 mean "a bot was here", not "the page is gone",
  * and treating them as death is how a link-checking bot quietly deletes a
  * third of a good directory. Those go in an explicit allowlist instead.
+ *
+ * The same reasoning covers a request that never got an answer at all. A
+ * dropped socket or a runner with no route to the host says nothing about the
+ * page, so those are retried and, for an allowlisted host, excused. Only a real
+ * status code can condemn a link. The classification itself lives in
+ * engine/lib/link-health.ts, where it is tested.
  */
 
 const ALLOWLIST_PATH = 'engine/lib/link-allowlist.yaml';
@@ -20,16 +27,18 @@ const TIMEOUT_MS = 15_000;
 const CONCURRENCY = 6;
 const PER_HOST_DELAY_MS = 1_000;
 
-type Status = 'ok' | 'redirected' | 'blocked' | 'dead' | 'error';
+/**
+ * Retries for a transport failure, i.e. no HTTP response at all. Three rounds
+ * with a growing gap is enough to ride out a dropped socket or a blackholed
+ * IPv6 route without turning the check into a crawl.
+ */
+const RETRY_ROUNDS = 3;
+const RETRY_BACKOFF_MS = 2_000;
 
-interface Result {
-  url: string;
-  finalUrl: string | null;
-  status: number | null;
-  state: Status;
-  detail: string;
-  file: string | null;
-}
+type Status = LinkState;
+
+/** A probe outcome plus the content file it came from. */
+type Result = ProbeResult & { file: string | null };
 
 const args = new Set(process.argv.slice(2));
 const shouldUpdate = args.has('--update');
@@ -62,6 +71,11 @@ async function probe(url: string): Promise<Omit<Result, 'file'>> {
 
   await throttle(host);
 
+  // `responses` counts HTTP replies actually received. Zero means we never got
+  // to speak HTTP at all -- a reset socket, a TLS failure, a runner with no
+  // route -- which is not evidence about the page. See the retry loop below.
+  let responses = 0;
+
   // HEAD is cheap but some hosts reject it, so fall back to a ranged GET.
   const attempts: Array<{ method: 'HEAD' | 'GET'; headers: Record<string, string> }> = [
     {
@@ -90,6 +104,7 @@ async function probe(url: string): Promise<Omit<Result, 'file'>> {
         headers: attempt.headers,
       });
       clearTimeout(timer);
+      responses++;
 
       const finalUrl = response.url || null;
       const canonicalInput = normaliseUrl(url);
@@ -125,14 +140,69 @@ async function probe(url: string): Promise<Omit<Result, 'file'>> {
       clearTimeout(timer);
       const message = cause instanceof Error ? cause.message : String(cause);
       if (/abort/i.test(message)) return { url, finalUrl: null, status: null, state: 'error', detail: `timeout after ${TIMEOUT_MS}ms` };
-      if (/getaddrinfo|ENOTFOUND|EAI_AGAIN/i.test(message)) {
+      // EAI_AGAIN is the resolver saying "try again later", not "no such
+      // host". ENOTFOUND is an answer; a temporary failure is not.
+      if (/EAI_AGAIN/i.test(message)) {
+        lastDetail = `DNS temporary failure: ${message}`;
+      } else if (/getaddrinfo|ENOTFOUND/i.test(message)) {
         return { url, finalUrl: null, status: null, state: 'dead', detail: 'DNS does not resolve' };
+      } else {
+        lastDetail = message;
       }
-      lastDetail = message;
+    }
+
+    // No HTTP reply at all on either method: the runner's network failed, not
+    // the page. Undi's `fetch failed` is famously a reset socket, a TLS
+    // handshake dropped mid-run, or an IPv6 route that blackholes. Retry with
+    // backoff before concluding anything, or a single flaky socket turns a
+    // good link red on CI and invites a maintainer to delete it.
+    if (responses === 0 && attempt === attempts[attempts.length - 1]) {
+      for (let round = 1; round < RETRY_ROUNDS; round++) {
+        await new Promise((r) => setTimeout(r, RETRY_BACKOFF_MS * round));
+        try {
+          const response = await fetch(url, {
+            method: 'GET',
+            redirect: 'follow',
+            signal: AbortSignal.timeout(TIMEOUT_MS),
+            headers: attempts[1].headers,
+          });
+          responses++;
+          const finalUrl = response.url || null;
+          const canonicalInput = normaliseUrl(url);
+          const canonicalFinal = finalUrl ? normaliseUrl(finalUrl) : null;
+          const moved = Boolean(canonicalInput && canonicalFinal && canonicalInput !== canonicalFinal);
+          if (response.status === 403 || response.status === 429 || response.status === 401) {
+            return { url, finalUrl, status: response.status, state: 'blocked', detail: `${response.status} — bot-walled, needs manual check` };
+          }
+          if (response.ok) {
+            return { url, finalUrl, status: response.status, state: moved ? 'redirected' : 'ok', detail: moved ? `redirects to ${finalUrl}` : String(response.status) };
+          }
+          // An actual status code is an answer about the page. Take it.
+          return { url, finalUrl, status: response.status, state: 'dead', detail: `${response.status} ${response.statusText}`.trim() };
+        } catch (cause) {
+          const message = cause instanceof Error ? cause.message : String(cause);
+          if (/getaddrinfo|ENOTFOUND/i.test(message)) {
+            // DNS is not flaking: there is no such host. Retrying proves nothing.
+            return { url, finalUrl: null, status: null, state: 'dead', detail: 'DNS does not resolve' };
+          }
+          lastDetail = message;
+        }
+      }
+      break;
     }
   }
 
-  return { url, finalUrl: null, status: null, state: 'dead', detail: lastDetail || 'unreachable' };
+  // Two exits, and the difference is whether we ever got an answer. If any
+  // attempt reached HTTP, the last status is the server's verdict and the link
+  // is dead. If nothing did, we are describing our own network, which is
+  // `unreachable` and non-fatal.
+  return {
+    url,
+    finalUrl: null,
+    status: null,
+    state: responses > 0 ? 'dead' : 'unreachable',
+    detail: lastDetail || 'no response',
+  };
 }
 
 async function loadAllowlist(): Promise<{ [host: string]: string }> {
@@ -168,20 +238,14 @@ async function main() {
       const host = safeHost(target.url);
       const known = allowlist[host];
       const mark =
-        result.state === 'ok' ? 'ok  ' : result.state === 'redirected' ? '->  ' : result.state === 'blocked' ? (known ? 'blkd' : 'BLKD') : 'DEAD';
+        result.state === 'ok' ? 'ok  ' : result.state === 'redirected' ? '->  ' : result.state === 'blocked' ? (known ? 'blkd' : 'BLKD') : result.state === 'unreachable' ? 'UNRE' : 'DEAD';
       process.stdout.write(`  ${mark} ${target.url}\n`);
     }
   });
   await Promise.all(workers);
 
   // Allowlisted hosts get downgraded from an error to a note.
-  for (const result of results) {
-    const host = safeHost(result.url);
-    if (result.state === 'blocked' && allowlist[host]) {
-      result.state = 'ok';
-      result.detail = `blocked, allowlisted (${allowlist[host]})`;
-    }
-  }
+  applyAllowlist(results, allowlist);
 
   await mkdir(join(ROOT, '.agents'), { recursive: true });
   await writeFile(
@@ -200,6 +264,9 @@ async function main() {
   );
   console.log('\nlinks: ' + Object.entries(tally).map(([k, v]) => `${v} ${k}`).join(', '));
 
+  // Only a received answer is fatal. `unreachable` means every attempt failed
+  // before HTTP, which is a fact about this runner; failing the run on it is
+  // what marked a live link dead on CI twice.
   const fatal = results.filter((r) => r.state === 'dead' || r.state === 'error');
 
   // Surface findings in the PR too: an error on anything that is not a 2xx, a
@@ -209,6 +276,8 @@ async function main() {
   for (const r of results) {
     if (r.state === 'dead') annotate('error', 'Dead link', r.file, `${r.url} — ${r.detail}`);
     else if (r.state === 'error') annotate('error', 'Link check error', r.file, `${r.url} — ${r.detail}`);
+    else if (r.state === 'unreachable')
+      annotate('warning', 'Unreachable from this runner', r.file, `${r.url} — ${r.detail} (no HTTP response; not evidence the page is gone)`);
     else if (r.state === 'redirected')
       annotate('warning', 'Redirect followed', r.file, `${r.url} redirects to ${r.finalUrl ?? 'unknown'}`);
     else if (r.state === 'blocked')
@@ -220,14 +289,6 @@ async function main() {
     for (const r of fatal) console.log(`  ${r.file ?? '-'}\n    ${r.url}\n    ${r.detail}`);
   }
   if (fatal.length) process.exit(1);
-}
-
-function safeHost(url: string): string {
-  try {
-    return new URL(url).host.toLowerCase();
-  } catch {
-    return url;
-  }
 }
 
 /** Stamp `last_checked` on every file that came back clean. */
