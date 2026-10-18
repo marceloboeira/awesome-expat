@@ -98,6 +98,15 @@ Every stage is dry-run by default and writes inside `.agents/pool/` only. `pool-
 candidate whose `description_verified` is still `false`, which is a flag only a human may set. Do not work
 around that gate: if it blocks, your job is to print the draft and ask the human to review it.
 
+**The pool does not currently work end to end**, and the blocker is upstream of the classifier. Measured on
+2026-10-08 with `pnpm run pool:classify -- --limit=40`: 3 of 40 classified, 37 rejected out-of-vocab. Most
+rejections are the model answering country `zz`, which means "no idea" — the harvested candidates are largely
+EU Commission section headings ("Guarantees", "Inland waterway staff") rather than resources, so there is no
+country to assign. Two further defects: the free-text `reason` field accepts arbitrary junk (one accepted
+classification carried a Ukrainian sentence fragment at confidence 1.00), and a run is not checkpointed, so an
+interrupted pass loses all of it. Do not paper over this by loosening the vocabulary check; that converts a
+visible rejection into a wrong country on a published page.
+
 ## Hard rules
 
 1. **Never invent a description.** A description must come from a human or from the page you actually
@@ -128,10 +137,10 @@ git status --short       nothing under .agents/ staged
 
 ## Known gaps
 
-Verified on 2026-10-06 by running the commands. Do not report one of these as fixed unless you have run the
+Verified on 2026-10-08 by running the commands. Do not report one of these as fixed unless you have run the
 command and seen it pass.
 
 | Gap | Symptom | Do instead |
 | --- | --- | --- |
-| `engine/cmd/add-link.ts` does not exist | `make add-link` fails on a missing module | write the YAML by hand, per [CONTRIBUTING.md → Add a link](CONTRIBUTING.md#add-a-link) |
-| `make add-country` forwards arguments wrongly | make eats `--region=...`, then passes the bare `--` to the script as the country code | `pnpm run add-country -- --code=pt --region=europe` |
+| The pool cannot classify real candidates | `make pool-classify` rejects ~92% as out-of-vocab, mostly answering country `zz`, and a run over all 458 candidates takes over an hour with no checkpointing | treat the pool as unproven; add links by hand or with `make add-link`. See the note below before "fixing" it |
+| `pool-promote-apply` has never run | `.agents/pool/draft/` is empty and there is no `reports/describe.json` | expected — it refuses `description_verified: false`, which only a human may set |

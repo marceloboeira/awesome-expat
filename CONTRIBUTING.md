@@ -86,6 +86,38 @@ content/links/<country>/<category>/<slug>.yaml
 `<slug>` is kebab-case, derived from the title: `Berlin Flat Listings` → `berlin-flat-listings`. Choose it
 carefully — it is the URL, and renaming a file breaks any link people have already shared.
 
+#### The short way
+
+`make add-link` writes the file for you. It fetches a suggested title, canonicalises the URL, checks the
+whole corpus for a duplicate, picks a filename that is not taken, and re-validates afterwards:
+
+```
+make add-link URL=https://berlinflatfinder.example COUNTRY=de CATEGORY=housing \
+  DESCRIPTION="Filterable Berlin flat listings by district and rent ceiling, and the only site that shows \
+the Anmeldung requirement per address. Landlords list here directly, so the stock is current."
+```
+
+Note `NAME=value`, not `--name=value`: GNU make parses an unknown `--flag` as one of its *own* options and
+aborts before the recipe runs, so the dash form cannot work through make at all.
+
+For the optional fields, call the script directly, which does take `--flag=value`:
+
+```
+pnpm run add-link -- --url=https://berlinflatfinder.example --country=de \
+  --category=housing --description="..." \
+  --title="Berlin Flat Listings" --roles=software-engineer \
+  --scopes=de,at --tags=free --contributor=your-github-handle --featured
+```
+
+`--draft` will write the file with a `TODO` placeholder description and `description_verified: false`, so you
+can open the PR first and write the prose in a follow-up commit. It will be published as unreviewed until you
+replace it.
+
+The command **will not invent a description**. That field is the reason this site is worth anything, so
+`--description` is required unless you pass `--draft`.
+
+#### Writing it by hand
+
 Copy the closest existing file in the same category and edit it:
 
 ```
@@ -214,16 +246,16 @@ enforces.
 ## Add a country
 
 ```
-pnpm run add-country -- --code=pt --region=europe
+make add-country CODE=pt REGION=europe
 ```
 
 `--region` is required and has no default: guessing it puts the country in the wrong part of the map and the
 wrong sitemap group. Omit it and the command prints the plausible regions for that code. It writes
 `content/countries/<code>.yaml` and re-checks the registry, so a typo cannot land unnoticed.
 
-Pass the flags through `pnpm`, not `make`: `make add-country CODE=pt --region=europe` currently fails, because
-GNU make consumes `--region=...` as its own option and forwards the bare `--` to the script as the country
-code.
+Again `NAME=value`, not `--name=value`: make would consume `--region=...` as its own option and fail before
+the recipe ran. The script itself still takes `--code=`/`--region=`, so
+`pnpm run add-country -- --code=pt --region=europe` works too.
 
 ## Add a category or a role
 

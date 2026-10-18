@@ -6,6 +6,14 @@
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
+# Targets that forward arguments do it with `make target NAME=value`, never
+# `make target --name=value`. GNU make (including the 3.81 on macOS) parses an
+# unknown leading `--name=value` as one of its OWN options and aborts with
+# "unrecognized option" before any recipe runs; MAKEOVERRIDES does not prevent
+# this, it only stops the assignment becoming a variable. So the dash form is
+# not usable through make at all, and the scripts keep their `--name=value`
+# parsing for direct `pnpm run` invocation.
+
 PNPM ?= pnpm
 PKG  = awesome-expat
 
@@ -22,11 +30,11 @@ PHONY_TARGETS := help setup dev build preview check export validate seed \
 
 .PHONY: $(PHONY_TARGETS)
 
-# The `## name:` comments above are the single source of truth for the target
-# list. This check fails the build if a real target is missing from .PHONY,
-# which is what silently lets a same-named file shadow a target. It reads the
-# list from PHONY_TARGETS, so it can never go stale against a second hardcoded
-# copy — the bug it exists to prevent.
+# PHONY_TARGETS above is the source of truth for the target list; `make help`
+# renders it from the `## name:` comments. This check fails if a real target is
+# missing from that list, which is what silently lets a same-named file shadow
+# a target. Reading it from PHONY_TARGETS is the point: a second hand-maintained
+# copy of the list is the bug it exists to prevent.
 check-phony:
 	@missing=$$(comm -23 \
 		<(grep -E '^[a-z][a-z0-9-]*:' Makefile | sed -E 's/:.*//' | sort -u) \
@@ -117,6 +125,7 @@ pool-pipeline:
 	@$(MAKE) --no-print-directory pool-classify
 	@$(MAKE) --no-print-directory pool-describe
 	@$(MAKE) --no-print-directory pool-status
+
 ## check: Validate content and fail if generated Markdown is stale
 #
 # Generates into .agents/export-check/ and diffs, rather than regenerating in
@@ -166,8 +175,8 @@ links-check:
 
 ## site-check: Check the built site (requires build; internal links + invariants)
 #
-# `make links-check` validates the 67 external URLs in content/. This validates
-# the other direction: the 7,000+ internal links between generated pages, and
+# `make links-check` validates the external URLs in content/. This validates
+# the other direction: the internal links between generated pages, and
 # the claims each page makes about itself. Both are build-time mistakes that
 # `astro build` reports as success.
 #
@@ -204,13 +213,29 @@ i18n-report:
 list:
 	@$(PNPM) run list
 
-## add-link: Scaffold a new link file.  make add-link URL=https://...
+## add-link: Scaffold a new link file
+#
+#   make add-link URL=https://example.com COUNTRY=de CATEGORY=housing \
+#     DESCRIPTION="What it is actually good for."
+#
+# Runs add-link.ts, which reads --url/--country/--category/--description; the
+# Make variables are translated here.
+#
+# Only these four, deliberately. Make cannot forward arbitrary `--flag=value`
+# (it rejects them as its own options), and a `$(ARGS)` escape hatch does not
+# help: unquoted it word-splits, so `--title=Find a flat` silently becomes
+# `--title=Find`. Anything beyond the four below goes through the script:
+#   pnpm run add-link -- --url=... --country=... --category=... \
+#     --description=... --title=... --roles=... --scopes=... --draft
 add-link:
-	@$(PNPM) run add-link -- $(URL)
+	@$(PNPM) run add-link -- --url='$(URL)' --country='$(COUNTRY)' \
+		--category='$(CATEGORY)' $(if $(DESCRIPTION),--description='$(DESCRIPTION)',)
 
-## add-country: Register a country.  make add-country CODE=pt
+## add-country: Register a country
+#
+#   make add-country CODE=pt REGION=europe
 add-country:
-	@$(PNPM) run add-country -- $(CODE)
+	@$(PNPM) run add-country -- --code='$(CODE)' --region='$(REGION)'
 
 ## status: Print the local agent plan status if it exists
 status:
