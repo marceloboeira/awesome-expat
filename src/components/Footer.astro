@@ -1,5 +1,5 @@
 ---
-import { categories, countries, country, category, roles, global, contribute, about, stats, contributors, repo, repoNewIssue } from '../lib/routes.ts';
+import { categories, countries, country, category, roles, global, contribute, about, stats, contributors, repo, repoNewIssue, llmsTxt, llmsFullTxt, corpusJson } from '../lib/routes.ts';
 const year = new Date().getFullYear();
 ---
 
@@ -54,7 +54,16 @@ const year = new Date().getFullYear();
       </nav>
     </div>
 
-    <div class="mt-10 flex flex-col gap-3 border-t border-rule pt-6 text-[length:var(--text-step--1)] text-ink-faint sm:flex-row sm:items-center sm:justify-between">
+    <div class="mt-10 border-t border-rule pt-6 text-[length:var(--text-step--1)] text-ink-faint">
+      <p>
+        For agents and tools: <a href={llmsTxt()} class="text-ink-soft hover:text-accent">llms.txt</a>,
+        <a href={llmsFullTxt()} class="text-ink-soft hover:text-accent">llms-full.txt</a>, and
+        <a href={corpusJson()} class="text-ink-soft hover:text-accent">corpus.json</a> carry the whole
+        directory as data, so nothing has to be scraped out of the HTML.
+      </p>
+    </div>
+
+    <div class="mt-6 flex flex-col gap-3 border-t border-rule pt-6 text-[length:var(--text-step--1)] text-ink-faint sm:flex-row sm:items-center sm:justify-between">
       <p>© {year} Awesome Expat. Content licensed under CC BY-SA 4.0.</p>
       <p>
         Built with

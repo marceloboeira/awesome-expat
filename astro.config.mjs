@@ -110,10 +110,23 @@ for (const handle of contributorHandles) {
 const emptyCountryCodes = new Set(countryCodes.filter((code) => forCountry(code).length === 0));
 
 /**
+ * Category pages with no links in them, for the same reason and with the same
+ * single-source-of-truth requirement as emptyCountryCodes. This mirrors
+ * `noindex={inCategory.length === 0}` in src/pages/categories/[slug].astro.
+ *
+ * It is computed rather than listed because a hardcoded list is a silent
+ * trap: the first link added to a listed category would make the page
+ * indexable while the sitemap kept excluding it, and nothing would complain
+ * until the page had been quietly unlisted.
+ */
+const emptyCategorySlugs = new Set(categorySlugs.filter((slug) => forCategory(slug).length === 0));
+
+/**
  * Astro 7, static output, no adapter.
  *
- * The static output is the point, not a limitation: the whole directory is 67
- * YAML files and 0 posts today. There is no per-request work, so a CDN plus a
+ * The static output is the point, not a limitation: the whole directory is one
+ * small YAML file per link and 0 posts today. (Deliberately no count: a total
+ * written here is a fact with an expiry date.) There is no per-request work, so a CDN plus a
  * static host is both the fastest and the cheapest thing that can possibly
  * serve it, and it cannot fall over.
  *
@@ -145,7 +158,9 @@ export default defineConfig({
         if (path === '/search/' || path === '/404/') return false;
         const m = /^\/countries\/([a-z]{2})\/$/.exec(path);
         if (m && emptyCountryCodes.has(m[1])) return false;
-        return !page.includes('/categories/citizenship') && !page.includes('/categories/permanent-residency');
+        const c = /^\/categories\/([a-z-]+)\/$/.exec(path);
+        if (c && emptyCategorySlugs.has(c[1])) return false;
+        return true;
       },
       // Per-URL <lastmod> from the corpus (see lastmodByPath above). Pages
       // with no derivable date -- static prose like /about -- are emitted

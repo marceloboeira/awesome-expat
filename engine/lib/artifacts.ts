@@ -1,4 +1,4 @@
-import { writeFile } from 'node:fs/promises';
+import { writeFile, mkdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { loadContent, type Content } from './content.ts';
 import { checkSeoContract } from './seo-contract.ts';
@@ -188,7 +188,15 @@ export function siteArtifacts(): {
         const dist = dir.pathname;
         await writeFile(join(dist, 'corpus.json'), corpusJson(content));
         await writeFile(join(dist, 'llms-full.txt'), llmsFullTxt(content));
-        await writeFile(join(dist, 'llms.txt'), llmsTxt(content));
+
+        // llms.txt is written twice on purpose. The llms.txt convention puts
+        // it at the site root; /.well-known/ is where an agent that only knows
+        // the well-known discovery paths will look. Same bytes, generated from
+        // the same function, so the two cannot disagree.
+        const llms = llmsTxt(content);
+        await writeFile(join(dist, 'llms.txt'), llms);
+        await mkdir(join(dist, '.well-known'), { recursive: true });
+        await writeFile(join(dist, '.well-known', 'llms.txt'), llms);
 
         const violations = await checkSeoContract(dist);
         if (violations.length > 0) {
@@ -203,8 +211,8 @@ export function siteArtifacts(): {
         }
 
         logger.info(
-          `artifacts: corpus.json (${content.links.length} links), llms.txt, llms-full.txt; ` +
-            `seo contract: OK`,
+          `artifacts: corpus.json (${content.links.length} links), llms.txt (+ /.well-known), ` +
+            `llms-full.txt; seo contract: OK`,
         );
       },
     },

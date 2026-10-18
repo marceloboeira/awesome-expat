@@ -107,6 +107,11 @@ export function datasetLd(opts: {
             encodingFormat: 'text/plain',
             url: `${SITE}/llms-full.txt`,
           },
+          {
+            '@type': 'DataDownload',
+            encodingFormat: 'text/markdown',
+            url: `${SITE}/llms.txt`,
+          },
         ],
       },
     ],

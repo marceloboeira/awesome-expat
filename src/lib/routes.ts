@@ -47,6 +47,18 @@ export const about = () => '/about/';
 export const stats = () => '/stats/';
 export const contributors = () => '/contributors/';
 
+/*
+ * Agent-facing data endpoints.
+ *
+ * These are not Astro routes -- they are files written into dist/ by
+ * engine/lib/artifacts.ts during the build. They still get builders here so a
+ * link to one is never hand-typed, and so the Footer and the llms.txt template
+ * cannot drift onto two different URLs for the same file.
+ */
+export const llmsTxt = () => '/llms.txt';
+export const llmsFullTxt = () => '/llms-full.txt';
+export const corpusJson = () => '/corpus.json';
+
 export const country = (code: string) => `/countries/${code}/`;
 export const category = (slug: string) => `/categories/${slug}/`;
 export const categoryInCountry = (countrySlug: string, categorySlug: string) =>
