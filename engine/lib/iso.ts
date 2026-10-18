@@ -43,10 +43,26 @@ const BY_REGION: Record<Region, string[]> = {
 
 const REGION_ORDER: Region[] = ['europe', 'middle-east', 'asia', 'africa', 'americas', 'oceania'];
 
-const display = new Intl.DisplayNames(['en'], { type: 'region' });
+/*
+ * `fallback: 'none'` matters: with the default fallback, Intl.DisplayNames
+ * *invents* a name for any well-formed but unassigned code, so `countryName`
+ * could not distinguish a real country from a typo. With 'none' an unassigned
+ * code returns undefined and is rejected below.
+ *
+ * `ZZ` is the one exception CLDR assigns a real string ("Unknown Region"), so
+ * it is rejected explicitly -- otherwise `make add-country CODE=zz` writes a
+ * country called "Unknown Region" and reports success.
+ */
+const display = new Intl.DisplayNames(['en'], { type: 'region', fallback: 'none' });
+
+/** CLDR's placeholder territory. Not a country; see above. */
+const UNKNOWN_TERRITORY = 'ZZ';
 
 /** English display name for an ISO code, e.g. `de` -> `Germany`. */
 export function countryName(code: string): string {
+  if (code.toUpperCase() === UNKNOWN_TERRITORY) {
+    throw new Error(`"${UNKNOWN_TERRITORY}" is CLDR's placeholder territory, not a country`);
+  }
   const name = display.of(code.toUpperCase());
   if (!name || name === code.toUpperCase()) throw new Error(`not a known ISO 3166-1 alpha-2 code: ${code}`);
   return name;

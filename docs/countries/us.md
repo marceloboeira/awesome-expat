@@ -10,7 +10,7 @@ Practical links for people moving to or living in United States.
 
 3 resources across 1 category.
 
-[Browse on the site](https://awesome-expat.com/us/)
+[Browse on the site](https://awesome-expat.com/countries/us/)
 
 ### Finances & Banking
 

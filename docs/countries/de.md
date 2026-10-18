@@ -10,7 +10,7 @@ Practical links for people moving to or living in Germany.
 
 12 resources across 8 categories.
 
-[Browse on the site](https://awesome-expat.com/de/)
+[Browse on the site](https://awesome-expat.com/countries/de/)
 
 ### Housing
 

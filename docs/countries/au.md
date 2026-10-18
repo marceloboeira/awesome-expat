@@ -10,7 +10,7 @@ Practical links for people moving to or living in Australia.
 
 1 resource across 1 category.
 
-[Browse on the site](https://awesome-expat.com/au/)
+[Browse on the site](https://awesome-expat.com/countries/au/)
 
 ### Finances & Banking
 

@@ -10,7 +10,7 @@ Practical links for people moving to or living in Finland.
 
 4 resources across 3 categories.
 
-[Browse on the site](https://awesome-expat.com/fi/)
+[Browse on the site](https://awesome-expat.com/countries/fi/)
 
 ### Housing
 

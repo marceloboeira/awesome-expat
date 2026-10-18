@@ -10,7 +10,7 @@ Practical links for people moving to or living in Spain.
 
 3 resources across 1 category.
 
-[Browse on the site](https://awesome-expat.com/es/)
+[Browse on the site](https://awesome-expat.com/countries/es/)
 
 ### Visas & Residency
 

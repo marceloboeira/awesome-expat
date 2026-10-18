@@ -10,7 +10,7 @@ Practical links for people moving to or living in Norway.
 
 2 resources across 2 categories.
 
-[Browse on the site](https://awesome-expat.com/no/)
+[Browse on the site](https://awesome-expat.com/countries/no/)
 
 ### Housing
 

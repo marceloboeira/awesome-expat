@@ -1,5 +1,5 @@
 import { loadContent } from '../lib/content.ts';
-import { categoryPath, countryPath, rolePath } from '../lib/lib-urls.ts';
+import { categoryInCountryPath, countryPath, rolePath } from '../lib/lib-urls.ts';
 
 /**
  * What needs translating before a second locale can launch.
@@ -31,7 +31,7 @@ async function main() {
   }
 
   for (const [slug, category] of content.categories) {
-    rows.push({ kind: 'category', id: slug, source: `content/categories/${slug}.yaml`, fields: 'name, description', route: categoryPath('<country>', slug) });
+    rows.push({ kind: 'category', id: slug, source: `content/categories/${slug}.yaml`, fields: 'name, description', route: categoryInCountryPath('<country>', slug) });
   }
 
   for (const [slug, group] of content.groups) {

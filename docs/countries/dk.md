@@ -10,7 +10,7 @@ Practical links for people moving to or living in Denmark.
 
 2 resources across 2 categories.
 
-[Browse on the site](https://awesome-expat.com/dk/)
+[Browse on the site](https://awesome-expat.com/countries/dk/)
 
 ### Housing
 

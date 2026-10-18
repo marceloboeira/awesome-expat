@@ -10,7 +10,7 @@ Practical links for people moving to or living in United Kingdom.
 
 3 resources across 3 categories.
 
-[Browse on the site](https://awesome-expat.com/gb/)
+[Browse on the site](https://awesome-expat.com/countries/gb/)
 
 ### Jobs & Work
 
