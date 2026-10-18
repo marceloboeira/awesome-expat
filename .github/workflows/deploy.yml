@@ -1,8 +1,22 @@
 name: Deploy to GitHub Pages
 
+# Deploy is gated on CI, deliberately.
+#
+# These used to be two independent `push` workflows, which meant a red CI on
+# main still deployed: the content checks and the SEO contract are advisory
+# here, because `pnpm build` runs the same build but nobody reads its exit code
+# before the site goes live. `workflow_run` fires when CI *finishes*, so the
+# conclusion can gate the deploy.
+#
+# The build then checks out the exact SHA CI validated, not whatever is on main
+# by the time this starts -- otherwise a second push could be deployed by a run
+# that never saw it.
 on:
-  push:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
     branches: [main]
+  # Escape hatch for a manual publish. Still runs the same checks below.
   workflow_dispatch:
 
 permissions:
@@ -16,9 +30,14 @@ concurrency:
 
 jobs:
   build:
+    # workflow_dispatch has no `workflow_run` payload to inspect.
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # The commit CI actually passed, not the current tip of main.
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
@@ -27,6 +46,12 @@ jobs:
       - run: pnpm install --frozen-lockfile
         env:
           PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID }}
+      # The gate, repeated here rather than trusted from the other workflow: a
+      # deploy must never publish a tree whose SEO contract was not enforced.
+      - name: Validate content and prove generated Markdown is current
+        run: make check
+      - run: make test
+      - run: make site-check
       - run: pnpm build
         env:
           PUBLIC_GA_MEASUREMENT_ID: ${{ vars.PUBLIC_GA_MEASUREMENT_ID }}
