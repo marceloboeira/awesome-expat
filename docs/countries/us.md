@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in United States.
 
-3 resources across 1 category.
+4 resources across 2 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/us/)
 
@@ -20,3 +20,8 @@ Practical links for people moving to or living in United States.
   How US citizens abroad can eliminate state income tax by keeping domicile in a no-tax state. — `us` `tax`
 - [Paycheck calculator](https://nutilz.com/paycheck-calculator)  
   Take-home pay estimate after federal, state and FICA withholding, for anyone working in the US. — `us` `salary`
+
+### Permanent Residency
+
+- [YiminShuju Visa Bulletin Tracker](https://yiminshuju.com/en/visa-bulletin)  
+  US Visa Bulletin cutoff dates for India, China and rest of world since 2023, both charts side by side with monthly moves. Shows past pace only, no wait-time forecast. — `free` `green-card`
