@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in Germany.
 
-12 resources across 8 categories.
+13 resources across 8 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/de/)
 
@@ -50,6 +50,8 @@ Practical links for people moving to or living in Germany.
 
 ### Moving
 
+- [Driving Schools](https://drivingschools.fyi)  
+  Driving schools in six countries listed by city, with the languages, vehicle types and lesson prices each school publishes on its own site. Coverage is thin outside the largest cities. — `free`
 - [Moving to Berlin: the definitive guide](https://allaboutberlin.com/guides/moving-to-berlin)  
   End-to-end checklist for relocating to Berlin, from paperwork to actually arriving. — `germany` `berlin`
 
