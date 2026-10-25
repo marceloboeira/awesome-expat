@@ -20,14 +20,15 @@
 
 | | |
 | --- | ---: |
-| Countries with resources | 18 |
-| Resources | 75 |
+| Countries with resources | 19 |
+| Resources | 76 |
 | Categories | 12 |
 | Job roles | 5 |
 
 ## Browse by country
 
 - **[Australia](https://awesome-expat.com/countries/au/)** — 1 resource
+- **[Canada](https://awesome-expat.com/countries/ca/)** — 1 resource
 - **[China](https://awesome-expat.com/countries/cn/)** — 1 resource
 - **[Denmark](https://awesome-expat.com/countries/dk/)** — 2 resources
 - **[Finland](https://awesome-expat.com/countries/fi/)** — 4 resources
@@ -59,7 +60,7 @@ Browse all categories: https://awesome-expat.com/categories/.
 | [Health & Insurance](https://awesome-expat.com/categories/healthcare/) | `healthcare` | 2 |
 | [Finances & Banking](https://awesome-expat.com/categories/finances/) | `finances` | 22 |
 | [Visas & Residency](https://awesome-expat.com/categories/visa/) | `visa` | 7 |
-| [Permanent Residency](https://awesome-expat.com/categories/permanent-residency/) | `permanent-residency` | 1 |
+| [Permanent Residency](https://awesome-expat.com/categories/permanent-residency/) | `permanent-residency` | 2 |
 | [Citizenship](https://awesome-expat.com/categories/citizenship/) | `citizenship` | 0 |
 | [Moving](https://awesome-expat.com/categories/moving/) | `moving` | 6 |
 | [Interviewing](https://awesome-expat.com/categories/interviewing/) | `interviewing` | 4 |
