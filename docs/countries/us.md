@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in United States.
 
-4 resources across 2 categories.
+5 resources across 3 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/us/)
 
@@ -20,6 +20,11 @@ Practical links for people moving to or living in United States.
   How US citizens abroad can eliminate state income tax by keeping domicile in a no-tax state. — `us` `tax`
 - [Paycheck calculator](https://nutilz.com/paycheck-calculator)  
   Take-home pay estimate after federal, state and FICA withholding, for anyone working in the US. — `us` `salary`
+
+### Visas & Residency
+
+- [ImmigrationHelp](https://immigrationhelp.fyi)  
+  DOJ-authorized immigration legal providers in 14 US states: recognized organizations, accredited representatives and pro bono services. Deliberately excludes notarios and unlicensed consultants. — `free`
 
 ### Permanent Residency
 
