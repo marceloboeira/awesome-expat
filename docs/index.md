@@ -12,6 +12,7 @@ Every country below has at least one resource. 152 countries are registered in t
 | Country | Slug | Links | Categories |
 | --- | --- | ---: | ---: |
 | [Australia](https://awesome-expat.com/countries/au/) | [`au`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/au) | 1 | 1 |
+| [Canada](https://awesome-expat.com/countries/ca/) | [`ca`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/ca) | 1 | 1 |
 | [China](https://awesome-expat.com/countries/cn/) | [`cn`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/cn) | 1 | 1 |
 | [Denmark](https://awesome-expat.com/countries/dk/) | [`dk`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/dk) | 2 | 2 |
 | [Finland](https://awesome-expat.com/countries/fi/) | [`fi`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/fi) | 4 | 3 |
