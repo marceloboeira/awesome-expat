@@ -8,7 +8,7 @@
 
 Resources that apply wherever you land — money, flights, accommodation, and job boards.
 
-43 resources across 8 categories.
+44 resources across 8 categories.
 
 [Browse on the site](https://awesome-expat.com/global/)
 
@@ -68,6 +68,8 @@ Resources that apply wherever you land — money, flights, accommodation, and jo
   Move money between countries at low cost with transparent mid-market exchange rates. — `banking` `free`
 - [Xoom](https://xoom.com)  
   Send money, reload phones and pay bills internationally. — `banking`
+- [ZikCards](https://zikcards.com)  
+  US-issued Visa and Mastercard virtual cards for foreign subscriptions and ad accounts when local cards are refused. Funded only with USDT or USDC; ID check required; $5 per card plus 3% to load. — `crypto` `freelance`
 
 ### Visas & Residency
 
