@@ -21,7 +21,7 @@
 | | |
 | --- | ---: |
 | Countries with resources | 19 |
-| Resources | 76 |
+| Resources | 77 |
 | Categories | 12 |
 | Job roles | 5 |
 
@@ -45,7 +45,7 @@
 - **[Switzerland](https://awesome-expat.com/countries/ch/)** — 1 resource
 - **[United Kingdom](https://awesome-expat.com/countries/gb/)** — 3 resources
 - **[United States](https://awesome-expat.com/countries/us/)** — 4 resources
-- **[Global](https://awesome-expat.com/global/)** — 43 resources that apply anywhere
+- **[Global](https://awesome-expat.com/global/)** — 44 resources that apply anywhere
 
 Every country on the site: https://awesome-expat.com/countries/. Directory of the content files, with link counts:
 [docs/index.md](docs/index.md).
@@ -58,7 +58,7 @@ Browse all categories: https://awesome-expat.com/categories/.
 | [Jobs & Work](https://awesome-expat.com/categories/jobs/) | `jobs` | 12 |
 | [Taxes](https://awesome-expat.com/categories/taxes/) | `taxes` | 2 |
 | [Health & Insurance](https://awesome-expat.com/categories/healthcare/) | `healthcare` | 2 |
-| [Finances & Banking](https://awesome-expat.com/categories/finances/) | `finances` | 22 |
+| [Finances & Banking](https://awesome-expat.com/categories/finances/) | `finances` | 23 |
 | [Visas & Residency](https://awesome-expat.com/categories/visa/) | `visa` | 7 |
 | [Permanent Residency](https://awesome-expat.com/categories/permanent-residency/) | `permanent-residency` | 2 |
 | [Citizenship](https://awesome-expat.com/categories/citizenship/) | `citizenship` | 0 |
