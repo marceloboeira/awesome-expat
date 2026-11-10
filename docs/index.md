@@ -24,7 +24,7 @@ Every country below has at least one resource. 152 countries are registered in t
 | [Netherlands](https://awesome-expat.com/countries/nl/) | [`nl`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/nl) | 1 | 1 |
 | [Norway](https://awesome-expat.com/countries/no/) | [`no`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/no) | 2 | 2 |
 | [South Korea](https://awesome-expat.com/countries/kr/) | [`kr`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/kr) | 2 | 2 |
-| [Spain](https://awesome-expat.com/countries/es/) | [`es`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/es) | 3 | 1 |
+| [Spain](https://awesome-expat.com/countries/es/) | [`es`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/es) | 4 | 1 |
 | [Sweden](https://awesome-expat.com/countries/se/) | [`se`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/se) | 2 | 2 |
 | [Switzerland](https://awesome-expat.com/countries/ch/) | [`ch`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/ch) | 1 | 1 |
 | [United Kingdom](https://awesome-expat.com/countries/gb/) | [`gb`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/gb) | 3 | 3 |

@@ -21,7 +21,7 @@
 | | |
 | --- | ---: |
 | Countries with resources | 19 |
-| Resources | 77 |
+| Resources | 78 |
 | Categories | 12 |
 | Job roles | 5 |
 
@@ -40,7 +40,7 @@
 - **[Netherlands](https://awesome-expat.com/countries/nl/)** — 1 resource
 - **[Norway](https://awesome-expat.com/countries/no/)** — 2 resources
 - **[South Korea](https://awesome-expat.com/countries/kr/)** — 2 resources
-- **[Spain](https://awesome-expat.com/countries/es/)** — 3 resources
+- **[Spain](https://awesome-expat.com/countries/es/)** — 4 resources
 - **[Sweden](https://awesome-expat.com/countries/se/)** — 2 resources
 - **[Switzerland](https://awesome-expat.com/countries/ch/)** — 1 resource
 - **[United Kingdom](https://awesome-expat.com/countries/gb/)** — 3 resources
@@ -59,7 +59,7 @@ Browse all categories: https://awesome-expat.com/categories/.
 | [Taxes](https://awesome-expat.com/categories/taxes/) | `taxes` | 2 |
 | [Health & Insurance](https://awesome-expat.com/categories/healthcare/) | `healthcare` | 2 |
 | [Finances & Banking](https://awesome-expat.com/categories/finances/) | `finances` | 23 |
-| [Visas & Residency](https://awesome-expat.com/categories/visa/) | `visa` | 7 |
+| [Visas & Residency](https://awesome-expat.com/categories/visa/) | `visa` | 8 |
 | [Permanent Residency](https://awesome-expat.com/categories/permanent-residency/) | `permanent-residency` | 2 |
 | [Citizenship](https://awesome-expat.com/categories/citizenship/) | `citizenship` | 0 |
 | [Moving](https://awesome-expat.com/categories/moving/) | `moving` | 6 |
