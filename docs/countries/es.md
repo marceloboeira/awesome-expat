@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in Spain.
 
-3 resources across 1 category.
+4 resources across 1 category.
 
 [Browse on the site](https://awesome-expat.com/countries/es/)
 
@@ -20,3 +20,5 @@ Practical links for people moving to or living in Spain.
   English guides to Spanish visas and residence permits — digital nomad, non-lucrative, student, Beckham law — written against the BOE. — `spain` `spanish`
 - [Guía Extranjeros](https://guiaextranjeros.es/en)  
   Free guide to Spanish immigration paperwork in English, Spanish and Ukrainian: NIE and TIE, Cl@ve, cita previa, official EX forms, plus a CCSE citizenship practice test. — `spain` `paperwork`
+- [TIE Hoy](https://tiehoy.com/lote/check)  
+  Free TIE/NIE card pickup check: pick one of 157 offices, enter the lote from your fingerprint receipt, see the office's current lote and an estimated pickup date where data exists. Not official. — `spain` `paperwork`
