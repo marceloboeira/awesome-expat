@@ -34,7 +34,7 @@
   "dependencies": {
     "astro": "^7.3.5",
     "yaml": "^2.9.1",
-    "zod": "^4.6.5"
+    "zod": "^4.6.6"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.7.4",
