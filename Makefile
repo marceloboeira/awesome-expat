@@ -169,7 +169,7 @@ export:
 seed:
 	@$(PNPM) run seed
 
-## links-check: Check every link, failing on dead ones
+## links-check: Check every link, report dead ones as warnings
 links-check:
 	@$(PNPM) run check-links
 
