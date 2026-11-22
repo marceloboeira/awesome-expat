@@ -8,12 +8,14 @@
 
 Practical links for people moving to or living in Denmark.
 
-3 resources across 3 categories.
+4 resources across 3 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/dk/)
 
 ### Housing
 
+- [Nest Copenhagen](https://nestcopenhagen.dk)  
+  Coliving space in Copenhagen, Denmark. — `free`
 - [NordicExpat](https://nordicexpat.com) ⭐  
   Relocation guides for non-EU expats moving to Denmark, Sweden, Norway or Finland, covering banking, housing, taxes and healthcare. — `nordics`
 

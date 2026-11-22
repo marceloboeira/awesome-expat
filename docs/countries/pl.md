@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in Poland.
 
-1 resource across 1 category.
+3 resources across 1 category.
 
 [Browse on the site](https://awesome-expat.com/countries/pl/)
 
@@ -16,3 +16,7 @@ Practical links for people moving to or living in Poland.
 
 - [EuroJobs.ai](https://eurojobs.ai)  
   IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `free`
+- [Jobo](https://jobo.pl)  
+  Remote-only verified jobs from Poland. — `free`
+- [No Fluff Jobs](https://nofluffjobs.com/pl)  
+  Job board with remote filter. — `free`

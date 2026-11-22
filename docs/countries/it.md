@@ -8,9 +8,14 @@
 
 Practical links for people moving to or living in Italy.
 
-3 resources across 3 categories.
+4 resources across 4 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/it/)
+
+### Housing
+
+- [Talent Garden](https://talentgarden.com/en/coworking)  
+  Coworking spaces mainly in Italy and some other countries. — `free`
 
 ### Jobs & Work
 

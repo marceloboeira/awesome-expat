@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in Germany.
 
-14 resources across 8 categories.
+16 resources across 8 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/de/)
 
@@ -23,8 +23,12 @@ Practical links for people moving to or living in Germany.
   Startup jobs in Berlin, with visa and relocation details for each listing. — `germany`
 - [EuroJobs.ai](https://eurojobs.ai)  
   IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `free`
+- [freelancermap](https://freelancermap.com/projects/remote.html)  
+  Freelance and contract jobs for IT experts. — `free`
 - [List of job boards for Berlin](https://allaboutberlin.com/guides/find-a-job-in-berlin)  
   A curated round-up of the job boards and recruiters actually hiring in Berlin. — `germany`
+- [zuhausejobs](https://zuhausejobs.com)  
+  Remote jobs in German-speaking countries. — `free`
 
 ### Taxes
 

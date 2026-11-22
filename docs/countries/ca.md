@@ -8,9 +8,16 @@
 
 Practical links for people moving to or living in Canada.
 
-2 resources across 2 categories.
+5 resources across 3 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/ca/)
+
+### Jobs & Work
+
+- [Dataaxy](https://dataaxy.com)  
+  Job board specialized in data and AI in North America. — `free`
+- [Freel](https://freel.ca)  
+  Freelancer job board in Canada. — `free`
 
 ### Permanent Residency
 
@@ -21,3 +28,5 @@ Practical links for people moving to or living in Canada.
 
 - [Driving Schools](https://drivingschools.fyi)  
   Driving schools in six countries listed by city, with the languages, vehicle types and lesson prices each school publishes on its own site. Coverage is thin outside the largest cities. — `free`
+- [Visto](https://visto.ai)  
+  Relocation help for developers moving to Canada. — `free`

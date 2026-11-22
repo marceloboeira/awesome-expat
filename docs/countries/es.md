@@ -8,14 +8,27 @@
 
 Practical links for people moving to or living in Spain.
 
-5 resources across 2 categories.
+10 resources across 3 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/es/)
+
+### Housing
+
+- [Anceu](https://anceu.com)  
+  Rural coliving and coworking space in Galicia, Spain. — `free`
+- [bedndesk](https://bedndesk.com)  
+  Coworking and coliving space on Mallorca, Spain. — `free`
+- [Coworking in the Sun](https://coworkinginthesun.com)  
+  Coliving and coworking space in Tenerife, Spain. — `free`
+- [Sende](https://sende.co)  
+  Coliving and coworking space in northern Spain. — `free`
 
 ### Jobs & Work
 
 - [EuroJobs.ai](https://eurojobs.ai)  
   IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `free`
+- [remote-es/remotes](https://github.com/remote-es/remotes)  
+  Companies offering full-time remote jobs with Spanish contracts. — `free`
 
 ### Visas & Residency
 

@@ -8,7 +8,7 @@
 
 Resources that apply wherever you land — money, flights, accommodation, and job boards.
 
-45 resources across 8 categories.
+46 resources across 8 categories.
 
 [Browse on the site](https://awesome-expat.com/global/)
 
@@ -29,6 +29,8 @@ Resources that apply wherever you land — money, flights, accommodation, and jo
 
 ### Jobs & Work
 
+- [hiring.lat](https://hiring.lat)  
+  Transparent job postings for LATAM workers. — `free`
 - [HN Hiring](https://hnhiring.me)  
   Monthly-updated software jobs aggregated from Who Is Hiring threads.
 - [Landing.jobs](https://landing.jobs)  

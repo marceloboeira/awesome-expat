@@ -8,9 +8,14 @@
 
 Practical links for people moving to or living in United States.
 
-6 resources across 4 categories.
+11 resources across 5 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/us/)
+
+### Housing
+
+- [Common](https://common.com)  
+  Coliving housing in New York. — `free`
 
 ### Finances & Banking
 
@@ -35,3 +40,11 @@ Practical links for people moving to or living in United States.
 
 - [Driving Schools](https://drivingschools.fyi)  
   Driving schools in six countries listed by city, with the languages, vehicle types and lesson prices each school publishes on its own site. Coverage is thin outside the largest cities. — `free`
+- [Live And Work In Maine](https://liveandworkinmaine.com/opportunity-maine)  
+  Student loan payments subtracted from state income taxes for qualifying graduates. — `free`
+- [Remote Shoals](https://remoteshoals.com)  
+  Cash incentive to work remotely from the Shoals. — `free`
+- [Tulsa Remote](https://tulsaremote.com)  
+  Cash incentive to work remotely from Tulsa. — `free`
+- [Vermont Remote Worker Grant Program](https://thinkvermont.com/relocate)  
+  Grant program for remote workers relocating to Vermont. — `free`
