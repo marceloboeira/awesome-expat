@@ -59,14 +59,7 @@ const isVerified = (l: LoadedLink) => l.data.description_verified === true;
               </a>
             )}
 
-            {!isVerified({ id, data }) && (
-              <span
-                class="text-[length:var(--text-step--1)] text-warn"
-                title="This description has not been reviewed by a person yet"
-              >
-                awaiting review
-              </span>
-            )}
+
           </div>
 
           {data.description && (
