@@ -120,6 +120,11 @@ const cardDesc = generatedDesc;
     { name: 'Countries', href: countriesRoute() },
     { name, href: countryRoute(slug) },
   ]}
+  faq={[
+    { q: `What resources are listed for ${name}?`, a: `Checked resources for people moving to ${name}: housing, jobs, taxes, visas and more, each with a human-written description and a dated link check.` },
+    { q: `How do I add a resource for ${name}?`, a: 'Use the contribute page to suggest a link; entries are reviewed and added as plain YAML in the public repository.' },
+    { q: 'Are these links sponsored?', a: 'No. Nothing is ranked, sponsored or sold; descriptions are written by people and reviewed.' },
+  ]}
 >
   <PageHeader
     eyebrow={regionName}
@@ -153,7 +158,7 @@ const cardDesc = generatedDesc;
           minutes and helps the next person.
         </p>
         <a
-          href={`/contribute/?country=${code}`}
+          href="/contribute/"
           class="mt-6 inline-block rounded bg-ink px-5 py-2.5 text-[length:var(--text-step-0)] font-medium text-paper"
         >
           Add the first link

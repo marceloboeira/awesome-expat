@@ -45,6 +45,10 @@ const rows: { label: string; value: number; note?: string }[] = [
   description={`Current coverage of Awesome Expat: ${t.links} links across ${t.countries_with_links} countries and ${t.categories_with_links} categories, with the gaps listed honestly.`}
   path="/stats/"
   breadcrumbs={[{ name: 'Stats', href: '/stats/' }]}
+  faq={[
+    { q: 'What do these statistics show?', a: 'Coverage by country, category and role, including honest gaps.' },
+    { q: 'Why publish gaps?', a: 'So readers know where the directory is thin and can contribute.' },
+  ]}
 >
   <PageHeader
     eyebrow="Coverage"

@@ -32,6 +32,10 @@ const byCategory = categories
     items: globalLinks.map((l) => ({ name: l.data.title, url: l.data.url })),
   })}
   breadcrumbs={[{ name: 'Global', href: '/global/' }]}
+  faq={[
+    { q: 'What are global expat resources?', a: 'Resources that apply wherever you move — visa checklists, banking for foreigners, health insurance and first-month paperwork.' },
+    { q: 'How are these different from country pages?', a: 'Country pages list place-specific links; global pages list links useful in any country.' },
+  ]}
 >
   <PageHeader
     eyebrow="Applies everywhere"

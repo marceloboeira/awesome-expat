@@ -23,6 +23,10 @@ const empty = categories.filter((c) => linksForCategory(links, c.slug).length ==
   }. Each category page lists the countries with checked links.`}
   path="/categories/"
   breadcrumbs={[{ name: 'Categories', href: '/categories/' }]}
+  faq={[
+    { q: 'How are categories organised?', a: 'Every link is filed under exactly one category and one country.' },
+    { q: 'Do empty categories exist?', a: 'Yes, they are listed so readers can request them.' },
+  ]}
 >
   <PageHeader
     eyebrow="Browse by need"

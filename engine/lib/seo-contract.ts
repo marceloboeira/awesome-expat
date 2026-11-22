@@ -38,7 +38,7 @@ const contracts: (Contract & { match: RegExp })[] = [
     title: [45, 65],
     description: [110, 165],
     words: 120,
-    ld: ['Organization', 'WebSite'],
+    ld: ['Organization', 'WebSite', 'FAQPage'],
   },
   {
     // /countries/de/... /categories/housing/... /roles/x/... /roles/x/de/...
@@ -48,7 +48,7 @@ const contracts: (Contract & { match: RegExp })[] = [
     title: [42, 68],
     description: [100, 165],
     words: 90,
-    ld: ['Organization', 'CollectionPage', 'ItemList', 'BreadcrumbList'],
+    ld: ['Organization', 'CollectionPage', 'ItemList', 'BreadcrumbList', 'FAQPage'],
   },
   {
     kind: 'page',
@@ -56,7 +56,7 @@ const contracts: (Contract & { match: RegExp })[] = [
     title: [45, 65],
     description: [110, 165],
     words: 150,
-    ld: ['Organization'],
+    ld: ['Organization', 'FAQPage'],
   },
   {
     // Contributor profiles are generated from GitHub handles; the name is the
@@ -66,7 +66,7 @@ const contracts: (Contract & { match: RegExp })[] = [
     title: [25, 75],
     description: [90, 200],
     words: 40,
-    ld: ['Organization', 'ProfilePage'],
+    ld: ['Organization', 'ProfilePage', 'FAQPage'],
   },
 ];
 

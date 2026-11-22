@@ -44,6 +44,9 @@ const lastContribution = contrib.links[0]?.data.added_at;
     { name: 'Contributors', href: contributorsRoute() },
     { name: displayName, href: contributorRoute(handle) },
   ]}
+  faq={[
+    { q: `What has ${displayName} contributed?`, a: `${contrib.links.length} checked resources to the Awesome Expat directory.` },
+  ]}
 >
   <PageHeader eyebrow="Contributor" title={displayName}>
     <div class="mt-5 flex flex-wrap items-center gap-4">

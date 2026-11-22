@@ -166,8 +166,11 @@ export default defineConfig({
       // with no derivable date -- static prose like /about -- are emitted
       // untouched, which beats a fabricated date.
       serialize: (item) => {
-        const d = lastmodByPath.get(new URL(item.url).pathname);
-        return d ? { ...item, lastmod: d } : item;
+        const path = new URL(item.url).pathname;
+        const d = lastmodByPath.get(path);
+        const changefreq =
+          path === '/about/' || path === '/contribute/' ? 'monthly' : 'weekly';
+        return d ? { ...item, lastmod: d, changefreq } : { ...item, changefreq };
       },
     }),
     // Must come after sitemap: its build:done hook reads dist/sitemap-0.xml.

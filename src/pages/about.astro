@@ -22,6 +22,10 @@ const populated = categoriesWithLinks(links, categories);
   path="/about/"
   ld={aboutPageLd()}
   breadcrumbs={[{ name: 'About', href: '/about/' }]}
+  faq={[
+    { q: 'Why is the directory open source?', a: 'So every entry can be read as plain YAML, checked, and improved in the public repository.' },
+    { q: 'How are descriptions written?', a: 'By people, not generated; a description that only restates the title is rejected.' },
+  ]}
 >
   <PageHeader
     eyebrow="How this works"

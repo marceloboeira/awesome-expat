@@ -23,6 +23,10 @@ const tooThin = pages.filter(({ page }) => !roleHasEnoughLinks(page));
   description="Moving for work? Find the paperwork, hiring rules, and career resources for the roles this directory covers — engineers, designers, managers and researchers."
   path="/roles/"
   breadcrumbs={[{ name: 'Roles', href: '/roles/' }]}
+  faq={[
+    { q: 'Why browse by role?', a: 'Working abroad differs by role — documents, hiring rules and visas vary.' },
+    { q: 'What if a role has too few links?', a: 'It is not published until it clears the coverage threshold.' },
+  ]}
 >
   <PageHeader
     eyebrow="Browse by who you are"

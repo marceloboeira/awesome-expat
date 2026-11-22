@@ -55,6 +55,10 @@ const name = country.name;
     { name: role.name, href: roleRoute(slug) },
     { name: name, href: roleInCountry(slug, code) },
   ]}
+  faq={[
+    { q: `What does a ${role.name.toLowerCase()} need to move to ${name}?`, a: `${page.applicable} checked resources covering work permits, hiring rules, taxes and paperwork.` },
+    { q: 'Where can I see all resources for this country?', a: `Visit the ${name} page for the full list across all categories.` },
+  ]}
 >
   <PageHeader
     eyebrow={`${role.name} · ${name}`}

@@ -65,6 +65,11 @@ const cardDesc =
     { name: 'Categories', href: categoriesRoute() },
     { name: category.name, href: categoryRoute(slug) },
   ]}
+  faq={[
+    { q: `What is the ${category.name} category?`, a: category.description },
+    { q: 'How are these resources checked?', a: 'Each link has a human-written description and a date it was last verified; dead links are fixed or removed.' },
+    { q: 'Can I filter by country?', a: 'Yes — category pages group resources by country so you can compare places.' },
+  ]}
 >
   <PageHeader
     eyebrow="Category"
@@ -84,7 +89,7 @@ const cardDesc =
             readers ask for it — if you know a good source, it would be the first one listed.
           </p>
           <a
-            href={`/contribute/?category=${slug}`}
+            href="/contribute/"
             class="mt-6 inline-block rounded bg-ink px-5 py-2.5 text-[length:var(--text-step-0)] font-medium text-paper"
           >
             Add the first {category.name.toLowerCase()} link

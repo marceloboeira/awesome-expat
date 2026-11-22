@@ -57,6 +57,10 @@ const countryCodes = [...new Set(page.all.map((l) => l.data.country))].sort((a, 
     { name: 'Roles', href: rolesRoute() },
     { name: role.name, href: roleRoute(slug) },
   ]}
+  faq={[
+    { q: `What resources matter for a ${role.name.toLowerCase()} moving abroad?`, a: `${role.description} ${page.applicable} checked links covering visas, job boards, salaries and paperwork.` },
+    { q: 'Do these apply to every country?', a: 'Some are role-specific and some apply to any role; the page separates both, and lists where they apply.' },
+  ]}
 >
   <PageHeader
     eyebrow="By role"

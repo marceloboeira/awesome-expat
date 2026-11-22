@@ -43,6 +43,10 @@ const alphabet = [...new Set(withLinks.map((c) => c.name[0]!.toUpperCase()))].so
   description={`Browse expat resources by country. ${withLinks.length} countries have reviewed links on housing, jobs, taxes, visas and more — and every page says honestly what is still missing.`}
   path="/countries/"
   breadcrumbs={[{ name: 'Countries', href: '/countries/' }]}
+  faq={[
+    { q: 'How many countries are covered?', a: `${withLinks.length} countries have reviewed resources, with gaps listed honestly.` },
+    { q: 'What if my country has no links?', a: 'You can add the first link via the contribute page.' },
+  ]}
 >
   <PageHeader
     eyebrow="Browse by place"

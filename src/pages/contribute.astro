@@ -31,20 +31,7 @@ const emptyCodes = new Set(
   countries.filter((c) => !c.global).map((c) => c.slug).filter((s) => !countriesWithSomething.some((c) => c.slug === s)),
 );
 
-// A reader arriving from a country or category page carries a hint of where the
-// link belongs. Turn that into a real GitHub "create a file here" URL.
-const q = Astro.url.searchParams;
-const countryKnown = new Set(countries.map((c) => c.slug));
-const categoryKnown = new Set(categories.map((c) => c.slug));
-const preselectCountry = q.has('country') && countryKnown.has(q.get('country')!) ? q.get('country')! : '';
-const preselectCategory = q.has('category') && categoryKnown.has(q.get('category')!) ? q.get('category')! : '';
-
-const newFileDir =
-  preselectCountry && preselectCategory
-    ? `content/links/${preselectCountry}/${preselectCategory}`
-    : preselectCountry
-      ? `content/links/${preselectCountry}`
-      : 'content/links';
+const newFileDir = 'content/links';
 ---
 
 <Base
@@ -52,6 +39,10 @@ const newFileDir =
   description="Add a resource to Awesome Expat on GitHub: open a pull request with one YAML file, or request a link in an issue. What we accept, and what gets rejected."
   path="/contribute/"
   breadcrumbs={[{ name: 'Contribute', href: '/contribute/' }]}
+  faq={[
+    { q: 'How do I add a link?', a: 'Open a pull request adding one YAML file under content/links, or request a link in an issue.' },
+    { q: 'What gets rejected?', a: 'Entries with descriptions that only restate the title, affiliate filler, or dead links.' },
+  ]}
 >
   <div class="border-b border-rule">
     <div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
@@ -249,25 +240,6 @@ const newFileDir =
       </dl>
     </section>
 
-    {(preselectCountry || preselectCategory) && (
-      <section class="mt-14 rounded-lg border border-accent bg-accent-soft/40 p-5" aria-labelledby="h-pre">
-        <h2 id="h-pre" class="text-[length:var(--text-step-1)] font-semibold">You came from a specific gap</h2>
-        <p class="mt-2 text-[length:var(--text-step--1)] text-ink-soft">
-          The file belongs at this path. Open it on GitHub to add it — no clone required.
-        </p>
-        <code class="mt-3 block overflow-x-auto rounded bg-paper-sunk p-3 font-mono text-[length:var(--text-step--1)]">
-          {newFileDir}/{'<slug>'}.yaml
-        </code>
-        <a
-          href={repoNewFile(newFileDir)}
-          target="_blank"
-          rel="noopener"
-          class="mt-4 inline-flex items-center gap-2 rounded bg-ink px-4 py-2 text-[length:var(--text-step--1)] font-medium text-paper transition-opacity hover:opacity-85"
-        >
-          Add this file on GitHub →
-        </a>
-      </section>
-    )}
 
     <section class="mt-14" aria-labelledby="h-next">
       <h2 id="h-next" class="text-[length:var(--text-step-2)] font-semibold tracking-tight">Pick a gap</h2>
@@ -287,7 +259,7 @@ const newFileDir =
             .map((c) => (
               <li>
                 <a
-                  href={`/contribute/?category=${c.slug}`}
+                  href="/contribute/"
                   class="inline-block rounded border border-dashed border-warn px-3 py-1.5 text-[length:var(--text-step--1)] text-ink-soft transition-colors hover:border-ink hover:text-ink"
                 >
                   {c.name}
@@ -309,7 +281,7 @@ const newFileDir =
             .map((c) => (
               <li>
                 <a
-                  href={`/contribute/?country=${c.slug}`}
+                  href="/contribute/"
                   class="inline-block rounded border border-dashed border-rule px-3 py-1.5 text-[length:var(--text-step--1)] text-ink-faint transition-colors hover:border-ink hover:text-ink"
                 >
                   {c.name}

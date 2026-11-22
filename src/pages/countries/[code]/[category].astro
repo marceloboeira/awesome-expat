@@ -72,6 +72,10 @@ const siblings = categories
     { name, href: countryRoute(code) },
     { name: category.name, href: categoryInCountry(code, categorySlug) },
   ]}
+  faq={[
+    { q: `${category.name} in ${name}: what is listed?`, a: `${inPair.length} reviewed ${category.name.toLowerCase()} resources for people moving to ${name}, each with a human-written description and a dated link check.` },
+    { q: 'How do I add a resource?', a: 'Use the contribute page to suggest a link for this country and category.' },
+  ]}
 >
   <PageHeader
     eyebrow={`${name} · Category`}
