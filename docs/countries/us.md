@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in United States.
 
-4 resources across 2 categories.
+6 resources across 4 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/us/)
 
@@ -21,7 +21,17 @@ Practical links for people moving to or living in United States.
 - [Paycheck calculator](https://nutilz.com/paycheck-calculator)  
   Take-home pay estimate after federal, state and FICA withholding, for anyone working in the US. — `us` `salary`
 
+### Visas & Residency
+
+- [ImmigrationHelp](https://immigrationhelp.fyi)  
+  DOJ-authorized immigration legal providers in 14 US states: recognized organizations, accredited representatives and pro bono services. Deliberately excludes notarios and unlicensed consultants. — `free`
+
 ### Permanent Residency
 
 - [YiminShuju Visa Bulletin Tracker](https://yiminshuju.com/en/visa-bulletin)  
   US Visa Bulletin cutoff dates for India, China and rest of world since 2023, both charts side by side with monthly moves. Shows past pace only, no wait-time forecast. — `free` `green-card`
+
+### Moving
+
+- [Driving Schools](https://drivingschools.fyi)  
+  Driving schools in six countries listed by city, with the languages, vehicle types and lesson prices each school publishes on its own site. Coverage is thin outside the largest cities. — `free`

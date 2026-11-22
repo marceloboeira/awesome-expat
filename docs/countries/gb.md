@@ -8,12 +8,14 @@
 
 Practical links for people moving to or living in United Kingdom.
 
-3 resources across 3 categories.
+5 resources across 3 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/gb/)
 
 ### Jobs & Work
 
+- [EuroJobs.ai](https://eurojobs.ai)  
+  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `free`
 - [London Startup Jobs](https://londonstartupjobs.co.uk)  
   Startup jobs in London, with visa and relocation details for each listing. — `uk`
 
@@ -24,5 +26,7 @@ Practical links for people moving to or living in United Kingdom.
 
 ### Moving
 
+- [Driving Schools](https://drivingschools.fyi)  
+  Driving schools in six countries listed by city, with the languages, vehicle types and lesson prices each school publishes on its own site. Coverage is thin outside the largest cities. — `free`
 - [Keep your giffgaff number](https://getgiffgaff.com/tools/keep-number-reminder)  
   Browser-only tool that turns your last giffgaff activity into a reminder before your number is reclaimed, and exports an ICS file. — `uk` `telecom`

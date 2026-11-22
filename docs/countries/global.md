@@ -8,7 +8,7 @@
 
 Resources that apply wherever you land — money, flights, accommodation, and job boards.
 
-44 resources across 8 categories.
+45 resources across 8 categories.
 
 [Browse on the site](https://awesome-expat.com/global/)
 
@@ -75,6 +75,8 @@ Resources that apply wherever you land — money, flights, accommodation, and jo
 
 - [Daybound](https://daybound.9ek.ru)  
   Schengen 90/180 calculator and per-country stay-day tracker for managing visa-free day limits while abroad. — `schengen`
+- [Official resources for researching a move abroad (FARO)](https://faro.place/en/guides/official-resources-for-researching-a-move-abroad)  
+  AI-written guide (labeled as such) listing official immigration portals (EU, UK, Canada, NZ, US, Argentina, Mexico), ENIC-NARIC and IOM data. Few countries covered; no visa advice. — `free`
 - [Take Root Abroad](https://takerootabroad.com)  
   Move-abroad planner for US citizens: country-fit quiz, visa routes for remote workers and retirees, and the US tax picture. — `digital-nomad`
 - [Transita](https://transita.app)  

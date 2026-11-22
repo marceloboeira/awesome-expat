@@ -8,9 +8,14 @@
 
 Practical links for people moving to or living in Spain.
 
-4 resources across 1 category.
+5 resources across 2 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/es/)
+
+### Jobs & Work
+
+- [EuroJobs.ai](https://eurojobs.ai)  
+  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `free`
 
 ### Visas & Residency
 

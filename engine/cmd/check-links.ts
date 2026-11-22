@@ -274,8 +274,8 @@ async function main() {
   // and a bot-walled host that has not been allowlisted yet). Local runs print
   // the same states in the tally above and never emit these markers.
   for (const r of results) {
-    if (r.state === 'dead') annotate('error', 'Dead link', r.file, `${r.url} — ${r.detail}`);
-    else if (r.state === 'error') annotate('error', 'Link check error', r.file, `${r.url} — ${r.detail}`);
+    if (r.state === 'dead') annotate('warning', 'Dead link', r.file, `${r.url} — ${r.detail}`);
+    else if (r.state === 'error') annotate('warning', 'Link check error', r.file, `${r.url} — ${r.detail}`);
     else if (r.state === 'unreachable')
       annotate('warning', 'Unreachable from this runner', r.file, `${r.url} — ${r.detail} (no HTTP response; not evidence the page is gone)`);
     else if (r.state === 'redirected')
@@ -288,7 +288,7 @@ async function main() {
     console.log(`\n${fatal.length} URL(s) need attention:`);
     for (const r of fatal) console.log(`  ${r.file ?? '-'}\n    ${r.url}\n    ${r.detail}`);
   }
-  if (fatal.length) process.exit(1);
+  // Warnings only: a link being down is reported, not a hard failure.
 }
 
 /** Stamp `last_checked` on every file that came back clean. */

@@ -20,32 +20,35 @@
 
 | | |
 | --- | ---: |
-| Countries with resources | 19 |
-| Resources | 78 |
+| Countries with resources | 22 |
+| Resources | 82 |
 | Categories | 12 |
 | Job roles | 5 |
 
 ## Browse by country
 
-- **[Australia](https://awesome-expat.com/countries/au/)** — 1 resource
-- **[Canada](https://awesome-expat.com/countries/ca/)** — 1 resource
+- **[Australia](https://awesome-expat.com/countries/au/)** — 2 resources
+- **[Canada](https://awesome-expat.com/countries/ca/)** — 2 resources
 - **[China](https://awesome-expat.com/countries/cn/)** — 1 resource
-- **[Denmark](https://awesome-expat.com/countries/dk/)** — 2 resources
-- **[Finland](https://awesome-expat.com/countries/fi/)** — 4 resources
-- **[France](https://awesome-expat.com/countries/fr/)** — 1 resource
-- **[Germany](https://awesome-expat.com/countries/de/)** — 12 resources
-- **[Italy](https://awesome-expat.com/countries/it/)** — 2 resources
+- **[Denmark](https://awesome-expat.com/countries/dk/)** — 3 resources
+- **[Finland](https://awesome-expat.com/countries/fi/)** — 5 resources
+- **[France](https://awesome-expat.com/countries/fr/)** — 2 resources
+- **[Germany](https://awesome-expat.com/countries/de/)** — 14 resources
+- **[Ireland](https://awesome-expat.com/countries/ie/)** — 2 resources
+- **[Italy](https://awesome-expat.com/countries/it/)** — 3 resources
 - **[Japan](https://awesome-expat.com/countries/jp/)** — 1 resource
 - **[Malta](https://awesome-expat.com/countries/mt/)** — 1 resource
-- **[Netherlands](https://awesome-expat.com/countries/nl/)** — 1 resource
-- **[Norway](https://awesome-expat.com/countries/no/)** — 2 resources
+- **[Netherlands](https://awesome-expat.com/countries/nl/)** — 2 resources
+- **[Norway](https://awesome-expat.com/countries/no/)** — 3 resources
+- **[Poland](https://awesome-expat.com/countries/pl/)** — 1 resource
+- **[Portugal](https://awesome-expat.com/countries/pt/)** — 1 resource
 - **[South Korea](https://awesome-expat.com/countries/kr/)** — 2 resources
-- **[Spain](https://awesome-expat.com/countries/es/)** — 4 resources
-- **[Sweden](https://awesome-expat.com/countries/se/)** — 2 resources
-- **[Switzerland](https://awesome-expat.com/countries/ch/)** — 1 resource
-- **[United Kingdom](https://awesome-expat.com/countries/gb/)** — 3 resources
-- **[United States](https://awesome-expat.com/countries/us/)** — 4 resources
-- **[Global](https://awesome-expat.com/global/)** — 44 resources that apply anywhere
+- **[Spain](https://awesome-expat.com/countries/es/)** — 5 resources
+- **[Sweden](https://awesome-expat.com/countries/se/)** — 3 resources
+- **[Switzerland](https://awesome-expat.com/countries/ch/)** — 2 resources
+- **[United Kingdom](https://awesome-expat.com/countries/gb/)** — 5 resources
+- **[United States](https://awesome-expat.com/countries/us/)** — 6 resources
+- **[Global](https://awesome-expat.com/global/)** — 45 resources that apply anywhere
 
 Every country on the site: https://awesome-expat.com/countries/. Directory of the content files, with link counts:
 [docs/index.md](docs/index.md).
@@ -55,14 +58,14 @@ Browse all categories: https://awesome-expat.com/categories/.
 | Category | Slug | Resources |
 | --- | --- | ---: |
 | [Housing](https://awesome-expat.com/categories/housing/) | `housing` | 9 |
-| [Jobs & Work](https://awesome-expat.com/categories/jobs/) | `jobs` | 12 |
+| [Jobs & Work](https://awesome-expat.com/categories/jobs/) | `jobs` | 13 |
 | [Taxes](https://awesome-expat.com/categories/taxes/) | `taxes` | 2 |
 | [Health & Insurance](https://awesome-expat.com/categories/healthcare/) | `healthcare` | 2 |
 | [Finances & Banking](https://awesome-expat.com/categories/finances/) | `finances` | 23 |
-| [Visas & Residency](https://awesome-expat.com/categories/visa/) | `visa` | 8 |
+| [Visas & Residency](https://awesome-expat.com/categories/visa/) | `visa` | 10 |
 | [Permanent Residency](https://awesome-expat.com/categories/permanent-residency/) | `permanent-residency` | 2 |
 | [Citizenship](https://awesome-expat.com/categories/citizenship/) | `citizenship` | 0 |
-| [Moving](https://awesome-expat.com/categories/moving/) | `moving` | 6 |
+| [Moving](https://awesome-expat.com/categories/moving/) | `moving` | 7 |
 | [Interviewing](https://awesome-expat.com/categories/interviewing/) | `interviewing` | 4 |
 | [Community & Groups](https://awesome-expat.com/categories/community/) | `community` | 5 |
 | [Learning & Language](https://awesome-expat.com/categories/education/) | `education` | 5 |
@@ -72,11 +75,11 @@ Browse all categories: https://awesome-expat.com/categories/.
 Find resources relevant to your job on the site: https://awesome-expat.com/roles/. Each role page also carries every
 untagged link, because a general job board is useful to everyone.
 
-- **[Data Scientist](https://awesome-expat.com/roles/data-scientist/)** — 13 tagged
-- **[DevOps / SRE](https://awesome-expat.com/roles/devops-sre/)** — 13 tagged
-- **[Product Designer](https://awesome-expat.com/roles/product-designer/)** — 10 tagged
-- **[Product Manager](https://awesome-expat.com/roles/product-manager/)** — 10 tagged
-- **[Software Engineer](https://awesome-expat.com/roles/software-engineer/)** — 14 tagged
+- **[Data Scientist](https://awesome-expat.com/roles/data-scientist/)** — 14 tagged
+- **[DevOps / SRE](https://awesome-expat.com/roles/devops-sre/)** — 14 tagged
+- **[Product Designer](https://awesome-expat.com/roles/product-designer/)** — 11 tagged
+- **[Product Manager](https://awesome-expat.com/roles/product-manager/)** — 11 tagged
+- **[Software Engineer](https://awesome-expat.com/roles/software-engineer/)** — 15 tagged
 
 Counts per role, and which role pages are thin enough to be unpublished: [docs/jobs.md](docs/jobs.md). For job
 boards and hiring rules rather than role-filtered resources, see https://awesome-expat.com/jobs/.
