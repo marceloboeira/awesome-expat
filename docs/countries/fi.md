@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in Finland.
 
-4 resources across 3 categories.
+5 resources across 3 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/fi/)
 
@@ -19,6 +19,8 @@ Practical links for people moving to or living in Finland.
 
 ### Jobs & Work
 
+- [EuroJobs.ai](https://eurojobs.ai)  
+  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `free`
 - [JobCrawls](https://jobcrawls.com/en)  
   Jobs in Finland from employers' own career pages, searchable in English with a no-Finnish-required filter. — `finland`
 - [Work in Finland](https://workinfinland.com/en)  

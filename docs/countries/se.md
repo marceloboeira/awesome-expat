@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in Sweden.
 
-2 resources across 2 categories.
+3 resources across 3 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/se/)
 
@@ -16,6 +16,11 @@ Practical links for people moving to or living in Sweden.
 
 - [NordicExpat](https://nordicexpat.com) ⭐  
   Relocation guides for non-EU expats moving to Denmark, Sweden, Norway or Finland, covering banking, housing, taxes and healthcare. — `nordics`
+
+### Jobs & Work
+
+- [EuroJobs.ai](https://eurojobs.ai)  
+  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `free`
 
 ### Finances & Banking
 

@@ -8,9 +8,14 @@
 
 Practical links for people moving to or living in Netherlands.
 
-1 resource across 1 category.
+2 resources across 2 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/nl/)
+
+### Jobs & Work
+
+- [EuroJobs.ai](https://eurojobs.ai)  
+  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `free`
 
 ### Finances & Banking
 

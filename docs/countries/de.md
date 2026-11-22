@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in Germany.
 
-12 resources across 8 categories.
+14 resources across 8 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/de/)
 
@@ -21,6 +21,8 @@ Practical links for people moving to or living in Germany.
 
 - [Berlin Startup Jobs](https://berlinstartupjobs.com)  
   Startup jobs in Berlin, with visa and relocation details for each listing. — `germany`
+- [EuroJobs.ai](https://eurojobs.ai)  
+  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `free`
 - [List of job boards for Berlin](https://allaboutberlin.com/guides/find-a-job-in-berlin)  
   A curated round-up of the job boards and recruiters actually hiring in Berlin. — `germany`
 
@@ -50,6 +52,8 @@ Practical links for people moving to or living in Germany.
 
 ### Moving
 
+- [Driving Schools](https://drivingschools.fyi)  
+  Driving schools in six countries listed by city, with the languages, vehicle types and lesson prices each school publishes on its own site. Coverage is thin outside the largest cities. — `free`
 - [Moving to Berlin: the definitive guide](https://allaboutberlin.com/guides/moving-to-berlin)  
   End-to-end checklist for relocating to Berlin, from paperwork to actually arriving. — `germany` `berlin`
 
