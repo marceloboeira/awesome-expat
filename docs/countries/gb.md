@@ -31,11 +31,11 @@ Practical links for people moving to or living in United Kingdom.
 
 ### Moving
 
-- [Apply for a National Insurance Number](https://www.gov.uk/apply-national-insurance-number)  
+- [Apply for a National Insurance Number](https://gov.uk/apply-national-insurance-number)  
   How to apply for a National Insurance number in the UK. — `uk` `paperwork`
 - [Awesome London](https://github.com/tolgaergin/awesome-london)  
   A curated guide to living in London: neighbourhoods, transport, and practical tips for newcomers. — `london` `uk`
-- [Citymapper](https://citymapper.com/)  
+- [Citymapper](https://citymapper.com)  
   Transit and navigation app for getting around London. — `uk` `transport`
 - [Driving Schools](https://drivingschools.fyi)  
   Driving schools in six countries listed by city, with the languages, vehicle types and lesson prices each school publishes on its own site. Coverage is thin outside the largest cities. — `free`
@@ -46,5 +46,5 @@ Practical links for people moving to or living in United Kingdom.
 
 ### Community & Groups
 
-- [Companies House](https://beta.companieshouse.gov.uk/)  
+- [Companies House](https://beta.companieshouse.gov.uk)  
   Search UK company records and filings. — `uk` `business`

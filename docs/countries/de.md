@@ -75,31 +75,31 @@ Practical links for people moving to or living in Germany.
   A curated list of German language resources: dictionaries, grammar, news, and tools for learners. — `germany` `language`
 - [Awesome Germany](https://github.com/bundestag/awesome-germany)  
   Fiscal-financed public projects and civic tech relevant to citizens in Germany: open data, standards, and apps. — `germany` `civic-tech`
-- [bund.dev](https://bund.dev/)  
+- [bund.dev](https://bund.dev)  
   German government APIs documented by the civic tech community. — `germany` `api`
 - [Consul](https://github.com/consul/consul)  
   Open government and e-participation web software. — `germany` `civic-tech`
 - [Deutsche Welle Learn German](https://dw.com/en/learn-german/s-2469)  
   Free German courses and resources from Deutsche Welle. — `germany` `language`
-- [Duden](https://duden.de/)  
+- [Duden](https://duden.de)  
   German dictionary and spelling reference. — `germany` `language`
-- [DWDS](https://dwds.de/)  
+- [DWDS](https://dwds.de)  
   Digital dictionary of the German language. — `germany` `language`
-- [Forvo](https://forvo.com/languages/de/)  
+- [Forvo](https://forvo.com/languages/de)  
   Pronunciation dictionary with native speaker recordings. — `germany` `language`
-- [Freifunk](https://freifunk.net/)  
+- [Freifunk](https://freifunk.net)  
   Open communication networks run by volunteers across Germany. — `germany` `network`
 - [German Laws](https://github.com/bundestag/gesetze)  
   German laws converted to Markdown and tracked in a Git repository. — `germany` `law`
-- [GovData](https://www.govdata.de/)  
+- [GovData](https://govdata.de)  
   Official open data portal for Germany. — `germany` `open-data`
-- [Linguee](https://linguee.com/german-english/)  
+- [Linguee](https://linguee.com/german-english)  
   Bilingual dictionary with example sentences for German and English. — `germany` `language`
-- [Masterportal](https://www.masterportal.org/home.html)  
+- [Masterportal](https://masterportal.org/home.html)  
   City map with custom layers for German municipalities. — `germany` `maps`
-- [OParl](https://github.com/OParl/)  
+- [OParl](https://github.com/OParl)  
   Open standard for machine-readable access to municipal council information systems. — `germany` `civic-tech`
-- [OpenCoDE](https://opencode.de/)  
+- [OpenCoDE](https://opencode.de)  
   Official portal for public administration software in Germany by ZenDiS. — `germany` `open-source`
 - [Settle in Berlin](https://settle-in-berlin.com) ⭐  
   Guides on Anmeldung, bank accounts and finding a flat in Berlin, written by someone who has done it. — `germany` `berlin`
