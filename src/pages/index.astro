@@ -2,6 +2,8 @@
 import { getLinks, getCountries, getCategories, getRoles } from '../lib/content';
 import Base from '../layouts/Base.astro';
 import LinkList from '../components/LinkList.astro';
+import CategoryIcon from '../components/CategoryIcon.astro';
+import Flag from '../components/Flag.astro';
 import WorldMap from '../components/WorldMap.astro';
 import {
   byTitle,
@@ -118,13 +120,13 @@ faq={[
           const n = primaryLinksForCountry(links, slug).length;
           const scoped = linksForCountry(links, slug).length - n;
           return (
-            <li class="flex items-baseline justify-between gap-3 border-b border-rule py-2.5">
-              <a href={countryRoute(slug)} class="font-medium transition-colors hover:text-accent">
+            <li class="flex items-center justify-between gap-3 border-b border-rule py-2.5">
+              <a href={countryRoute(slug)} class="flex items-center gap-2 font-medium transition-colors hover:text-accent">
+                 <Flag code={slug} size="1.25rem" />
                 {country.name}
               </a>
               <span class="shrink-0 text-[length:var(--text-step--1)] text-ink-faint tabular-nums">
                 {n} link{n === 1 ? '' : 's'}
-                {scoped > 0 && <span class="text-ink-faint"> +{scoped} shared</span>}
               </span>
             </li>
           );
@@ -148,6 +150,9 @@ faq={[
                   href={categoryRoute(c.slug)}
                   class="block h-full rounded-lg border border-rule bg-paper p-4 transition-colors hover:border-ink"
                 >
+                  <span class="mb-2 flex h-8 w-8 items-center justify-center rounded-md bg-paper-sunk text-accent">
+                    <CategoryIcon slug={c.slug} size={18} />
+                  </span>
                   <span class="block font-medium">{c.name}</span>
                   <span class="mt-1 block text-[length:var(--text-step--1)] text-ink-soft clamp-2">
                     {c.description}

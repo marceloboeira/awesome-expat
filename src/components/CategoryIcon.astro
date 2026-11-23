@@ -1,0 +1,41 @@
+---
+import IdCard from '@lucide/astro/icons/id-card';
+import Users from '@lucide/astro/icons/users';
+import GraduationCap from '@lucide/astro/icons/graduation-cap';
+import Wallet from '@lucide/astro/icons/wallet';
+import HeartPulse from '@lucide/astro/icons/heart-pulse';
+import House from '@lucide/astro/icons/house';
+import MessageCircle from '@lucide/astro/icons/message-circle';
+import Briefcase from '@lucide/astro/icons/briefcase';
+import Plane from '@lucide/astro/icons/plane';
+import ShieldCheck from '@lucide/astro/icons/shield-check';
+import Receipt from '@lucide/astro/icons/receipt';
+import Stamp from '@lucide/astro/icons/stamp';
+
+interface Props {
+  slug: string;
+  class?: string;
+  size?: number;
+}
+
+const { slug, class: className = '', size = 20 } = Astro.props;
+
+const icons: Record<string, any> = {
+  citizenship: IdCard,
+  community: Users,
+  education: GraduationCap,
+  finances: Wallet,
+  healthcare: HeartPulse,
+  housing: House,
+  interviewing: MessageCircle,
+  jobs: Briefcase,
+  moving: Plane,
+  'permanent-residency': ShieldCheck,
+  taxes: Receipt,
+  visa: Stamp,
+};
+
+const Icon = icons[slug];
+---
+
+{Icon ? <Icon class={className} size={size} aria-hidden="true" /> : null}

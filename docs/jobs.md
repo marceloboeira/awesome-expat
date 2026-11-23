@@ -14,11 +14,11 @@ page, because a general job board is useful to everyone.
 
 | Role | Slug | Links | Countries | Page generated |
 | --- | --- | ---: | ---: | --- |
-| [Data Scientist](https://awesome-expat.com/roles/data-scientist/) | [`data-scientist`](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/data-scientist.yaml) | 109 | 22 | yes |
-| [DevOps / SRE](https://awesome-expat.com/roles/devops-sre/) | [`devops-sre`](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/devops-sre.yaml) | 109 | 22 | yes |
-| [Product Designer](https://awesome-expat.com/roles/product-designer/) | [`product-designer`](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/product-designer.yaml) | 106 | 22 | yes |
-| [Product Manager](https://awesome-expat.com/roles/product-manager/) | [`product-manager`](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/product-manager.yaml) | 106 | 22 | yes |
-| [Software Engineer](https://awesome-expat.com/roles/software-engineer/) | [`software-engineer`](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/software-engineer.yaml) | 110 | 22 | yes |
+| [Data Scientist](https://awesome-expat.com/roles/data-scientist/) | [`data-scientist`](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/data-scientist.yaml) | 135 | 23 | yes |
+| [DevOps / SRE](https://awesome-expat.com/roles/devops-sre/) | [`devops-sre`](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/devops-sre.yaml) | 135 | 23 | yes |
+| [Product Designer](https://awesome-expat.com/roles/product-designer/) | [`product-designer`](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/product-designer.yaml) | 132 | 23 | yes |
+| [Product Manager](https://awesome-expat.com/roles/product-manager/) | [`product-manager`](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/product-manager.yaml) | 132 | 23 | yes |
+| [Software Engineer](https://awesome-expat.com/roles/software-engineer/) | [`software-engineer`](https://github.com/marceloboeira/awesome-expat/tree/main/content/roles/software-engineer.yaml) | 136 | 23 | yes |
 
 A role page is only published once it has at least 3 links, to avoid thin
 duplicate pages competing with each other in search results. Unpublished roles are listed above with

@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in Sweden.
 
-3 resources across 3 categories.
+4 resources across 4 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/se/)
 
@@ -26,3 +26,8 @@ Practical links for people moving to or living in Sweden.
 
 - [Nordic take-home pay calculator](https://nordicexpat.com/tools)  
   Gross-to-net salary calculators for Denmark, Sweden, Norway and Finland, including holiday pay and gross-up. — `nordics` `salary`
+
+### Community & Groups
+
+- [Awesome Sweden](https://github.com/buren/awesome-sweden)  
+  A curated list of resources and links for living in and learning about Sweden. — `sweden`

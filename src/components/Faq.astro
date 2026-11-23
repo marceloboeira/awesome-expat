@@ -24,6 +24,7 @@ const { items = [], heading = 'Frequently asked questions' } = Astro.props;
         set:html={JSON.stringify({
           '@context': 'https://schema.org',
           '@type': 'FAQPage',
+          inLanguage: 'en',
           mainEntity: items.map((item) => ({
             '@type': 'Question',
             name: item.q,

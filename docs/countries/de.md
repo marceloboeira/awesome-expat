@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in Germany.
 
-16 resources across 8 categories.
+34 resources across 8 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/de/)
 
@@ -19,6 +19,8 @@ Practical links for people moving to or living in Germany.
 
 ### Jobs & Work
 
+- [Awesome Jobs in Germany](https://github.com/germanitjobs/awesome-jobs-in-germany)  
+  Curated list of job boards and hiring resources for finding work in Germany. — `germany` `jobs`
 - [Berlin Startup Jobs](https://berlinstartupjobs.com)  
   Startup jobs in Berlin, with visa and relocation details for each listing. — `germany`
 - [EuroJobs.ai](https://eurojobs.ai)  
@@ -56,6 +58,8 @@ Practical links for people moving to or living in Germany.
 
 ### Moving
 
+- [Awesome Berlin](https://github.com/marlonbernardes/awesome-berlin)  
+  A guide helping newcomers have a successful start in Berlin, covering housing, paperwork, and daily life. — `berlin` `germany`
 - [Driving Schools](https://drivingschools.fyi)  
   Driving schools in six countries listed by city, with the languages, vehicle types and lesson prices each school publishes on its own site. Coverage is thin outside the largest cities. — `free`
 - [Moving to Berlin: the definitive guide](https://allaboutberlin.com/guides/moving-to-berlin)  
@@ -65,5 +69,37 @@ Practical links for people moving to or living in Germany.
 
 - [All About Berlin](https://allaboutberlin.com) ⭐  
   The most complete English-language guide to living in Berlin: registration, housing, jobs, banking and visas. — `germany` `berlin`
+- [AusweisApp2](https://github.com/Governikus/AusweisApp2)  
+  eID client for using the German national identity card online. — `germany` `eid`
+- [Awesome German](https://github.com/Frederick-S/awesome-german)  
+  A curated list of German language resources: dictionaries, grammar, news, and tools for learners. — `germany` `language`
+- [Awesome Germany](https://github.com/bundestag/awesome-germany)  
+  Fiscal-financed public projects and civic tech relevant to citizens in Germany: open data, standards, and apps. — `germany` `civic-tech`
+- [bund.dev](https://bund.dev/)  
+  German government APIs documented by the civic tech community. — `germany` `api`
+- [Consul](https://github.com/consul/consul)  
+  Open government and e-participation web software. — `germany` `civic-tech`
+- [Deutsche Welle Learn German](https://dw.com/en/learn-german/s-2469)  
+  Free German courses and resources from Deutsche Welle. — `germany` `language`
+- [Duden](https://duden.de/)  
+  German dictionary and spelling reference. — `germany` `language`
+- [DWDS](https://dwds.de/)  
+  Digital dictionary of the German language. — `germany` `language`
+- [Forvo](https://forvo.com/languages/de/)  
+  Pronunciation dictionary with native speaker recordings. — `germany` `language`
+- [Freifunk](https://freifunk.net/)  
+  Open communication networks run by volunteers across Germany. — `germany` `network`
+- [German Laws](https://github.com/bundestag/gesetze)  
+  German laws converted to Markdown and tracked in a Git repository. — `germany` `law`
+- [GovData](https://www.govdata.de/)  
+  Official open data portal for Germany. — `germany` `open-data`
+- [Linguee](https://linguee.com/german-english/)  
+  Bilingual dictionary with example sentences for German and English. — `germany` `language`
+- [Masterportal](https://www.masterportal.org/home.html)  
+  City map with custom layers for German municipalities. — `germany` `maps`
+- [OParl](https://github.com/OParl/)  
+  Open standard for machine-readable access to municipal council information systems. — `germany` `civic-tech`
+- [OpenCoDE](https://opencode.de/)  
+  Official portal for public administration software in Germany by ZenDiS. — `germany` `open-source`
 - [Settle in Berlin](https://settle-in-berlin.com) ⭐  
   Guides on Anmeldung, bank accounts and finding a flat in Berlin, written by someone who has done it. — `germany` `berlin`

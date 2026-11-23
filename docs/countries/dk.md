@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in Denmark.
 
-4 resources across 3 categories.
+5 resources across 4 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/dk/)
 
@@ -28,3 +28,8 @@ Practical links for people moving to or living in Denmark.
 
 - [Nordic take-home pay calculator](https://nordicexpat.com/tools)  
   Gross-to-net salary calculators for Denmark, Sweden, Norway and Finland, including holiday pay and gross-up. — `nordics` `salary`
+
+### Community & Groups
+
+- [Awesome Danish](https://github.com/fnielsen/awesome-danish)  
+  A curated list of Danish language resources and tools for learners. — `denmark` `language`

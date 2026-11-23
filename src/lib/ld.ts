@@ -14,14 +14,25 @@ import { SITE, REPO, githubProfile } from './routes.ts';
  */
 
 const siteName = 'Awesome Expat';
+const language = 'en';
 
 export const organizationLd = {
   '@type': 'Organization',
   '@id': `${SITE}/#organization`,
   name: siteName,
   url: SITE,
-  logo: { '@type': 'ImageObject', url: `${SITE}/og-default.png` },
+  logo: { '@type': 'ImageObject', url: `${SITE}/og-default.png`, width: 1200, height: 630 },
   sameAs: [REPO],
+  knowsAbout: [
+    'moving abroad',
+    'expat resources',
+    'visas and residency',
+    'housing',
+    'jobs and work',
+    'taxes',
+    'healthcare',
+    'finances and banking',
+  ],
 };
 
 export const webSiteLd = {
@@ -29,7 +40,16 @@ export const webSiteLd = {
   '@id': `${SITE}/#website`,
   url: SITE,
   name: siteName,
+  inLanguage: language,
   publisher: { '@id': `${SITE}/#organization` },
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: {
+      '@type': 'EntryPoint',
+      urlTemplate: `${SITE}/search/?q={search_term_string}`,
+    },
+    'query-input': 'required name=search_term_string',
+  },
 };
 
 export function siteGraph(isHome: boolean): Record<string, unknown> {
@@ -45,31 +65,37 @@ export function collectionPageLd(opts: {
   description: string;
   path: string;
   items: { name: string; url: string }[];
+  dateModified?: string;
 }): Record<string, unknown> {
   const url = new URL(opts.path, SITE).toString();
+  const graph: Record<string, unknown>[] = [
+    {
+      '@type': 'CollectionPage',
+      '@id': url,
+      url,
+      name: opts.title,
+      description: opts.description,
+      inLanguage: language,
+      isPartOf: { '@id': `${SITE}/#website` },
+      publisher: { '@id': `${SITE}/#organization` },
+      ...(opts.dateModified ? { dateModified: `${opts.dateModified}T00:00:00.000Z` } : {}),
+      mainEntity: { '@id': `${url}#items` },
+    },
+    {
+      '@type': 'ItemList',
+      '@id': `${url}#items`,
+      numberOfItems: opts.items.length,
+      itemListElement: opts.items.map((item, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: item.name,
+        url: item.url,
+      })),
+    },
+  ];
   return {
     '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'CollectionPage',
-        '@id': url,
-        url,
-        name: opts.title,
-        description: opts.description,
-        isPartOf: { '@id': `${SITE}/#website` },
-      },
-      {
-        '@type': 'ItemList',
-        '@id': `${url}#items`,
-        numberOfItems: opts.items.length,
-        itemListElement: opts.items.map((item, i) => ({
-          '@type': 'ListItem',
-          position: i + 1,
-          name: item.name,
-          url: item.url,
-        })),
-      },
-    ],
+    '@graph': graph,
   };
 }
 
@@ -93,9 +119,22 @@ export function datasetLd(opts: {
         name: 'Awesome Expat resource directory',
         description: `A curated directory of ${opts.totalLinks} practical resources for people moving abroad across ${opts.totalCountries} countries and ${opts.totalCategories} categories. Each entry has a human-written description and a verified URL.`,
         url: SITE,
+        inLanguage: language,
+        license: 'https://creativecommons.org/publicdomain/zero/1.0/',
+        keywords: [
+          'expat',
+          'moving abroad',
+          'visa',
+          'housing',
+          'jobs',
+          'taxes',
+          'healthcare',
+          'finances',
+        ],
         sameAs: REPO,
         creator: { '@id': `${SITE}/#organization` },
-        dateModified: opts.dateModified,
+        publisher: { '@id': `${SITE}/#organization` },
+        dateModified: opts.dateModified ? `${opts.dateModified}T00:00:00.000Z` : undefined,
         distribution: [
           {
             '@type': 'DataDownload',
@@ -127,7 +166,10 @@ export function aboutPageLd(): Record<string, unknown> {
         '@type': 'AboutPage',
         '@id': url,
         url,
+        name: `About ${siteName}`,
+        inLanguage: language,
         publisher: { '@id': `${SITE}/#organization` },
+        isPartOf: { '@id': `${SITE}/#website` },
       },
     ],
   };
@@ -142,6 +184,8 @@ export function profilePageLd(handle: string): Record<string, unknown> {
         '@type': 'ProfilePage',
         '@id': url,
         url,
+        inLanguage: language,
+        isPartOf: { '@id': `${SITE}/#website` },
         mainEntity: {
           '@type': 'Person',
           '@id': `${url}#person`,

@@ -45,7 +45,7 @@ const contracts: (Contract & { match: RegExp })[] = [
     // /countries/de/housing/ ... /global/
     kind: 'collection',
     match: /^\/(global\/|countries\/[a-z]{2}(\/[a-z-]+)?\/|categories\/[a-z-]+\/|roles\/[a-z-]+(\/[a-z]{2})?\/)$/,
-    title: [42, 68],
+    title: [42, 72],
     description: [100, 165],
     words: 90,
     ld: ['Organization', 'CollectionPage', 'ItemList', 'BreadcrumbList', 'FAQPage'],

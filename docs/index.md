@@ -16,10 +16,10 @@ Every country below has at least one resource. 152 countries are registered in t
 | [Chile](https://awesome-expat.com/countries/cl/) | [`cl`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/cl) | 1 | 1 |
 | [China](https://awesome-expat.com/countries/cn/) | [`cn`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/cn) | 1 | 1 |
 | [Colombia](https://awesome-expat.com/countries/co/) | [`co`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/co) | 1 | 1 |
-| [Denmark](https://awesome-expat.com/countries/dk/) | [`dk`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/dk) | 4 | 3 |
+| [Denmark](https://awesome-expat.com/countries/dk/) | [`dk`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/dk) | 5 | 4 |
 | [Finland](https://awesome-expat.com/countries/fi/) | [`fi`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/fi) | 5 | 3 |
 | [France](https://awesome-expat.com/countries/fr/) | [`fr`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/fr) | 2 | 2 |
-| [Germany](https://awesome-expat.com/countries/de/) | [`de`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/de) | 16 | 8 |
+| [Germany](https://awesome-expat.com/countries/de/) | [`de`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/de) | 34 | 8 |
 | [India](https://awesome-expat.com/countries/in/) | [`in`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/in) | 1 | 1 |
 | [Ireland](https://awesome-expat.com/countries/ie/) | [`ie`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/ie) | 2 | 2 |
 | [Italy](https://awesome-expat.com/countries/it/) | [`it`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/it) | 4 | 4 |
@@ -33,9 +33,9 @@ Every country below has at least one resource. 152 countries are registered in t
 | [Serbia](https://awesome-expat.com/countries/rs/) | [`rs`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/rs) | 1 | 1 |
 | [South Korea](https://awesome-expat.com/countries/kr/) | [`kr`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/kr) | 2 | 2 |
 | [Spain](https://awesome-expat.com/countries/es/) | [`es`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/es) | 10 | 3 |
-| [Sweden](https://awesome-expat.com/countries/se/) | [`se`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/se) | 3 | 3 |
+| [Sweden](https://awesome-expat.com/countries/se/) | [`se`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/se) | 4 | 4 |
 | [Switzerland](https://awesome-expat.com/countries/ch/) | [`ch`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/ch) | 3 | 2 |
-| [United Kingdom](https://awesome-expat.com/countries/gb/) | [`gb`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/gb) | 5 | 3 |
+| [United Kingdom](https://awesome-expat.com/countries/gb/) | [`gb`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/gb) | 11 | 5 |
 | [United States](https://awesome-expat.com/countries/us/) | [`us`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/us) | 11 | 5 |
 | [Global](https://awesome-expat.com/global/) | [`global`](https://github.com/marceloboeira/awesome-expat/tree/main/content/links/global) | 46 | 8 |
 
