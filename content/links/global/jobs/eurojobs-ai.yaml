@@ -1,0 +1,23 @@
+---
+title: EuroJobs.ai
+url: https://eurojobs.ai
+country: global
+category: jobs
+roles:
+  - software-engineer
+  - data-scientist
+  - product-designer
+  - product-manager
+  - devops-sre
+description: Aggregates 28,000+ IT jobs across Europe from 21,000 employer career pages (Greenhouse, Lever, Ashby, Workable and others), rechecked hourly. Filters for country, remote, visa sponsorship and English-speaking teams.
+added_at: 2026-11-24
+last_checked: 2026-11-24
+featured: false
+tags:
+  - europe
+  - aggregator
+  - visa-sponsorship
+  - remote
+  - ai
+contributors:
+  - lurndatascience
