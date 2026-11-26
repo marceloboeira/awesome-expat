@@ -8,7 +8,7 @@
 
 Resources that apply wherever you land — money, flights, accommodation, and job boards.
 
-46 resources across 8 categories.
+47 resources across 8 categories.
 
 [Browse on the site](https://awesome-expat.com/global/)
 
@@ -29,6 +29,8 @@ Resources that apply wherever you land — money, flights, accommodation, and jo
 
 ### Jobs & Work
 
+- [EuroJobs.ai](https://eurojobs.ai)  
+  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `europe` `aggregator` `visa-sponsorship` `remote` `free`
 - [hiring.lat](https://hiring.lat)  
   Transparent job postings for LATAM workers. — `free`
 - [HN Hiring](https://hnhiring.me)  

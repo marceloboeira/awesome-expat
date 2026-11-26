@@ -15,7 +15,7 @@ Practical links for people moving to or living in United Kingdom.
 ### Jobs & Work
 
 - [EuroJobs.ai](https://eurojobs.ai)  
-  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `free`
+  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `europe` `aggregator` `visa-sponsorship` `remote` `free`
 - [London Startup Jobs](https://londonstartupjobs.co.uk)  
   Startup jobs in London, with visa and relocation details for each listing. — `uk`
 

@@ -53,7 +53,7 @@
 - **[Switzerland](https://awesome-expat.com/countries/ch/)** — 3 resources
 - **[United Kingdom](https://awesome-expat.com/countries/gb/)** — 11 resources
 - **[United States](https://awesome-expat.com/countries/us/)** — 11 resources
-- **[Global](https://awesome-expat.com/global/)** — 46 resources that apply anywhere
+- **[Global](https://awesome-expat.com/global/)** — 47 resources that apply anywhere
 
 Every country on the site: https://awesome-expat.com/countries/. Directory of the content files, with link counts:
 [docs/index.md](docs/index.md).

@@ -24,7 +24,7 @@ Practical links for people moving to or living in Germany.
 - [Berlin Startup Jobs](https://berlinstartupjobs.com)  
   Startup jobs in Berlin, with visa and relocation details for each listing. — `germany`
 - [EuroJobs.ai](https://eurojobs.ai)  
-  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `free`
+  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `europe` `aggregator` `visa-sponsorship` `remote` `free`
 - [freelancermap](https://freelancermap.com/projects/remote.html)  
   Freelance and contract jobs for IT experts. — `free`
 - [List of job boards for Berlin](https://allaboutberlin.com/guides/find-a-job-in-berlin)  

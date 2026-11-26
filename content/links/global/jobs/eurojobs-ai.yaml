@@ -2,6 +2,22 @@
 title: EuroJobs.ai
 url: https://eurojobs.ai
 country: global
+scopes:
+  - global
+  - de
+  - gb
+  - nl
+  - fr
+  - es
+  - ie
+  - pt
+  - pl
+  - ch
+  - se
+  - dk
+  - fi
+  - no
+  - it
 category: jobs
 roles:
   - software-engineer
@@ -9,15 +25,15 @@ roles:
   - product-designer
   - product-manager
   - devops-sre
-description: Aggregates 28,000+ IT jobs across Europe from 21,000 employer career pages (Greenhouse, Lever, Ashby, Workable and others), rechecked hourly. Filters for country, remote, visa sponsorship and English-speaking teams.
-added_at: 2026-11-24
-last_checked: 2026-11-24
+description: "IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account."
+added_at: 2026-11-22
+last_checked: null
 featured: false
 tags:
   - europe
   - aggregator
   - visa-sponsorship
   - remote
-  - ai
+  - free
 contributors:
   - lurndatascience

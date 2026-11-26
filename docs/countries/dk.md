@@ -22,7 +22,7 @@ Practical links for people moving to or living in Denmark.
 ### Jobs & Work
 
 - [EuroJobs.ai](https://eurojobs.ai)  
-  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `free`
+  IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `europe` `aggregator` `visa-sponsorship` `remote` `free`
 
 ### Finances & Banking
 
