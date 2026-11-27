@@ -21,7 +21,7 @@
 | | |
 | --- | ---: |
 | Countries with resources | 27 |
-| Resources | 136 |
+| Resources | 137 |
 | Categories | 12 |
 | Job roles | 5 |
 
@@ -53,7 +53,7 @@
 - **[Switzerland](https://awesome-expat.com/countries/ch/)** — 3 resources
 - **[United Kingdom](https://awesome-expat.com/countries/gb/)** — 11 resources
 - **[United States](https://awesome-expat.com/countries/us/)** — 11 resources
-- **[Global](https://awesome-expat.com/global/)** — 47 resources that apply anywhere
+- **[Global](https://awesome-expat.com/global/)** — 48 resources that apply anywhere
 
 Every country on the site: https://awesome-expat.com/countries/. Directory of the content files, with link counts:
 [docs/index.md](docs/index.md).
@@ -73,7 +73,7 @@ Browse all categories: https://awesome-expat.com/categories/.
 | [Moving](https://awesome-expat.com/categories/moving/) | `moving` | 17 |
 | [Interviewing](https://awesome-expat.com/categories/interviewing/) | `interviewing` | 4 |
 | [Community & Groups](https://awesome-expat.com/categories/community/) | `community` | 24 |
-| [Learning & Language](https://awesome-expat.com/categories/education/) | `education` | 5 |
+| [Learning & Language](https://awesome-expat.com/categories/education/) | `education` | 6 |
 
 ## Browse by role
 
