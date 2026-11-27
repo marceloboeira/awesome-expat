@@ -8,7 +8,7 @@
 
 Resources that apply wherever you land — money, flights, accommodation, and job boards.
 
-47 resources across 8 categories.
+48 resources across 8 categories.
 
 [Browse on the site](https://awesome-expat.com/global/)
 
@@ -125,6 +125,8 @@ Resources that apply wherever you land — money, flights, accommodation, and jo
   The most widely used way to learn a language, and the one most expats already have installed. — `language` `free`
 - [Memrise](https://memrise.com)  
   Spaced-repetition language learning built around native-speaker video and pronunciation. — `language`
+- [OpenExam Hub](https://openexamhub.org/exams)  
+  Free, open-source study planner that turns official language-exam materials into a day-by-day plan. — `language` `free`
 - [OSSU Computer Science](https://ossu.firebaseapp.com)  
   A complete, free, self-directed path to a computer science degree-equivalent, using open courses. — `free`
 - [OSSU Data Science](https://github.com/ossu/data-science)  
