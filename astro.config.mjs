@@ -37,7 +37,7 @@ const linkRecords = readYamlTree(linksDir).map((l) => ({
   category: l.category,
   scopes: l.scopes ?? [],
   roles: l.roles ?? [],
-  contributors: l.contributors ?? [],
+  contributors: (l.contributors ?? []).map((c) => String(c).replace(/^@/, '').toLowerCase()),
   added_at: l.added_at,
 }));
 
