@@ -8,7 +8,7 @@
 
 Practical links for people moving to or living in Portugal.
 
-3 resources across 2 categories.
+4 resources across 3 categories.
 
 [Browse on the site](https://awesome-expat.com/countries/pt/)
 
@@ -23,3 +23,8 @@ Practical links for people moving to or living in Portugal.
   IT jobs across Europe read hourly from employers' own job boards, with visa, relocation and English-speaking filters. IT roles only; applying needs a free account. — `europe` `aggregator` `visa-sponsorship` `remote` `free`
 - [thatmlopsguy/remote-pt](https://github.com/thatmlopsguy/remote-pt)  
   Companies offering full-time remote jobs with Portuguese contracts. — `free`
+
+### Visas & Residency
+
+- [Portugal D7 & D8 Visa Income Calculator](https://dayinportugal.com/portugal-visa-income-calculator.html)  
+  Turns the 2026 minimum wage into the income needed for a D7 or D8 by household size, with the formula shown. General information only: consulates may ask for more. — `free`
